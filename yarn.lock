@@ -4545,14 +4545,6 @@
   dependencies:
     tippy.js "^6.3.1"
 
-"@trezor/rollout@1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@trezor/rollout/-/rollout-1.0.7.tgz#e4ee8281866ab6712ccc8873f3a383621b1a18ca"
-  integrity sha512-yFN2J/g3Epv1dM0dCsRnOagK7lrsfs7vDy1uc4T7DF9qtN0ZGO/tdCjSdgRGUZECRdXRcPrzRUsZDXGOkPcLoA==
-  dependencies:
-    cross-fetch "^3.0.6"
-    runtypes "^5.0.1"
-
 "@trezor/utxo-lib@0.1.2", "@trezor/utxo-lib@^0.1.2":
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/@trezor/utxo-lib/-/utxo-lib-0.1.2.tgz#19319a424b0d0c648b0df456f1849eb08697fb44"
