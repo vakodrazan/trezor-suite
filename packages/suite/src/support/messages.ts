@@ -2608,6 +2608,10 @@ const definedMessages = defineMessages({
         description: 'Button. Skip one step',
         id: 'TR_SKIP',
     },
+    TR_SKIP_UPDATE: {
+        defaultMessage: 'Skip Update',
+        id: 'TR_SKIP_UPDATE',
+    },
     TR_SKIP_ALL: {
         defaultMessage: 'Skip onboarding',
         description: 'Button. Skip the entire onboarding process.',
@@ -4001,6 +4005,10 @@ const definedMessages = defineMessages({
         id: 'TR_FIRMWARE_INSTALL_FAILED_HEADER',
         defaultMessage: 'Firmware installation failed',
     },
+    TR_FIRMWARE_STATUS_INSTALLATION_COMPLETED: {
+        id: 'TR_FIRMWARE_STATUS_INSTALLATION_COMPLETED',
+        defaultMessage: 'Completed',
+    },
     TR_FIRMWARE_IS_UP_TO_DATE: {
         id: 'TR_FIRMWARE_IS_UP_TO_DATE',
         defaultMessage: 'Firmware is up to date',
@@ -4016,6 +4024,18 @@ const definedMessages = defineMessages({
     TR_RECONNECT_IN_BOOTLOADER: {
         id: 'TR_RECONNECT_IN_BOOTLOADER',
         defaultMessage: 'Reconnect your device in bootloader mode',
+    },
+    TR_RECONNECT_IN_BOOTLOADER_SUCCESS: {
+        id: 'TR_RECONNECT_IN_BOOTLOADER_SUCCESS',
+        defaultMessage: 'Device is now ready',
+    },
+    TR_RECONNECT_IN_NORMAL: {
+        id: 'TR_RECONNECT_IN_NORMAL',
+        defaultMessage: 'Reconnect your device',
+    },
+    TR_RECONNECT_IN_NORMAL_SUCCESS: {
+        id: 'TR_RECONNECT_IN_NORMAL_SUCCESS',
+        defaultMessage: 'Device is now ready',
     },
     TR_LEAVE_BOOTLOADER_MODE: {
         id: 'TR_LEAVE_BOOTLOADER_MODE',
