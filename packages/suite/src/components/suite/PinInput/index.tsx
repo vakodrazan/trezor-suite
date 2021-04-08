@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
-import { Button, ButtonPin } from '@trezor/components';
+import { Button, ButtonPin, variables } from '@trezor/components';
 import InputPin from './components/InputPin';
 import { Translation } from '@suite-components';
 import { MAX_LENGTH } from '@suite-constants/inputs';
@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 `;
 
 const InputWrapper = styled.div`
-    margin-top: 12px;
+    /* margin-top: 12px; */
     margin-bottom: 12px;
     width: 100%;
 `;
@@ -25,6 +25,12 @@ const PinRow = styled.div`
     display: flex;
     width: 100%;
     justify-content: space-between;
+`;
+
+const ResponsiveButtonPin = styled(ButtonPin)`
+    @media all and (max-height: ${variables.SCREEN_SIZE.SM}) {
+        height: 65px;
+    }
 `;
 
 const PinFooter = styled.div`
@@ -129,24 +135,24 @@ const PinInput = (props: Props) => {
                 <InputPin value={pin} onDeleteClick={() => onPinBackspace()} />
             </InputWrapper>
             <PinRow>
-                <ButtonPin type="button" data-value="7" onClick={() => onPinAdd('7')} />
-                <ButtonPin type="button" data-value="8" onClick={() => onPinAdd('8')} />
-                <ButtonPin type="button" data-value="9" onClick={() => onPinAdd('9')} />
+                <ResponsiveButtonPin type="button" data-value="7" onClick={() => onPinAdd('7')} />
+                <ResponsiveButtonPin type="button" data-value="8" onClick={() => onPinAdd('8')} />
+                <ResponsiveButtonPin type="button" data-value="9" onClick={() => onPinAdd('9')} />
             </PinRow>
             <PinRow>
-                <ButtonPin type="button" data-value="4" onClick={() => onPinAdd('4')} />
-                <ButtonPin type="button" data-value="5" onClick={() => onPinAdd('5')} />
-                <ButtonPin type="button" data-value="6" onClick={() => onPinAdd('6')} />
+                <ResponsiveButtonPin type="button" data-value="4" onClick={() => onPinAdd('4')} />
+                <ResponsiveButtonPin type="button" data-value="5" onClick={() => onPinAdd('5')} />
+                <ResponsiveButtonPin type="button" data-value="6" onClick={() => onPinAdd('6')} />
             </PinRow>
             <PinRow>
-                <ButtonPin
+                <ResponsiveButtonPin
                     type="button"
                     data-value="1"
                     onClick={() => onPinAdd('1')}
                     data-test="@pin/input/1"
                 />
-                <ButtonPin type="button" data-value="2" onClick={() => onPinAdd('2')} />
-                <ButtonPin type="button" data-value="3" onClick={() => onPinAdd('3')} />
+                <ResponsiveButtonPin type="button" data-value="2" onClick={() => onPinAdd('2')} />
+                <ResponsiveButtonPin type="button" data-value="3" onClick={() => onPinAdd('3')} />
             </PinRow>
 
             <Expander />
