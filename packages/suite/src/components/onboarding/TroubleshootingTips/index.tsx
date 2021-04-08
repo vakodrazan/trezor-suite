@@ -85,11 +85,7 @@ const TroubleshootingTips = ({ label, items, offerWebUsb }: Props) => (
         variant="large"
         heading={
             offerWebUsb ? (
-                <WebusbButton ready>
-                    <Button icon="SEARCH">
-                        <Translation id="TR_CHECK_FOR_DEVICES" />
-                    </Button>
-                </WebusbButton>
+                <WebusbButton icon="SEARCH" />
             ) : undefined
         }
         iconLabel={label}
