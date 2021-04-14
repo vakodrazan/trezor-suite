@@ -2398,7 +2398,7 @@ const definedMessages = defineMessages({
         id: 'TR_RECONNECT_HEADER',
     },
     TR_RECONNECT_TEXT: {
-        defaultMessage: 'We lost connection with your device. This might mean:',
+        defaultMessage: 'We lost connection with your Trezor',
         id: 'TR_RECONNECT_TEXT',
     },
     TR_RECONNECT_TROUBLESHOOT_BRIDGE: {
