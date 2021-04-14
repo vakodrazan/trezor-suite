@@ -43,11 +43,11 @@ type Props = {
 const HomescreenGallery = ({ device, onConfirm }: Props) => {
     const { applySettings } = useActions({ applySettings: deviceSettingsActions.applySettings });
 
-    const setHomescreen = async (image: AnyImageName) => {
+    const setHomescreen = (image: AnyImageName) => {
         const element = document.getElementById(image);
         if (element instanceof HTMLImageElement) {
             const hex = elementToHomescreen(element, device.features.major_version);
-            await applySettings({ homescreen: hex });
+            applySettings({ homescreen: hex });
             if (onConfirm) {
                 onConfirm();
             }
@@ -62,6 +62,8 @@ const HomescreenGallery = ({ device, onConfirm }: Props) => {
                         <BackgroundImageT1
                             key={image}
                             id={image}
+                            // 2 eslint rules clashing
+                            // eslint-disable-next-line require-await
                             onClick={() => setHomescreen(image)}
                             src={resolveStaticPath(`images/png/homescreens/t1/${image}.png`)}
                         />
@@ -75,6 +77,8 @@ const HomescreenGallery = ({ device, onConfirm }: Props) => {
                             data-test={`@modal/gallery/t2/${image}`}
                             key={image}
                             id={image}
+                            // 2 eslint rules clashing
+                            // eslint-disable-next-line require-await
                             onClick={() => setHomescreen(image)}
                             src={resolveStaticPath(`images/png/homescreens/t2/${image}.png`)}
                         />
