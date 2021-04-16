@@ -20,10 +20,11 @@
         "noImplicitAny": true,
         "strictNullChecks": true,
         "moduleResolution": "node",
+        "resolveJsonModule": true,
         "jsx": "react",
         "outDir": "lib"
     },
-    "include": ["src/**/*", "styled.d.ts"],
+    "include": ["src/**/*", "styled.d.ts", "./types/index.d.ts"],
     "exclude": [
         "node_modules",
         "build",

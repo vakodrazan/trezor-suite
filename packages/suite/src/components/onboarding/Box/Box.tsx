@@ -5,7 +5,13 @@ import Text from '@onboarding-components/Text';
 import { Image, ImageProps } from '@suite-components';
 import { H1, variables } from '@trezor/components';
 
-const BoxWrapper = styled(animated.div)<{ variant?: Props['variant']; withImage?: boolean }>`
+const BoxWrapper = styled(animated.div)<{
+    variant?: Props['variant'];
+    withImage?: boolean;
+    disablePadding?: boolean;
+    expanded?: Props['expanded'];
+    expandable?: Props['expandable'];
+}>`
     position: relative;
     padding: ${props => (props.variant === 'large' ? '40px 80px' : '20px 30px')};
     width: ${props => (props.variant === 'large' ? '100%' : 'auto')};
@@ -29,6 +35,32 @@ const BoxWrapper = styled(animated.div)<{ variant?: Props['variant']; withImage?
         props.variant === 'small' &&
         css`
             max-width: 550px;
+        `}
+    ${props =>
+        props.expandable &&
+        (props.expanded
+            ? css`
+                  padding-top: 57px;
+              `
+            : css`
+                  background: ${props.theme.BG_GREY};
+                  box-shadow: none;
+                  border-radius: 10px;
+                  cursor: pointer;
+                  padding: 22px 25px 19px 36px;
+              `)}
+    ${props =>
+        props.disablePadding &&
+        css`
+            padding: 0;
+        `}
+`;
+
+const BoxWrapperInner = styled.div<{ expandable: boolean }>`
+    ${props =>
+        props.expandable &&
+        css`
+            overflow: hidden;
         `}
 `;
 
@@ -76,6 +108,11 @@ const Description = styled.div<{ hasChildren?: boolean }>`
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
     image?: ImageProps['image'];
     variant?: 'small' | 'large';
+    expandable?: boolean;
+    expanded?: boolean;
+    onToggle?: () => void;
+    expandableIcon?: React.ReactNode;
+    disablePadding?: boolean;
     heading?: React.ReactNode;
     description?: React.ReactNode;
     children?: React.ReactNode;
@@ -88,23 +125,73 @@ const Box = ({
     children,
     className,
     variant = 'large',
+    expanded = true,
+    expandable = false,
+    expandableIcon,
+    disablePadding = false,
+    onToggle = () => undefined,
     ...rest
-}: Props) => (
-    <BoxWrapper variant={variant} withImage={!!image} className={className} {...rest}>
-        {heading && <Heading withDescription={!!description}>{heading}</Heading>}
-        {description && (
-            <Description hasChildren={!!children}>
-                <Text>{description}</Text>
-            </Description>
-        )}
-        {image && (
-            <BoxImageWrapper>
-                <Image width={100} height={100} image={image} />
-            </BoxImageWrapper>
-        )}
-        <ChildrenWrapper>{children}</ChildrenWrapper>
-    </BoxWrapper>
-);
+}: Props) => {
+    const { theme } = useTheme();
+    const [heightRef, { height }] = useMeasure<HTMLDivElement>();
+    const springExpandableBox = useSpring({
+        from: { opacity: 0 },
+        to: { background: expanded ? theme.BG_WHITE : theme.BG_GREY, opacity: 1 },
+    });
+    const expandedStyles = useSpring({
+        from: { opacity: 0, height: 0 },
+        to: {
+            opacity: expandable && expanded ? 1 : 0,
+            height: expandable && expanded ? height + 0 : 0,
+        },
+    });
+    return (
+        <BoxWrapper
+            expanded={expanded}
+            expandable={expandable}
+            disablePadding={disablePadding}
+            variant={variant}
+            withImage={!!image}
+            className={className}
+            style={springExpandableBox}
+            onClick={expandable && !expanded ? onToggle : undefined}
+            {...rest}
+        >
+            <BoxWrapperInner expandable={expandable}>
+                {expandable && !expanded && (
+                    <ExpandableBox>
+                        {expandableIcon}
+                        <HeadingExpandable>{heading}</HeadingExpandable>
+                        <Tag>
+                            <Translation id="TR_ONBOARDING_ADVANCED" />
+                        </Tag>
+                    </ExpandableBox>
+                )}
+                <animated.div style={expandable ? expandedStyles : {}}>
+                    <div ref={heightRef}>
+                        {expandable && expanded && (
+                            <CloseButton variant="tertiary" onClick={() => onToggle()}>
+                                <Translation id="TR_CLOSE" />
+                            </CloseButton>
+                        )}
+                        {heading && <Heading withDescription={!!description}>{heading}</Heading>}
+                        {description && (
+                            <Description hasChildren={!!children}>
+                                <Text>{description}</Text>
+                            </Description>
+                        )}
+                        {image && (
+                            <BoxImageWrapper>
+                                <Image width={100} height={100} image={image} />
+                            </BoxImageWrapper>
+                        )}
+                        <ChildrenWrapper>{children}</ChildrenWrapper>
+                    </div>
+                </animated.div>
+            </BoxWrapperInner>
+        </BoxWrapper>
+    );
+};
 
 export default Box;
 export type { Props as BoxProps };

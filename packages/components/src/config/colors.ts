@@ -3,6 +3,8 @@
 
 export const THEME = {
     light: {
+        THEME: 'light',
+
         BG_GREEN: '#39a814',
         BG_LIGHT_GREEN: '#effaec',
         BG_SECONDARY: '#effaec', // used for secondary button, in light mode same as LIGHT_GREEN
@@ -50,6 +52,8 @@ export const THEME = {
         BOX_SHADOW_MODAL: 'rgba(77, 77, 77, 0.2)',
     },
     dark: {
+        THEME: 'dark',
+
         BG_GREEN: '#5ea447',
         BG_GREEN_HOVER: '#4e883b', // improvisation
         BG_LIGHT_GREEN: '#1a2516',
@@ -99,6 +103,8 @@ export const THEME = {
     },
     // black theme is not used currently, but will be in the future
     black: {
+        THEME: 'black',
+
         BG_GREEN: '#5ea447',
         BG_GREEN_HOVER: '#4e883b', // improvisation
         BG_LIGHT_GREEN: '#1a2516',

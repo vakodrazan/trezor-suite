@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSpring, config, animated } from 'react-spring';
-import { variables, Icon } from '@trezor/components';
+import { variables, Icon, DeviceAnimation } from '@trezor/components';
 import { Translation } from '@suite-components';
-import { useTheme } from '@suite-hooks';
+import { useTheme, useDevice } from '@suite-hooks';
 import styled from 'styled-components';
 
 const Wrapper = styled(animated.div)`
@@ -29,12 +29,6 @@ const Checkmark = styled.div`
     right: 10px;
 `;
 
-const Img = styled.img`
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-`;
-
 const Text = styled.div`
     display: flex;
     margin: 0px 32px;
@@ -58,6 +52,7 @@ const getDefaultMessage = (connected: boolean, showWarning: boolean) => {
 };
 const ConnectDevicePrompt = ({ children, connected, showWarning }: Props) => {
     const { theme } = useTheme();
+    const { device } = useDevice();
     const fadeStyles = useSpring({
         config: config.default,
         transform: 'translate(0px, 0px)',
@@ -68,10 +63,11 @@ const ConnectDevicePrompt = ({ children, connected, showWarning }: Props) => {
         },
         delay: 200,
     });
+    const animation = device?.features?.model === 'T' ? 'TT_CONNECT' : 'T1_CONNECT';
     return (
         <Wrapper style={fadeStyles}>
             <ImageWrapper>
-                <Img />
+                <DeviceAnimation type={animation} loop={!connected} />
                 <Checkmark>
                     {connected && !showWarning && (
                         <Icon icon="CHECK_ACTIVE" size={24} color={theme.TYPE_GREEN} />

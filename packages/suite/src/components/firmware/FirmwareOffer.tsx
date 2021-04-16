@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Button, Icon, Tooltip, variables } from '@trezor/components';
 import { Translation, TrezorLink } from '@suite-components';
 import { parseFirmwareChangelog } from '@suite-utils/device';
-import { useTheme } from '@suite-hooks';
 import { TrezorDevice } from '@suite-types';
 import { CHANGELOG_URL } from '@suite-constants/urls';
 
@@ -90,7 +89,6 @@ interface Props {
 
 const FirmwareOffer = ({ currentVersion, newVersion, releaseChangelog }: Props) => {
     const parsedChangelog = parseFirmwareChangelog(releaseChangelog);
-    const { theme } = useTheme();
     return (
         <FwVersionWrapper>
             {currentVersion && (
@@ -111,9 +109,10 @@ const FirmwareOffer = ({ currentVersion, newVersion, releaseChangelog }: Props) 
                     <Translation id="TR_ONBOARDING_NEW_VERSION" />
                 </Label>
                 <VersionWrapper>
-                    <Version new>{newVersion}</Version>
-                    {parsedChangelog && (
+                    {parsedChangelog ? (
                         <Tooltip
+                            rich
+                            dashed
                             content={
                                 <Changelog>
                                     {parsedChangelog.slice(0, 1).map(log => (
@@ -151,13 +150,10 @@ const FirmwareOffer = ({ currentVersion, newVersion, releaseChangelog }: Props) 
                             }
                             placement="top"
                         >
-                            <Icon
-                                useCursorPointer
-                                size={14}
-                                color={theme.TYPE_GREEN}
-                                icon="QUESTION_ACTIVE"
-                            />
+                            <Version new>{newVersion}</Version>
                         </Tooltip>
+                    ) : (
+                        <Version new>{newVersion}</Version>
                     )}
                 </VersionWrapper>
             </FwVersion>
