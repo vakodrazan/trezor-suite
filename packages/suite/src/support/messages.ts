@@ -2703,6 +2703,10 @@ const definedMessages = defineMessages({
         defaultMessage: 'Testnet coins',
         id: 'TR_TESTNET_COINS',
     },
+    TR_TESTNET_COINS_LOWERCASE: {
+        defaultMessage: 'testnet coins',
+        id: 'TR_TESTNET_COINS_LOWERCASE',
+    },
     TR_TESTNET_COINS_EXPLAINED: {
         defaultMessage:
             "Testnet coins don't have any value but you still may use them to learn and experiment.",
@@ -5852,6 +5856,10 @@ const definedMessages = defineMessages({
         id: 'TR_ONBOARDING_STEP_COINS',
         defaultMessage: 'Coins',
     },
+    TR_ONBOARDING_STEP_COINS_LOWERCASE: {
+        id: 'TR_ONBOARDING_STEP_COINS_LOWERCASE',
+        defaultMessage: 'coins',
+    },
     TR_ONBOARDING_CURRENT_VERSION: {
         id: 'TR_ONBOARDING_CURRENT_VERSION',
         defaultMessage: 'Current Version',
@@ -5906,7 +5914,7 @@ const definedMessages = defineMessages({
     TR_ONBOARDING_COINS_STEP_DESCRIPTION: {
         id: 'TR_ONBOARDING_COINS_STEP_DESCRIPTION',
         defaultMessage:
-            'We preselected our 3 most popular, for which we’ll create accounts. U can always enable more later.',
+            'Select coins which you want to enable in Trezor Suite. You can change this settings anytime.',
     },
     TR_WHAT_DATA_WE_COLLECT: {
         id: 'TR_WHAT_DATA_WE_COLLECT',
@@ -5931,11 +5939,11 @@ const definedMessages = defineMessages({
         defaultMessage: 'You can set custom backend for ...',
     },
     TR_ONBOARDING_TOR_HEADING: {
-        id: 'TR_ONBOARDING_CUSTOM_BACKEND_HEADING',
+        id: 'TR_ONBOARDING_TOR_HEADING',
         defaultMessage: 'Setup TOR',
     },
     TR_ONBOARDING_TOR_DESCRIPTION: {
-        id: 'TR_ONBOARDING_CUSTOM_BACKEND_DESCRIPTION',
+        id: 'TR_ONBOARDING_TOR_DESCRIPTION',
         defaultMessage: 'You can setup TOR ...',
     },
     TR_ONBOARDING_ADVANCED: {

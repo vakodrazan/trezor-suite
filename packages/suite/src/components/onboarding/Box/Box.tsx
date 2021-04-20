@@ -1,11 +1,17 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { animated } from 'react-spring';
+import { animated, useSpring } from 'react-spring';
 import Text from '@onboarding-components/Text';
-import { Image, ImageProps } from '@suite-components';
-import { H1, variables } from '@trezor/components';
+import { Image, ImageProps, Translation } from '@suite-components';
+import { H1, variables, Button } from '@trezor/components';
+import { useTheme } from '@suite-hooks';
+import { useMeasure } from 'react-use';
 
-const BoxWrapper = styled(animated.div)<{
+const BoxWrapper = styled(
+    ({ variant, withImage, disablePadding, expanded, expandable, ...rest }) => (
+        <animated.div {...rest} />
+    ),
+)<{
     variant?: Props['variant'];
     withImage?: boolean;
     disablePadding?: boolean;
@@ -22,7 +28,7 @@ const BoxWrapper = styled(animated.div)<{
     @media all and (max-width: ${variables.SCREEN_SIZE.LG}) {
         padding-left: ${props => (props.variant === 'large' ? '40px' : '30px')};
         padding-right: ${props => (props.variant === 'large' ? '40px' : '30px')};
-        padding-bottom: ${props => (props.variant === 'large' ? '40px' : '20px')};
+        padding-bottom: ${props => (props.variant === 'large' && props.expanded ? '40px' : '20px')};
     }
 
     ${props =>
@@ -103,6 +109,34 @@ const Description = styled.div<{ hasChildren?: boolean }>`
     @media only screen and (max-width: ${variables.SCREEN_SIZE.MD}) {
         padding: 0px 0px 36px 0px;
     }
+`;
+
+const ExpandableBox = styled(animated.div)`
+    text-align: left;
+    display: flex;
+    align-items: center;
+    padding: 0 6px;
+`;
+
+const HeadingExpandable = styled.div`
+    color: ${props => props.theme.TYPE_DARK_GREY};
+    font-size: ${variables.FONT_SIZE.NORMAL};
+    font-weight: ${variables.FONT_WEIGHT.MEDIUM};
+    flex: 1;
+`;
+
+const Tag = styled.div`
+    color: ${props => props.theme.TYPE_LIGHT_GREY};
+    text-transform: uppercase;
+    font-size: ${variables.FONT_SIZE.TINY};
+    font-weight: ${variables.FONT_WEIGHT.DEMI_BOLD};
+    letter-spacing: 0.2px;
+`;
+
+const CloseButton = styled(Button)`
+    position: absolute;
+    top: 16px;
+    right: 16px;
 `;
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
