@@ -6,6 +6,7 @@ import { P, H2, ErrorImg } from '@firmware-components';
 
 const Heading = () => <Translation id="TR_FIRMWARE_INSTALL_FAILED_HEADER" />;
 
+// Used in separate fw update modal
 const Body = () => {
     const { error } = useFirmware();
     return (

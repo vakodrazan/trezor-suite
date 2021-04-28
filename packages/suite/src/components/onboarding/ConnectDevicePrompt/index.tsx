@@ -65,7 +65,7 @@ const ConnectDevicePrompt = ({ children, connected, showWarning }: Props) => {
     });
     const animation = device?.features?.model === 'T' ? 'TT_CONNECT' : 'T1_CONNECT';
     return (
-        <Wrapper style={fadeStyles}>
+        <Wrapper style={fadeStyles} data-test="@onboarding/connect-device">
             <ImageWrapper>
                 <DeviceAnimation type={animation} loop={!connected} />
                 <Checkmark>

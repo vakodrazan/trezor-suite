@@ -149,7 +149,7 @@ const DataAnalytics = () => {
 
                 <ButtonWrapper>
                     <OnboardingButton.Cta
-                        data-test="@onboarding/button-continue"
+                        data-test="@onboarding/continue-button"
                         onClick={() => goToSubStep('security-check')}
                     >
                         <Translation id="TR_CONFIRM" />
