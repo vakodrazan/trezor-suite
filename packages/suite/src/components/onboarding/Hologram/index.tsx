@@ -12,7 +12,6 @@ import {
 const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
-    margin: 12px 16px;
 `;
 
 const HologramHeading = styled.span`
