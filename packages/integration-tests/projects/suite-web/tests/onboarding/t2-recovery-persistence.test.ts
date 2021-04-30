@@ -86,7 +86,7 @@ describe('Onboarding - T2 in recovery mode', () => {
     });
 
     // https://github.com/trezor/trezor-suite/issues/2049
-    it.only(`
+    it(`
         1. start recovery
         2. enter first shamir share
         3. reconnect device

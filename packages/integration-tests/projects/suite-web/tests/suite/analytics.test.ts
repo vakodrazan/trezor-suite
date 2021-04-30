@@ -43,13 +43,13 @@ describe('Analytics', () => {
         cy.wrap(requests).its(0).its('c_session_id').as('request0');
         cy.wrap(requests).its(0).should('have.property', 'c_type', 'initial-run-completed');
         cy.wrap(requests).its(0).should('have.property', 'analytics', 'false');
-        cy.wrap(requests).its(0).should('have.property', 'c_instance_id').should('match', instance);
         cy.wrap(requests).its(1).should('equal', undefined);
 
         // important, suite needs time to save initialRun flag into storage
         cy.getTestElement('@suite/loading').should('not.exist');
 
         // go to settings
+        cy.wait(1000);
         cy.prefixedVisit('/');
         cy.task('startEmu', { wipe: false });
         cy.discoveryShouldFinish();
@@ -92,7 +92,7 @@ describe('Analytics', () => {
         cy.wrap(requests).its(4).should('have.property', 'c_type', 'menu/goto/switch-device');
 
         // adding wallet
-        cy.getTestElement('@switch-device/add-wallet-button').click();
+        cy.getTestElement('@switch-device/add-hidden-wallet-button').click();
         cy.wait('@data-fetch');
         cy.wrap(requests).its(5).should('have.property', 'c_type', 'switch-device/add-wallet');
     });
