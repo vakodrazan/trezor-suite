@@ -56,6 +56,7 @@ describe('Onboarding - create wallet', () => {
         cy.getTestElement('@pin/submit-button').click();
         cy.getTestElement('@pin-mismatch');
         cy.getTestElement('@pin-mismatch/try-again-button').click();
+        cy.wait(1000);
         cy.task('pressYes');
 
         cy.log('Pin matrix appears again');
