@@ -35,8 +35,6 @@ describe('Analytics', () => {
         cy.getTestElement('@analytics/toggle-switch').should('be.checked');
         cy.getTestElement('@analytics/toggle-switch').click({ force: true });
         cy.getTestElement('@analytics/toggle-switch').should('not.be.checked');
-        cy.getTestElement('@analytics/go-to-onboarding-button').click();
-
         cy.getTestElement('@onboarding/continue-button').click();
         cy.getTestElement('@onboarding/exit-app-button').click();
 
@@ -52,10 +50,10 @@ describe('Analytics', () => {
         cy.getTestElement('@suite/loading').should('not.exist');
 
         // go to settings
-        cy.prefixedVisit('/settings');
-        cy.getTestElement('@modal/connect-device');
+        cy.prefixedVisit('/');
         cy.task('startEmu', { wipe: false });
-        cy.getTestElement('@modal/connect-device').should('not.exist');
+        cy.discoveryShouldFinish();
+        cy.getTestElement('@suite/menu/settings-index').click();
 
         // analytics is not enabled and no additional requests were fired
         cy.getTestElement('@analytics/toggle-switch').should('not.be.checked');
