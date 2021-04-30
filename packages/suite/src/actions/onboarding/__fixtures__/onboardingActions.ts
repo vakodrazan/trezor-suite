@@ -112,21 +112,6 @@ export default [
         },
     },
     {
-        description: 'selectTrezorModel',
-        initialState: {
-            onboarding: {
-                selectModel: 1,
-            },
-            suite: {
-                device: getSuiteDevice(),
-            },
-        },
-        action: () => onboardingActions.selectTrezorModel(2),
-        expect: {
-            toMatchObject: { selectedModel: 2 },
-        },
-    },
-    {
         description: 'resetOnboarding: should set onboarding reducer to initial state',
         initialState: {
             onboarding: {

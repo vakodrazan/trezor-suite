@@ -23,16 +23,8 @@ export type OnboardingAction =
           payload: AnyPath;
       }
     | {
-          type: typeof ONBOARDING.SELECT_TREZOR_MODEL;
-          model: 1 | 2;
-      }
-    | {
           type: typeof ONBOARDING.GO_TO_SUBSTEP;
           subStepId: string | null;
-      }
-    | {
-          type: typeof ONBOARDING.SET_STEP_RESOLVED;
-          stepId: AnyStepId;
       }
     | {
           type: typeof ONBOARDING.SET_STEP_ACTIVE;
@@ -47,11 +39,6 @@ const goToStep = (stepId: AnyStepId): OnboardingAction => ({
 const goToSubStep = (subStepId: string | null): OnboardingAction => ({
     type: ONBOARDING.GO_TO_SUBSTEP,
     subStepId,
-});
-
-const selectTrezorModel = (model: 1 | 2): OnboardingAction => ({
-    type: ONBOARDING.SELECT_TREZOR_MODEL,
-    model,
 });
 
 const addPath = (payload: AnyPath): OnboardingAction => ({
@@ -117,7 +104,6 @@ export {
     goToSubStep,
     goToStep,
     goToPreviousStep,
-    selectTrezorModel,
     addPath,
     removePath,
     resetOnboarding,
