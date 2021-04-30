@@ -7,8 +7,10 @@ describe('General settings', () => {
         cy.task('setupEmu', { needs_backup: false });
         cy.task('startBridge');
         cy.viewport(1024, 768).resetDb();
-        cy.prefixedVisit('/settings');
+        cy.prefixedVisit('/');
         cy.passThroughInitialRun();
+        cy.discoveryShouldFinish();
+        cy.getTestElement('@suite/menu/settings-index').click();
     });
 
     it('Change fiat', () => {

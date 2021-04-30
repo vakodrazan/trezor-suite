@@ -11,7 +11,6 @@ describe('Analytics', () => {
     beforeEach(() => {
         cy.task('startEmu', { wipe: true });
         cy.task('setupEmu');
-        cy.task('stopEmu');
         cy.task('startBridge');
         cy.viewport(1024, 768).resetDb();
     });
@@ -33,13 +32,13 @@ describe('Analytics', () => {
         cy.prefixedVisit('/');
 
         // pass through initial run
-        cy.getTestElement('@welcome/continue-button').click();
         cy.getTestElement('@analytics/toggle-switch').should('be.checked');
         cy.getTestElement('@analytics/toggle-switch').click({ force: true });
         cy.getTestElement('@analytics/toggle-switch').should('not.be.checked');
         cy.getTestElement('@analytics/go-to-onboarding-button').click();
-        cy.getTestElement('@onboarding/skip-button').click();
-        cy.getTestElement('@onboarding/skip-button').click();
+
+        cy.getTestElement('@onboarding/continue-button').click();
+        cy.getTestElement('@onboarding/exit-app-button').click();
 
         // assert that only 1 request was fired
         cy.wait('@data-fetch');

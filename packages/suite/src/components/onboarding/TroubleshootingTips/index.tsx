@@ -90,6 +90,7 @@ const TroubleshootingTips = ({ label, items, offerWebUsb }: Props) => (
         }
         iconLabel={label}
         noContentPadding
+        data-test="@onboarding/expand-troubleshooting-tips"
     >
         <Items>
             {items
