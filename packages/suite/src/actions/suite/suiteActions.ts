@@ -338,6 +338,17 @@ export const handleDeviceDisconnect = (device: Device) => (
     // }
 
     const available = deviceUtils.getFirstDeviceInstance(devices);
+
+    if (
+        ['wait-for-reboot', 'unplug'].includes(getState().firmware.status) &&
+        !available[0]?.connected
+    ) {
+        // Suite tried to switch selected device to a remembered (and disconnected) device.
+        // We never want to switch to some different remembered device when currently used device disconnects in order to complete firmware installation
+        dispatch({ type: SUITE.SELECT_DEVICE, payload: undefined });
+        return;
+    }
+
     dispatch({ type: SUITE.SELECT_DEVICE, payload: available[0] });
 };
 
