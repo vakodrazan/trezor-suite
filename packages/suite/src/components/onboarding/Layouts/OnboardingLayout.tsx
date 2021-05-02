@@ -18,7 +18,14 @@ const Wrapper = styled.div`
 `;
 
 const StyledProgressBar = styled(ProgressBar)`
-    @media all and (max-height: ${variables.SCREEN_SIZE.MD}) {
+    margin: 0 64px;
+    @media all and (max-width: ${variables.SCREEN_SIZE.SM}) {
+        margin: 0;
+    }
+`;
+
+const HideInMobile = styled.div`
+    @media all and (max-width: ${variables.SCREEN_SIZE.SM}) {
         display: none;
     }
 `;
@@ -36,7 +43,24 @@ const Header = styled.div`
     display: flex;
     width: 100%;
     padding: 26px 40px;
+    margin-bottom: 46px;
     justify-content: space-between;
+    align-items: center;
+
+    @media all and (max-width: ${variables.SCREEN_SIZE.LG}) {
+        padding: 0px 20px;
+    }
+
+    @media all and (max-width: ${variables.SCREEN_SIZE.SM}) {
+        /* low width screen (mobile) */
+        margin-bottom: 26px;
+    }
+
+    @media all and (max-height: ${variables.SCREEN_SIZE.SM}) {
+        /* low height screen */
+        padding: 0px 20px;
+        margin-bottom: 26px;
+    }
 `;
 
 const Content = styled.div`
@@ -62,15 +86,9 @@ const OnboardingLayout = ({ children }: Props) => {
         <Wrapper>
             <MaxWidth>
                 <Header>
-                    <TrezorLogo type="suite" width="128px" />
-                    <TrezorLink size="small" variant="nostyle" href={SUPPORT_URL}>
-                        <Button variant="tertiary" icon="EXTERNAL_LINK" alignIcon="right">
-                            <Translation id="TR_HELP" />
-                        </Button>
-                    </TrezorLink>
-                </Header>
-
-                <Content>
+                    <HideInMobile>
+                        <TrezorLogo type="suite" width="128px" />
+                    </HideInMobile>
                     <StyledProgressBar
                         steps={[
                             {
@@ -95,8 +113,16 @@ const OnboardingLayout = ({ children }: Props) => {
                         ]}
                         activeStep={activeStep.stepGroup}
                     />
-                    {children}
-                </Content>
+                    <HideInMobile>
+                        <TrezorLink size="small" variant="nostyle" href={SUPPORT_URL}>
+                            <Button variant="tertiary" icon="EXTERNAL_LINK" alignIcon="right">
+                                <Translation id="TR_HELP" />
+                            </Button>
+                        </TrezorLink>
+                    </HideInMobile>
+                </Header>
+
+                <Content>{children}</Content>
             </MaxWidth>
         </Wrapper>
     );

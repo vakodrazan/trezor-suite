@@ -6,8 +6,6 @@ import { useTheme } from '@suite-hooks';
 const ProgressBarWrapper = styled.div`
     display: flex;
     padding: 20px 0;
-    margin-top: 40px;
-    margin-bottom: 20px;
     width: 100%;
     /* prevents jumping in completed state with check mark icon shown */
     height: 64px;
@@ -24,6 +22,10 @@ const StepWrapper = styled.div<{ active: boolean }>`
     color: ${props => props.theme.TYPE_LIGHT_GREY};
     font-size: ${variables.NEUE_FONT_SIZE.NORMAL};
     font-weight: ${variables.FONT_WEIGHT.DEMI_BOLD};
+
+    @media all and (max-width: ${variables.SCREEN_SIZE.LG}) {
+        padding: 0;
+    }
 
     ${props =>
         props.active &&
@@ -64,12 +66,20 @@ const Label = styled.div`
     color: ${props => props.theme.TYPE_LIGHT_GREY};
     font-size: ${variables.NEUE_FONT_SIZE.TINY};
     font-weight: ${variables.FONT_WEIGHT.MEDIUM};
+
+    @media all and (max-width: ${variables.SCREEN_SIZE.MD}) {
+        display: none;
+    }
 `;
 
 const Divider = styled.div`
     flex-grow: 1;
     border-bottom: 1px solid ${props => props.theme.STROKE_GREY};
     margin: 20px;
+
+    @media all and (max-width: ${variables.SCREEN_SIZE.MD}) {
+        display: none;
+    }
 `;
 
 interface Props {
