@@ -1,5 +1,5 @@
 import React from 'react';
-import { OnboardingButton } from '@onboarding-components';
+import { OnboardingButtonBack } from '@onboarding-components';
 import { Translation } from '@suite-components';
 import * as onboardingActions from '@onboarding-actions/onboardingActions';
 import * as recoveryActions from '@recovery-actions/recoveryActions';
@@ -48,12 +48,12 @@ const RecoveryStepBox = (props: OnboardingStepBoxProps) => {
             image="RECOVERY"
             outerActions={
                 isBackButtonVisible() ? (
-                    <OnboardingButton.Back
+                    <OnboardingButtonBack
                         onClick={() => handleBack()}
                         data-test="@onboarding/recovery/back-button"
                     >
                         <Translation id="TR_BACK" />
-                    </OnboardingButton.Back>
+                    </OnboardingButtonBack>
                 ) : undefined
             }
             {...props}

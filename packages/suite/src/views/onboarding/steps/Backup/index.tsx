@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { OnboardingButton } from '@onboarding-components';
+import { OnboardingButtonCta, OnboardingButtonSkip } from '@onboarding-components';
 import { Translation, Image, TrezorLink } from '@suite-components';
 import { BackupSeedCards } from '@backup-components';
 import { canContinue } from '@backup-utils';
@@ -55,21 +55,21 @@ const BackupStep = () => {
                         />
                     }
                     innerActions={
-                        <OnboardingButton.Cta
+                        <OnboardingButtonCta
                             data-test="@backup/start-button"
                             onClick={() => backupDevice()}
                             isDisabled={!canContinue(backup.userConfirmed, locks)}
                         >
                             <Translation id="TR_START_BACKUP" />
-                        </OnboardingButton.Cta>
+                        </OnboardingButtonCta>
                     }
                     outerActions={
-                        <OnboardingButton.Skip
+                        <OnboardingButtonSkip
                             data-test="@onboarding/exit-app-button"
                             onClick={() => goToNextStep('set-pin')}
                         >
                             <Translation id="TR_SKIP_BACKUP" />
-                        </OnboardingButton.Skip>
+                        </OnboardingButtonSkip>
                     }
                 >
                     <OptionsWrapper>
@@ -103,13 +103,13 @@ const BackupStep = () => {
                     heading={<Translation id="TR_BACKUP_CREATED" />}
                     description={<Translation id="TR_BACKUP_FINISHED_TEXT" />}
                     innerActions={
-                        <OnboardingButton.Cta
+                        <OnboardingButtonCta
                             data-test="@backup/close-button"
                             onClick={() => goToNextStep()}
                             isDisabled={!canContinue(backup.userConfirmed)}
                         >
                             <Translation id="TR_BACKUP_FINISHED_BUTTON" />
-                        </OnboardingButton.Cta>
+                        </OnboardingButtonCta>
                     }
                 />
             )}
@@ -121,13 +121,13 @@ const BackupStep = () => {
                         <Translation id="TR_DEVICE_DISCONNECTED_DURING_ACTION_DESCRIPTION" />
                     }
                     innerActions={
-                        <OnboardingButton.Cta
+                        <OnboardingButtonCta
                             onClick={() => {
                                 goto('settings-index');
                             }}
                         >
                             <Translation id="TR_GO_TO_SETTINGS" />
-                        </OnboardingButton.Cta>
+                        </OnboardingButtonCta>
                     }
                 >
                     <OptionsWrapper>

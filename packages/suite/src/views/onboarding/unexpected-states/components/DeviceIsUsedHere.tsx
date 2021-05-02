@@ -1,6 +1,6 @@
 import React from 'react';
 import { Translation } from '@suite-components';
-import { OnboardingButton } from '@onboarding-components';
+import { OnboardingButtonCta } from '@onboarding-components';
 
 import * as suiteActions from '@suite-actions/suiteActions';
 import { useActions } from '@suite-hooks';
@@ -15,9 +15,9 @@ const DeviceIsUsedHere = () => {
             heading={<Translation id="TR_DEVICE_IS_USED_IN_OTHER_WINDOW_HEADING" />}
             description={<Translation id="TR_DEVICE_IS_USED_IN_OTHER_WINDOW_TEXT" />}
             innerActions={
-                <OnboardingButton.Cta onClick={() => actionCta()}>
+                <OnboardingButtonCta onClick={() => actionCta()}>
                     <Translation id="TR_DEVICE_IS_USED_IN_OTHER_WINDOW_BUTTON" />
-                </OnboardingButton.Cta>
+                </OnboardingButtonCta>
             }
         />
     );

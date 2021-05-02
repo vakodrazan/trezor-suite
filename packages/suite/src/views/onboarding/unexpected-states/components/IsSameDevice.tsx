@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { OnboardingButton } from '@onboarding-components';
+import { OnboardingButtonAlt } from '@onboarding-components';
 import { Translation } from '@suite-components';
 import { Dispatch } from '@suite-types';
 import * as onboardingActions from '@onboarding-actions/onboardingActions';
@@ -29,7 +29,7 @@ const IsSameDevice = ({ resetOnboarding, enableOnboardingReducer }: Props) => (
             </>
         }
         innerActions={
-            <OnboardingButton.Alt
+            <OnboardingButtonAlt
                 onClick={() => {
                     resetOnboarding();
                     enableOnboardingReducer(true);
@@ -37,7 +37,7 @@ const IsSameDevice = ({ resetOnboarding, enableOnboardingReducer }: Props) => (
                 data-test="@onboarding/unexpected-state/is-same/start-over-button"
             >
                 <Translation id="TR_START_AGAIN" />
-            </OnboardingButton.Alt>
+            </OnboardingButtonAlt>
         }
     />
 );

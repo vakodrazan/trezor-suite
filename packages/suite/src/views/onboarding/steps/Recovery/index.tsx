@@ -1,5 +1,5 @@
 import React from 'react';
-import { OnboardingButton } from '@onboarding-components';
+import { OnboardingButtonCta } from '@onboarding-components';
 import { SelectWordCount, SelectRecoveryType, SelectRecoveryWord } from '@recovery-components';
 import { Translation } from '@suite-components';
 import * as onboardingActions from '@onboarding-actions/onboardingActions';
@@ -58,14 +58,14 @@ const RecoveryStep = () => {
                 heading={<Translation id="TR_RECOVER_YOUR_WALLET_FROM" />}
                 description={<Translation id="TR_RECOVER_SUBHEADING_MODEL_T" />}
                 innerActions={
-                    <OnboardingButton.Cta
+                    <OnboardingButtonCta
                         data-test="@onboarding/recovery/start-button"
                         onClick={() => {
                             recoverDevice();
                         }}
                     >
                         <Translation id="TR_START_RECOVERY" />
-                    </OnboardingButton.Cta>
+                    </OnboardingButtonCta>
                 }
             />
         );
@@ -138,12 +138,12 @@ const RecoveryStep = () => {
             <RecoveryStepBox
                 heading={<Translation id="TR_WALLET_RECOVERED_FROM_SEED" />}
                 innerActions={
-                    <OnboardingButton.Cta
+                    <OnboardingButtonCta
                         data-test="@onboarding/recovery/continue-button"
                         onClick={() => goToNextStep('set-pin')}
                     >
                         <Translation id="TR_CONTINUE" />
-                    </OnboardingButton.Cta>
+                    </OnboardingButtonCta>
                 }
             />
         );
@@ -155,12 +155,12 @@ const RecoveryStep = () => {
                 heading={<Translation id="TR_RECOVERY_FAILED" />}
                 description={<Translation id="TR_RECOVERY_ERROR" values={{ error }} />}
                 innerActions={
-                    <OnboardingButton.Cta
+                    <OnboardingButtonCta
                         data-test="@onboarding/recovery/retry-button"
                         onClick={model === 1 ? resetReducer : recoverDevice}
                     >
                         <Translation id="TR_RETRY" />
-                    </OnboardingButton.Cta>
+                    </OnboardingButtonCta>
                 }
             />
         );

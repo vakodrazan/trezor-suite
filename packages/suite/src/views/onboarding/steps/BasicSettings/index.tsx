@@ -1,6 +1,6 @@
 import React from 'react';
 import { Translation } from '@suite-components';
-import { OnboardingButton } from '@onboarding-components';
+import { OnboardingButtonCta } from '@onboarding-components';
 import { useOnboarding, useSelector } from '@suite-hooks';
 import { NETWORKS } from '@wallet-config';
 import { Network } from '@wallet-types';
@@ -48,7 +48,7 @@ const BasicSettings = () => {
             description={<Translation id="TR_ONBOARDING_COINS_STEP_DESCRIPTION" />}
             outerActions={
                 <AdvancedSetup networks={setupNetworks}>
-                    <OnboardingButton.Cta
+                    <OnboardingButtonCta
                         data-test="@onboarding/coins/continue-button"
                         onClick={() => {
                             goToNextStep();
@@ -56,7 +56,7 @@ const BasicSettings = () => {
                         isDisabled={!canCompleteSetup}
                     >
                         <Translation id="TR_COMPLETE_SETUP" />
-                    </OnboardingButton.Cta>
+                    </OnboardingButtonCta>
                 </AdvancedSetup>
             }
         />

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as STEP from '@onboarding-constants/steps';
 import {
-    OnboardingButton,
+    OnboardingButtonBack,
     NeueOption,
     OptionsWrapper,
     OptionWrapper,
@@ -52,9 +52,9 @@ const ResetDeviceStep = () => {
             outerActions={
                 !isWaitingForConfirmation ? (
                     // There is no point to show back button if user can't click it because confirmOnDevice bubble is active
-                    <OnboardingButton.Back onClick={() => goToPreviousStep()}>
+                    <OnboardingButtonBack onClick={() => goToPreviousStep()}>
                         <Translation id="TR_BACK" />
-                    </OnboardingButton.Back>
+                    </OnboardingButtonBack>
                 ) : undefined
             }
         >

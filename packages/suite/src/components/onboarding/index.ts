@@ -9,10 +9,10 @@ import StepFooterWrapper from './Wrapper/StepFooterWrapper';
 import StepHeadingWrapper from './Wrapper/StepHeadingWrapper';
 import StepWrapper from './Wrapper/StepWrapper';
 
-import ButtonAlt from './Buttons/ButtonAlt';
-import ButtonCta from './Buttons/ButtonCta';
-import ButtonBack from './Buttons/ButtonBack';
-import ButtonSkip from './Buttons/ButtonSkip';
+import OnboardingButtonAlt from './Buttons/ButtonAlt';
+import OnboardingButtonCta from './Buttons/ButtonCta';
+import OnboardingButtonBack from './Buttons/ButtonBack';
+import OnboardingButtonSkip from './Buttons/ButtonSkip';
 
 import Box, { BoxProps } from './Box/Box';
 import Coin, { CoinProps } from './Coin/Coin';
@@ -25,13 +25,6 @@ import ProgressBar from './ProgressBar';
 import Hologram from './Hologram';
 import TroubleshootingTips from './TroubleshootingTips';
 import Dots from './Loaders/Dots';
-
-const OnboardingButton = {
-    Alt: ButtonAlt,
-    Cta: ButtonCta,
-    Back: ButtonBack,
-    Skip: ButtonSkip,
-};
 
 const Loaders = {
     Dots,
@@ -49,7 +42,10 @@ const Wrapper = {
 
 // TODO: remove what we don't need anymore
 export {
-    OnboardingButton,
+    OnboardingButtonAlt,
+    OnboardingButtonCta,
+    OnboardingButtonBack,
+    OnboardingButtonSkip,
     Loaders,
     Text,
     Wrapper,

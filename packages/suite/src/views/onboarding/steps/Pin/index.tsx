@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { PinMatrix, Translation } from '@suite-components';
-import { OnboardingButton } from '@onboarding-components';
+import { OnboardingButtonCta, OnboardingButtonSkip } from '@onboarding-components';
 import * as deviceSettingsActions from '@settings-actions/deviceSettingsActions';
 import { useActions, useSelector, useOnboarding } from '@suite-hooks';
 import PinStepBox from './PinStepBox';
@@ -65,12 +65,12 @@ const SetPinStep = () => {
                 description={<Translation id="TR_PIN_MISMATCH_TEXT" />}
                 data-test="@pin-mismatch"
                 innerActions={
-                    <OnboardingButton.Cta
+                    <OnboardingButtonCta
                         onClick={onTryAgain}
                         data-test="@pin-mismatch/try-again-button"
                     >
                         <Translation id="TR_TRY_AGAIN" />
-                    </OnboardingButton.Cta>
+                    </OnboardingButtonCta>
                 }
             />
         );
@@ -83,12 +83,12 @@ const SetPinStep = () => {
                 heading={<Translation id="TR_PIN_HEADING_SUCCESS" />}
                 description={<Translation id="TR_PIN_SET_SUCCESS" />}
                 outerActions={
-                    <OnboardingButton.Cta
+                    <OnboardingButtonCta
                         data-test="@onboarding/pin/continue-button"
                         onClick={() => goToNextStep()}
                     >
                         <Translation id="TR_CONTINUE" />
-                    </OnboardingButton.Cta>
+                    </OnboardingButtonCta>
                 }
             />
         );
@@ -108,26 +108,26 @@ const SetPinStep = () => {
             innerActions={
                 // "Create a pin" button to start the process, continue button after the pin is set (as outerAction), no primary CTA during the setup procedure on TT
                 !showConfirmationPrompt ? (
-                    <OnboardingButton.Cta
+                    <OnboardingButtonCta
                         data-test="@onboarding/set-pin-button"
                         onClick={() => {
                             changePin();
                         }}
                     >
                         <Translation id="TR_SET_PIN" />
-                    </OnboardingButton.Cta>
+                    </OnboardingButtonCta>
                 ) : undefined
             }
             outerActions={
                 // show skip button only if we are not done yet with setting up the pin (state is other than success state)
                 // and if confirmation prompt is not active (I guess there is no point showing back btn which can't be clicked because it is under the modal)
                 !showConfirmationPrompt ? (
-                    <OnboardingButton.Skip
+                    <OnboardingButtonSkip
                         data-test="@onboarding/skip-button"
                         onClick={() => goToNextStep()}
                     >
                         <Translation id="TR_SKIP" />
-                    </OnboardingButton.Skip>
+                    </OnboardingButtonSkip>
                 ) : undefined
             }
             confirmOnDevice={showConfirmationPrompt ? device.features.major_version : undefined}

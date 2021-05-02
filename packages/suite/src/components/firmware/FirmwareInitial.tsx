@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Button } from '@trezor/components';
-import { ConnectDevicePromptManager, OnboardingButton } from '@onboarding-components';
+import { ConnectDevicePromptManager, OnboardingButtonSkip } from '@onboarding-components';
 import { Translation } from '@suite-components';
 import { getFwUpdateVersion, getFwVersion } from '@suite-utils/device';
 import { useDevice, useFirmware, useActions } from '@suite-hooks';
@@ -99,12 +99,12 @@ const FirmwareInitial = ({ cachedDevice, setCachedDevice }: Props) => {
             outerActions:
                 device.firmware === 'outdated' ? (
                     // Fw update is not mandatory, show skip button
-                    <OnboardingButton.Skip
+                    <OnboardingButtonSkip
                         onClick={() => goToNextStep()}
                         data-test="@firmware/skip-button"
                     >
                         <Translation id="TR_SKIP_UPDATE" />
-                    </OnboardingButton.Skip>
+                    </OnboardingButtonSkip>
                 ) : undefined,
         };
     }

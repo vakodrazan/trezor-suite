@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { OnboardingButton } from '@onboarding-components';
+import { OnboardingButtonBack } from '@onboarding-components';
 import { Translation } from '@suite-components';
 import {
     ContinueButton,
@@ -43,9 +43,9 @@ const FirmwareStep = () => {
                 description={<Translation id="TOAST_GENERIC_ERROR" values={{ error }} />}
                 innerActions={<RetryButton onClick={firmwareUpdate} />}
                 outerActions={
-                    <OnboardingButton.Back onClick={() => resetReducer()}>
+                    <OnboardingButtonBack onClick={() => resetReducer()}>
                         <Translation id="TR_BACK" />
-                    </OnboardingButton.Back>
+                    </OnboardingButtonBack>
                 }
             />
         );

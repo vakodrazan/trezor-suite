@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Icon, Tooltip, variables } from '@trezor/components';
 import { useOnboarding, useSelector, useTheme } from '@suite-hooks';
 import { Translation, TrezorLink } from '@suite-components';
-import { Box, Hologram, OnboardingButton } from '@onboarding-components';
+import { Box, Hologram, OnboardingButtonCta, OnboardingButtonSkip } from '@onboarding-components';
 import { SUPPORT_URL } from '@suite-constants/urls';
 import { getConnectedDeviceStatus } from '@suite-utils/device';
 
@@ -42,7 +42,7 @@ const Text = styled.div`
     margin-left: 24px;
 `;
 
-const StyledButton = styled(OnboardingButton.Cta)`
+const StyledButton = styled(OnboardingButtonCta)`
     margin-right: 16px;
 `;
 
@@ -165,9 +165,9 @@ const SecurityCheck = () => {
             </Box>
             <OuterActions>
                 <TrezorLink variant="underline" href={SUPPORT_URL}>
-                    <OnboardingButton.Skip>
+                    <OnboardingButtonSkip>
                         <Translation id="TR_CONTACT_SUPPORT" />
-                    </OnboardingButton.Skip>
+                    </OnboardingButtonSkip>
                 </TrezorLink>
             </OuterActions>
         </>

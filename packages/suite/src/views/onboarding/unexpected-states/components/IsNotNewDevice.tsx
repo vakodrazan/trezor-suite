@@ -9,7 +9,7 @@ import { SUPPORT_URL } from '@suite-constants/urls';
 import * as STEP from '@onboarding-constants/steps';
 import * as onboardingActions from '@onboarding-actions/onboardingActions';
 import * as routerActions from '@suite-actions/routerActions';
-import { Text, Wrapper, OnboardingButton } from '@onboarding-components';
+import { Text, Wrapper, OnboardingButtonAlt, OnboardingButtonCta } from '@onboarding-components';
 
 import { AppState, Dispatch } from '@suite-types';
 
@@ -48,26 +48,26 @@ const IsNotNewDevice = ({ actionAlt, closeModalApp, device }: Props) => {
                 <StyledImage image="UNI_WARNING" width="160" />
                 <Wrapper.Controls>
                     <TrezorLink variant="nostyle" href={SUPPORT_URL}>
-                        <OnboardingButton.Cta style={{ width: '100%' }}>
+                        <OnboardingButtonCta style={{ width: '100%' }}>
                             <Translation id="TR_CONTACT_SUPPORT" />
-                        </OnboardingButton.Cta>
+                        </OnboardingButtonCta>
                     </TrezorLink>
 
                     {device.mode !== 'initialize' && (
-                        <OnboardingButton.Alt
+                        <OnboardingButtonAlt
                             onClick={() => closeModalApp()}
                             data-test="@onboarding/unexpected-state/go-to-suite-button"
                         >
                             <Translation id="TR_GO_TO_SUITE" />
-                        </OnboardingButton.Alt>
+                        </OnboardingButtonAlt>
                     )}
                     {device.mode === 'initialize' && device.firmware !== 'none' && (
-                        <OnboardingButton.Alt
+                        <OnboardingButtonAlt
                             onClick={() => actionAlt([STEP.PATH_NEW])}
                             data-test="@onboarding/unexpected-state/use-it-anyway-button"
                         >
                             <Translation id="TR_USE_IT_ANYWAY" />
-                        </OnboardingButton.Alt>
+                        </OnboardingButtonAlt>
                     )}
                 </Wrapper.Controls>
             </Wrapper.StepBody>

@@ -6,7 +6,7 @@ import { useAnalytics, useOnboarding } from '@suite-hooks';
 import { CollapsibleBox } from '@suite-components';
 import { Translation } from '@suite-components/Translation';
 import TrezorLink from '@suite-components/TrezorLink'; // Separate import because of circular dep problem. Error: Cannot create styled-component for component: undefined
-import { Box, OnboardingButton } from '@onboarding-components';
+import { Box, OnboardingButtonCta } from '@onboarding-components';
 import { TOS_URL } from '@suite-constants/urls';
 
 const Wrapper = styled.div`
@@ -148,12 +148,12 @@ const DataAnalytics = () => {
                 </SwitchWrapper>
 
                 <ButtonWrapper>
-                    <OnboardingButton.Cta
+                    <OnboardingButtonCta
                         data-test="@onboarding/continue-button"
                         onClick={() => goToSubStep('security-check')}
                     >
                         <Translation id="TR_CONFIRM" />
-                    </OnboardingButton.Cta>
+                    </OnboardingButtonCta>
                 </ButtonWrapper>
             </Wrapper>
         </Box>
