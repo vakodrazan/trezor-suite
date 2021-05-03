@@ -319,8 +319,16 @@ export const handleDeviceDisconnect = (device: Device) => (
     if (!selectedDevice) return;
     if (selectedDevice.path !== device.path) return;
 
+    const { devices, firmware, router } = getState();
+
+    if (['wait-for-reboot', 'unplug'].includes(firmware.status) || router.app === 'onboarding') {
+        // Suite tried to switch selected device to a remembered (and disconnected) device or another connected device while being in Onboarding process.
+        // We never want to switch to some different remembered device when currently used device disconnects because of loose cable or in order to complete firmware installation
+        dispatch({ type: SUITE.SELECT_DEVICE, payload: undefined });
+        return;
+    }
+
     // selected device is disconnected, decide what to do next
-    const { devices } = getState();
     // device is still present in reducer (remembered or candidate to remember)
     const devicePresent = deviceUtils.getSelectedDevice(selectedDevice, devices);
     const deviceInstances = deviceUtils.getDeviceInstances(selectedDevice, devices);
@@ -338,17 +346,6 @@ export const handleDeviceDisconnect = (device: Device) => (
     // }
 
     const available = deviceUtils.getFirstDeviceInstance(devices);
-
-    if (
-        ['wait-for-reboot', 'unplug'].includes(getState().firmware.status) &&
-        !available[0]?.connected
-    ) {
-        // Suite tried to switch selected device to a remembered (and disconnected) device.
-        // We never want to switch to some different remembered device when currently used device disconnects in order to complete firmware installation
-        dispatch({ type: SUITE.SELECT_DEVICE, payload: undefined });
-        return;
-    }
-
     dispatch({ type: SUITE.SELECT_DEVICE, payload: available[0] });
 };
 
