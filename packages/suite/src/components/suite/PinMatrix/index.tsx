@@ -25,6 +25,7 @@ const Col = styled.div<{ blur?: boolean }>`
     flex-direction: column;
     align-items: center;
     border-radius: 5px;
+    width: 100%;
     max-width: 340px;
 
     ${props =>
