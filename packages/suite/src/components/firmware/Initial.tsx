@@ -171,6 +171,7 @@ const BottomBar = () => {
         return null;
     }
 
+    // Uncomment this if you don't wanna allow reinstalling a firmware on a device that already has firmware installed
     // if (['outdated', 'required'].includes(device.firmware)) {
     return (
         <>

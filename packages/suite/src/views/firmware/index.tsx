@@ -106,7 +106,7 @@ const Firmware = ({ closeModalApp, resetReducer, firmware, device, modal }: Prop
         }
 
         // edge case 2 - user has reconnected device that is already up to date
-        // todo: remove this if we want to allow user to 'reinstall'
+        // Uncomment this if you don't wanna allow reinstalling a firmware on a device that already has firmware installed
         // if (!['done', 'initial'].includes(firmware.status)  && device?.firmware === 'valid') {
         //     return {
         //         Heading: <NoNewFirmware.Heading />,
