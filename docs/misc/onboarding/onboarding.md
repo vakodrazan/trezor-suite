@@ -60,7 +60,7 @@ In this step we handle various invalid device modes and problems with transport 
 Invalid device states:
 - Device connected, but in bootloader mode
 - Device connected, but unreadable 
-- Seedless device (not handled by onboarding/suite)
+- [Seedless device setup](https://wiki.trezor.io/Enterprise#Seedless_setup) is not not supported in Suite (not to be confused with regular device without seed).
 
 Invalid transport states:
 - No transport available (Trezor Bridge is not running)
@@ -117,7 +117,7 @@ Secondary action: Contact support
 
 ## Firmware
 
-To provide good user and dev experience firmware flow has its own reducer. It is shared between firmware flow used in onboarding and standalone modal for firmware update. Both flows reuse as much UI components and logic as possible (TODO).
+To provide good user and dev experience firmware flow has its own reducer. It is shared between firmware flow used in onboarding and standalone modal for firmware update. Both flows reuse as much UI components and logic as possible (TODO in [#3707](https://github.com/trezor/trezor-suite/issues/3707)).
 
 Active sub step of firmware step is stored in `status` field. Explanation of each field and sub steps can be found in [firmwareReducer.ts](https://github.com/trezor/trezor-suite/blob/develop/packages/suite/src/reducers/firmware/firmwareReducer.ts).
 
@@ -169,7 +169,7 @@ After the device is reconnected we show a button to trigger an update process. T
 ![firmware confirm](./assets/welcome/firmware_confirm.png)
 
 #### Device with no firmware installed
-User proceeds by clicking "Install firmware" CTA. Since the device without firmware is always in bootloader mode we don't need any cooperation from the user. Device doesn't ask for confirming the installation of the fw. When firmware installation is completed  `firmware.status` is set to ‘unplug’ in case of T1 and `wait-for-reboot`. in case of T2. User of T1 is prompted to disconnect the device and reconnect it in normal mode. Trezor model T automatically restarts itself. Then we continue to the next step ([Generating seed](##Generating-seed))
+User proceeds by clicking "Install firmware" CTA. Since the device without firmware is always in bootloader mode we don't need any cooperation from the user. Device doesn't ask for confirming the installation of the fw. When firmware installation is completed  `firmware.status` is set to `unplug` in case of T1, for T2 it it set to `wait-for-reboot`. User of T1 is prompted to disconnect the device and reconnect it in normal mode. Trezor model T automatically restarts itself. Then we continue to the next step ([Generating seed](##Generating-seed))
 
 ![reconnect in normal T1](./assets/welcome/reconnect_normal.png)
 ![firmware completed](./assets/welcome/firmware_completed.png)
@@ -200,8 +200,6 @@ However this doesn't work in case of freshly unpacked device (or device with wip
 When this happens Suite will try to select another available device, which will be the other connected device or remembered wallet and there is no way ho to switch the device back unless you restart the app/refresh the page.
 
 To work around this in `suiteActions.onHandleDisconnect`, before selecting the next active device, we check if we are in Onboarding (or standalone firmware update flow) and if so we won't allow switching selected device to different one.
-
-TODO: flow of `firmware.status`
 
 ## Generating seed
 User chooses between generating a new seed or seed recovery.
