@@ -9,6 +9,22 @@ There are few different ways to trigger the onboarding process:
   - Suite will automatically launch the onboarding
 - Wiping a device from Suite UI and proceeding with device setup
 
+## Prerequisites
+### Button Requests
+Each `device` object inside has its `buttonRequests` array which gets populated through `buttonRequestMiddleware`. It it basically a way for a device to request cooperation from the app.
+
+It is used, for example, by firmware update flow for setting correct `firmware.status` after device requested confirmation on the device:
+```js
+case SUITE.ADD_BUTTON_REQUEST:
+      if (action.payload === 'ButtonRequest_FirmwareUpdate') {
+          draft.status = 'waiting-for-confirmation';
+      }
+```
+
+Another usage is in "Setup Pin" step, where the device, through button request, will let us know if user should enter pin for the first time or 2nd time (for confirmation). It is also leveraged outside of Onboarding everytime user needs to enter a PIN. Thanks to these button we can reuse the same component that will adjust just based on these button requests.
+
+In onboarding, we clear this array after each step (handled in `buttonRequestMiddleware`).
+
 ## Steps
 - [Welcome](#Welcome)
   - [Data analytics](###Data-analytics-(only-in-initial-run))
@@ -177,7 +193,7 @@ Support for the WebUSB came pretty late for Trezor model One (bootloader 1.8.0?)
 - T1 sends `UI.FIRMWARE_PROGRESS` only twice, at 0% and then at 100%. However progress bar runs smoothly, that is because we are faking a progress. There are carefully set durations of fake progress bar. When fake progress reaches certain barrier (eg. 90%) it will stop and wait for progress report from `UI.FIRMWARE_PROGRESS`. Also when this event reports greater progress than the fake one, it will take the precedence. 
 - Faking a progress is also used on TT because, on device without any firmware installed, first `UI.FIRMWARE_PROGRESS` is received too late. (Only variant where we rely completely on a real progress is when we are upgrading TT from older firmware).
 
-##### Remembered wallet, multiple devices (maybe solved)
+##### Remembered wallet, multiple devices
 The onboarding inherited few bugs from its predecessor. After the installation of a firmware user is asked to reconnect his device (T1) or the device is auto restarted (TT). To prevent Suite from selecting another device while the one we use was disconnected, we force remembering the device (and storing it to persistent storage).
 However this doesn't work in case of freshly unpacked device (or device with wiped fw), which are in bootloader mode from the start and cannot be "remembered".
 
