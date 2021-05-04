@@ -1397,6 +1397,11 @@ const definedMessages = defineMessages({
         description: 'Button to click to contact support',
         id: 'TR_CONTACT_SUPPORT',
     },
+    TR_SECURITY_CHECK_CONTACT_SUPPORT: {
+        defaultMessage: 'Contact support',
+        description: 'Button to click to contact support',
+        id: 'TR_SECURITY_CHECK_CONTACT_SUPPORT',
+    },
     TR_CONTINUE: {
         defaultMessage: 'Continue',
         description: 'Generic continue button',

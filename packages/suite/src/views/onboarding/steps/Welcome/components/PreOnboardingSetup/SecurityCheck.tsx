@@ -166,7 +166,7 @@ const SecurityCheck = () => {
             <OuterActions>
                 <TrezorLink variant="underline" href={SUPPORT_URL}>
                     <OnboardingButtonSkip>
-                        <Translation id="TR_CONTACT_SUPPORT" />
+                        <Translation id="TR_SECURITY_CHECK_CONTACT_SUPPORT" />
                     </OnboardingButtonSkip>
                 </TrezorLink>
             </OuterActions>
