@@ -76,8 +76,12 @@ export const firmwareUpdate = () => async (dispatch: Dispatch, getState: GetStat
     const toBtcOnly = isBitcoinOnly(device);
 
     const intermediary = !toRelease.isLatest;
-    // const intermediary = !intermediaryInstalled; // for testing
-    console.log('intermediary', intermediary);
+    if (intermediary) {
+        console.warn('Cannot install latest firmware. Will install intermediary fw instead.');
+    } else {
+        console.warn(`Installing firmware ${toRelease.release.version}`);
+    }
+
     const payload = {
         keepSession: false,
         skipFinalReload: true,
@@ -110,8 +114,6 @@ export const firmwareUpdate = () => async (dispatch: Dispatch, getState: GetStat
     if (!updateResponse.success) {
         return dispatch({ type: FIRMWARE.SET_ERROR, payload: updateResponse.payload.error });
     }
-
-    console.log('payload', payload);
 
     if (intermediary) {
         dispatch({ type: FIRMWARE.SET_INTERMEDIARY_INSTALLED, payload: true });

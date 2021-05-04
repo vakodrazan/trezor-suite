@@ -64,9 +64,6 @@ const firmware = (api: MiddlewareAPI<Dispatch, AppState>) => (next: Dispatch) =>
             // todo: this is a 'client side' implementation. It would be nicer to have it in trezor-connect
             // todo: but this would require reworking the entire TRAKTOR
 
-            console.log('status', status);
-            console.log('intermediaryInstalled', intermediaryInstalled);
-            console.log('action.payload?.mode', action.payload?.mode);
             if (
                 // these 3 conditions cover any device reconnected in bootloader mode (possibly accidentally)
                 status === 'reconnect-in-normal' &&
@@ -75,6 +72,9 @@ const firmware = (api: MiddlewareAPI<Dispatch, AppState>) => (next: Dispatch) =>
                 // this one is the key, if there was previous firmware update that set intermediaryInstalled, proceed with subsequent updated automatically
                 intermediaryInstalled
             ) {
+                console.warn(
+                    'Device with intermediary firmware detected. Installing the latest update.',
+                );
                 api.dispatch(firmwareActions.firmwareUpdate());
                 break;
             }
