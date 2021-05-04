@@ -7,7 +7,7 @@ import {
     Input,
     Dropdown,
     DropdownRef,
-    DeviceAnimation,
+    DeviceImage,
 } from '@trezor/components';
 import { Translation, HomescreenGallery } from '@suite-components';
 import { OnboardingStepBox } from '@firmware-components';
@@ -71,6 +71,9 @@ const DeviceImageWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 400px;
+    height: 400px;
+    padding: 60px;
 `;
 
 const Heading = styled.div`
@@ -142,7 +145,7 @@ const FinalStep = () => {
 
     if (!device?.features) return null;
 
-    const animation = device?.features?.model === 'T' ? 'TT_SUCCESS' : 'T1_SUCCESS';
+    const model = device?.features?.model === 'T' ? 2 : 1;
 
     return (
         <OnboardingStepBox
@@ -152,7 +155,7 @@ const FinalStep = () => {
         >
             <Wrapper>
                 <DeviceImageWrapper>
-                    <DeviceAnimation type={animation} size={400} borderRadius="0" />
+                    <DeviceImage trezorModel={model} hires />
                 </DeviceImageWrapper>
                 <Content>
                     <Heading>
