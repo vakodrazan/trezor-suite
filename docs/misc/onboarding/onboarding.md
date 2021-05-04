@@ -117,7 +117,7 @@ Bootloader mode has another catch, not all device's features are accessible whil
 
 This is the reason why, in Welcome step, we force the user to connect a device in normal mode first. Otherwise we wouldn't know what firmware version is installed or what firmware update we can offer.
 
-### Firmware update or installation
+### Firmware installation
 Device could be in various states when the user enters this step.
 
 - Firmware not installed
@@ -158,18 +158,32 @@ User proceeds by clicking "Install firmware" CTA. Since the device without firmw
 ![reconnect in normal T1](./assets/welcome/reconnect_normal.png)
 ![firmware completed](./assets/welcome/firmware_completed.png)
 
-#### State of currently shipped devices, intermediary firmware
+#### State of currently shipped devices
+##### Intermediary firmware
 Trezor model One is shipped with bootloader version `1.4.0`. Such devices cannot be upgraded to latest firmware directly. First we'll install so called intermediary firmware (and set flag `firmware.intermediaryInstalled` to true), which will bump bootloader to newer version. After installation is completed the user will be asked to reconnect the device in normal mode (which is standard procedure after installing a regular firmware). However, because intermediary firmware only bumps bootloader and doesn't install any firmware, device will be in bootloader mode regardless of how the user reconnects it.
 
 In firmwareMiddleware we detect such a device thanks to `intermediaryInstalled` flag and the fact that it was connected in bootloader mode despite the instructions for connecting in normal mode.
 Then it triggers an installation of subsequent firmware, which will be the latest firmware available. It will follow basically same flow as with the first installation.
 At the end of the process the user will be asked to reconnect the device in normal mode once again. After that the installation process is fully completed and the user can continue to a next step.
 
+##### WebUSB
+Support for the WebUSB came pretty late for Trezor model One (bootloader 1.8.0?). Currently shipped devices won't support WebUSB out of-the-box and user won't be able to pair such device. In this case user needs to install Trezor Bridge. After finishing fw upgrade WebUSB support will be available.
+
 
 #### Caveats
+
+##### UI.FIRMWARE_PROGRESS
 - Both T1 and TT won’t dispatch any event after the user confirms the installation on a device. We only detect that the installation has started when we receive `UI.FIRMWARE_PROGRESS` which is triggered about 10 seconds too late.
 - T1 sends `UI.FIRMWARE_PROGRESS` only twice, at 0% and then at 100%. However progress bar runs smoothly, that is because we are faking a progress. There are carefully set durations of fake progress bar. When fake progress reaches certain barrier (eg. 90%) it will stop and wait for progress report from `UI.FIRMWARE_PROGRESS`. Also when this event reports greater progress than the fake one, it will take the precedence. 
-- Faking a progress is also used on TT because on device without any firmware installed first `UI.FIRMWARE_PROGRESS` is received too late. (Only variant where we rely completely on a real progress is when we are upgrading TT from older firmware).
+- Faking a progress is also used on TT because, on device without any firmware installed, first `UI.FIRMWARE_PROGRESS` is received too late. (Only variant where we rely completely on a real progress is when we are upgrading TT from older firmware).
+
+##### Remembered wallet, multiple devices (maybe solved)
+The onboarding inherited few bugs from its predecessor. After the installation of a firmware user is asked to reconnect his device (T1) or the device is auto restarted (TT). To prevent Suite from selecting another device while the one we use was disconnected, we force remembering the device (and storing it to persistent storage).
+However this doesn't work in case of freshly unpacked device (or device with wiped fw), which are in bootloader mode from the start and cannot be "remembered".
+
+When this happens Suite will try to select another available device, which will be the other connected device or remembered wallet and there is no way ho to switch the device back unless you restart the app/refresh the page.
+
+To work around this in `suiteActions.onHandleDisconnect`, before selecting the next active device, we check if we are in Onboarding (or standalone firmware update flow) and if so we won't allow switching selected device to different one.
 
 TODO: flow of `firmware.status`
 
