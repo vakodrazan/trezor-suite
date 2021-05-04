@@ -16,13 +16,15 @@ const steps: Step[] = [
             // STEP.DISALLOWED_IS_NOT_SAME_DEVICE,
             STEP.DISALLOWED_DEVICE_IS_IN_RECOVERY_MODE,
         ],
-        // path: [STEP.PATH_RECOVERY, STEP.PATH_CREATE, STEP.PATH_NEW, STEP.PATH_USED],
     },
     {
         id: STEP.ID_CREATE_OR_RECOVER,
         stepGroup: 1,
-        path: [STEP.PATH_RECOVERY, STEP.PATH_CREATE, STEP.PATH_NEW, STEP.PATH_USED],
-        disallowedDeviceStates: [STEP.DISALLOWED_DEVICE_IS_IN_RECOVERY_MODE],
+        path: [STEP.PATH_RECOVERY, STEP.PATH_CREATE],
+        disallowedDeviceStates: [
+            STEP.DISALLOWED_DEVICE_IS_IN_RECOVERY_MODE,
+            STEP.DISALLOWED_DEVICE_IS_NOT_CONNECTED,
+        ],
     },
     {
         id: STEP.ID_RESET_DEVICE_STEP,
@@ -31,10 +33,10 @@ const steps: Step[] = [
             STEP.DISALLOWED_DEVICE_IS_NOT_CONNECTED,
             STEP.DISALLOWED_DEVICE_IS_IN_BOOTLOADER,
             STEP.DISALLOWED_DEVICE_IS_NOT_USED_HERE,
-            STEP.DISALLOWED_IS_NOT_SAME_DEVICE, // TODO: doesn't work here
+            STEP.DISALLOWED_IS_NOT_SAME_DEVICE,
             STEP.DISALLOWED_DEVICE_IS_IN_RECOVERY_MODE,
         ],
-        path: [STEP.PATH_CREATE, STEP.PATH_NEW, STEP.PATH_USED],
+        path: [STEP.PATH_CREATE],
     },
     {
         id: STEP.ID_RECOVERY_STEP,
@@ -46,7 +48,7 @@ const steps: Step[] = [
             // watch out: cannot be used here! recovery is changing device_id
             // STEP.DISALLOWED_IS_NOT_SAME_DEVICE
         ],
-        path: [STEP.PATH_RECOVERY, STEP.PATH_NEW, STEP.PATH_USED],
+        path: [STEP.PATH_RECOVERY],
     },
     {
         id: STEP.ID_SECURITY_STEP,
@@ -58,7 +60,7 @@ const steps: Step[] = [
             STEP.DISALLOWED_IS_NOT_SAME_DEVICE,
             STEP.DISALLOWED_DEVICE_IS_IN_RECOVERY_MODE,
         ],
-        path: [STEP.PATH_RECOVERY, STEP.PATH_CREATE, STEP.PATH_NEW, STEP.PATH_USED],
+        path: [STEP.PATH_RECOVERY, STEP.PATH_CREATE],
     },
     {
         id: STEP.ID_BACKUP_STEP,
@@ -70,7 +72,7 @@ const steps: Step[] = [
             STEP.DISALLOWED_IS_NOT_SAME_DEVICE,
             STEP.DISALLOWED_DEVICE_IS_IN_RECOVERY_MODE,
         ],
-        path: [STEP.PATH_CREATE, STEP.PATH_NEW, STEP.PATH_USED],
+        path: [STEP.PATH_CREATE],
     },
     {
         id: STEP.ID_SET_PIN_STEP,
@@ -82,11 +84,18 @@ const steps: Step[] = [
             STEP.DISALLOWED_IS_NOT_SAME_DEVICE,
             STEP.DISALLOWED_DEVICE_IS_IN_RECOVERY_MODE,
         ],
-        path: [STEP.PATH_RECOVERY, STEP.PATH_CREATE, STEP.PATH_NEW, STEP.PATH_USED],
+        path: [STEP.PATH_RECOVERY, STEP.PATH_CREATE],
     },
     {
         id: STEP.ID_COINS_STEP,
         stepGroup: 3,
+        disallowedDeviceStates: [
+            STEP.DISALLOWED_DEVICE_IS_NOT_CONNECTED,
+            STEP.DISALLOWED_DEVICE_IS_IN_BOOTLOADER,
+            STEP.DISALLOWED_DEVICE_IS_NOT_USED_HERE,
+            STEP.DISALLOWED_IS_NOT_SAME_DEVICE,
+            STEP.DISALLOWED_DEVICE_IS_IN_RECOVERY_MODE,
+        ],
     },
     {
         id: STEP.ID_FINAL_STEP,
