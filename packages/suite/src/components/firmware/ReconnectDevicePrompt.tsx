@@ -1,7 +1,8 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { H1, Button, variables, DeviceAnimation } from '@trezor/components';
+import { H1, Button, variables } from '@trezor/components';
 import { Translation, WebusbButton } from '@suite-components';
+import { DeviceAnimation } from '@onboarding-components';
 import { useDevice, useFirmware } from '@suite-hooks';
 import { isDesktop, isMac } from '@suite-utils/env';
 import { DESKTOP_WRAPPER_BORDER_WIDTH } from '@suite-constants/layout';
@@ -168,12 +169,16 @@ const ReconnectDevicePrompt = ({ deviceVersion, requestedMode }: Props) => {
             </Button>
         ) : undefined;
 
-    const animation = device?.features?.model === 'T' ? 'TT_BOOTLOADER' : 'T1_BOOTLOADER';
-
     return (
         <Overlay desktopBorder={isDesktop() && !isMac() ? DESKTOP_WRAPPER_BORDER_WIDTH : undefined}>
             <Wrapper data-test={`@firmware/reconnect-device/${requestedMode}`}>
-                <StyledDeviceAnimation type={animation} size={200} borderRadius="30px" loop />
+                <StyledDeviceAnimation
+                    type="BOOTLOADER"
+                    size={200}
+                    shape="ROUNDED"
+                    version={device?.features?.major_version === 1 ? '1' : 'T'}
+                    loop
+                />
                 <Content>
                     <Heading>
                         {!reconnectedInRequestedMode ? text.headingStart : text.headingSuccess}

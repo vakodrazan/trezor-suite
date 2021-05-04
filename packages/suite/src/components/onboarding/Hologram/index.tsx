@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { variables } from '@trezor/components';
+import { DeviceAnimation } from '@onboarding-components';
 import { Translation, TrezorLink } from '@suite/components/suite';
-import HologramAnimation from './HologramAnimation';
 import {
     TREZOR_PACKAGING_URL,
     TREZOR_RESELLERS_URL,
@@ -42,7 +42,7 @@ const Warning = styled.div`
 `;
 
 interface Props {
-    trezorModel: number;
+    trezorModel?: string;
 }
 const Hologram = ({ trezorModel }: Props) => (
     <Wrapper>
@@ -55,7 +55,7 @@ const Hologram = ({ trezorModel }: Props) => (
         </HologramSubHeading>
 
         <AnimationWrapper>
-            <HologramAnimation model={trezorModel === 1 ? 1 : 2} />
+            <DeviceAnimation type="HOLOGRAM" version={trezorModel} shape="ROUNDED-SMALL" loop />
         </AnimationWrapper>
 
         <Warning>

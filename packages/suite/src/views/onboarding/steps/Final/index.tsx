@@ -1,16 +1,9 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
-import {
-    Button,
-    Icon,
-    variables,
-    Input,
-    Dropdown,
-    DropdownRef,
-    DeviceImage,
-} from '@trezor/components';
+import { Button, Icon, variables, Input, Dropdown, DropdownRef } from '@trezor/components';
 import { Translation, HomescreenGallery } from '@suite-components';
 import { OnboardingStepBox } from '@firmware-components';
+import { DeviceAnimation } from '@onboarding-components';
 import { useActions, useDevice, useOnboarding, useSelector } from '@suite-hooks';
 import * as deviceSettingsActions from '@settings-actions/deviceSettingsActions';
 import { DEFAULT_LABEL, MAX_LABEL_LENGTH } from '@suite-constants/device';
@@ -19,7 +12,8 @@ const Wrapper = styled.div`
     display: flex;
     width: 100%;
     align-items: center;
-    padding: 20px 77px 0 30px;
+    padding: 0 77px 0 0;
+    margin: -40px 0 -40px;
 `;
 
 const Option = styled.div`
@@ -73,7 +67,7 @@ const DeviceImageWrapper = styled.div`
     align-items: center;
     width: 400px;
     height: 400px;
-    padding: 60px;
+    margin: 0 20px 0 -60px;
 `;
 
 const Heading = styled.div`
@@ -145,17 +139,14 @@ const FinalStep = () => {
 
     if (!device?.features) return null;
 
-    const model = device?.features?.model === 'T' ? 2 : 1;
-
     return (
         <OnboardingStepBox
             data-test="@onboarding/final"
             confirmOnDevice={isWaitingForConfirm ? device.features?.major_version : undefined}
-            disablePadding
         >
             <Wrapper>
                 <DeviceImageWrapper>
-                    <DeviceImage trezorModel={model} hires />
+                    <DeviceAnimation type="SUCCESS" version={device?.features?.model} size={400} />
                 </DeviceImageWrapper>
                 <Content>
                     <Heading>

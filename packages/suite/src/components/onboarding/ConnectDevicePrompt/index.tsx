@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSpring, config, animated } from 'react-spring';
-import { variables, Icon, DeviceAnimation } from '@trezor/components';
+import { variables, Icon } from '@trezor/components';
+import { DeviceAnimation } from '@onboarding-components';
 import { Translation } from '@suite-components';
 import { useTheme, useDevice } from '@suite-hooks';
 import styled from 'styled-components';
@@ -63,11 +64,17 @@ const ConnectDevicePrompt = ({ children, connected, showWarning }: Props) => {
         },
         delay: 200,
     });
-    const animation = device?.features?.model === 'T' ? 'TT_CONNECT' : 'T1_CONNECT';
+
     return (
         <Wrapper style={fadeStyles} data-test="@onboarding/connect-device">
             <ImageWrapper>
-                <DeviceAnimation type={animation} loop={!connected} />
+                <DeviceAnimation
+                    type="CONNECT"
+                    version={device?.features?.model}
+                    loop={!connected}
+                    shape="CIRCLE"
+                    size={100}
+                />
                 <Checkmark>
                     {connected && !showWarning && (
                         <Icon icon="CHECK_ACTIVE" size={24} color={theme.TYPE_GREEN} />

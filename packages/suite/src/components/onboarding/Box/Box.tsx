@@ -7,14 +7,11 @@ import { H1, variables, Button } from '@trezor/components';
 import { useTheme } from '@suite-hooks';
 import { useMeasure } from 'react-use';
 
-const BoxWrapper = styled(
-    ({ variant, withImage, disablePadding, expanded, expandable, ...rest }) => (
-        <animated.div {...rest} />
-    ),
-)<{
+const BoxWrapper = styled(({ variant, withImage, expanded, expandable, ...rest }) => (
+    <animated.div {...rest} />
+))<{
     variant?: Props['variant'];
     withImage?: boolean;
-    disablePadding?: boolean;
     expanded?: Props['expanded'];
     expandable?: Props['expandable'];
 }>`
@@ -55,11 +52,6 @@ const BoxWrapper = styled(
                   cursor: pointer;
                   padding: 22px 25px 19px 36px;
               `)}
-    ${props =>
-        props.disablePadding &&
-        css`
-            padding: 0;
-        `}
 `;
 
 const BoxWrapperInner = styled.div<{ expandable: boolean }>`
@@ -146,7 +138,6 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
     expanded?: boolean;
     onToggle?: () => void;
     expandableIcon?: React.ReactNode;
-    disablePadding?: boolean;
     heading?: React.ReactNode;
     description?: React.ReactNode;
     children?: React.ReactNode;
@@ -162,7 +153,6 @@ const Box = ({
     expanded = true,
     expandable = false,
     expandableIcon,
-    disablePadding = false,
     onToggle = () => undefined,
     ...rest
 }: Props) => {
@@ -183,7 +173,6 @@ const Box = ({
         <BoxWrapper
             expanded={expanded}
             expandable={expandable}
-            disablePadding={disablePadding}
             variant={variant}
             withImage={!!image}
             className={className}

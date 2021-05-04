@@ -80,24 +80,7 @@ const SecurityCheck = () => {
                         strong: chunks => (
                             <StyledTooltip
                                 rich
-                                popperOptions={{
-                                    modifiers: [
-                                        {
-                                            // the content of this tooltio is quite huge and would overflow
-                                            // on small screens preventing users from seeing hologram video
-                                            name: 'preventOverflow',
-                                            options: {
-                                                altAxis: true,
-                                                tether: false,
-                                            },
-                                        },
-                                    ],
-                                }}
-                                content={
-                                    <Hologram
-                                        trezorModel={device?.features?.major_version === 1 ? 1 : 2}
-                                    />
-                                }
+                                content={<Hologram trezorModel={device?.features?.model} />}
                             >
                                 <Underline>{chunks}</Underline>
                             </StyledTooltip>
