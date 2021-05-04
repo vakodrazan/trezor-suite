@@ -117,5 +117,4 @@ const FirmwareInstallation = ({ cachedDevice }: Props) => {
     );
 };
 
-export default FirmwareInstallation;
 export { FirmwareInstallation };

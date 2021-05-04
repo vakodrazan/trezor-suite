@@ -9,6 +9,7 @@ import BackupSeedCard from './BackupSeedCard';
 
 const Wrapper = styled.div`
     display: flex;
+    width: 100%;
     justify-content: space-between;
 
     @media only screen and (max-width: ${variables.SCREEN_SIZE.MD}) {
@@ -35,33 +36,36 @@ const BackupSeedCards = () => {
 
     const isChecked = (key: backupActions.ConfirmKey) => backup.userConfirmed.includes(key);
 
+    const items = [
+        {
+            key: 'wrote-seed-properly',
+            label: <Translation id="TR_BACKUP_CHECKBOX_1_TITLE" />,
+            icon: 'CALENDAR',
+        },
+        {
+            key: 'made-no-digital-copy',
+            label: <Translation id="TR_BACKUP_CHECKBOX_2_TITLE" />,
+            icon: 'CALENDAR',
+        },
+        {
+            key: 'will-hide-seed',
+            label: <Translation id="TR_BACKUP_CHECKBOX_3_TITLE" />,
+            icon: 'CALENDAR',
+        },
+    ] as const;
+
     return (
         <Wrapper>
-            <StyledBackupSeedCard
-                // TODO: change data-test, checkbox keys to something more generic, independent of actual content
-                data-test="@backup/check-item/wrote-seed-properly"
-                onClick={() => toggleCheckboxByKey('wrote-seed-properly')}
-                label={<Translation id="TR_BACKUP_CHECKBOX_1_TITLE" />}
-                icon="CALENDAR"
-                // description={<Translation id="TR_BACKUP_CHECKBOX_1_DESCRIPTION" />}
-                isChecked={isChecked('wrote-seed-properly')}
-            />
-            <StyledBackupSeedCard
-                data-test="@backup/check-item/made-no-digital-copy"
-                onClick={() => toggleCheckboxByKey('made-no-digital-copy')}
-                label={<Translation id="TR_BACKUP_CHECKBOX_2_TITLE" />}
-                icon="CALENDAR"
-                // description={<Translation id="TR_BACKUP_CHECKBOX_2_DESCRIPTION" />}
-                isChecked={isChecked('made-no-digital-copy')}
-            />
-            <StyledBackupSeedCard
-                data-test="@backup/check-item/will-hide-seed"
-                onClick={() => toggleCheckboxByKey('will-hide-seed')}
-                label={<Translation id="TR_BACKUP_CHECKBOX_3_TITLE" />}
-                icon="CALENDAR"
-                // description={<Translation id="TR_BACKUP_CHECKBOX_3_DESCRIPTION" />}
-                isChecked={isChecked('will-hide-seed')}
-            />
+            {items.map(item => (
+                <StyledBackupSeedCard
+                    // TODO: change data-test, checkbox keys to something more generic, independent of actual content
+                    data-test={`@backup/check-item/${item.key}`}
+                    onClick={() => toggleCheckboxByKey(item.key)}
+                    label={<Translation id="TR_BACKUP_CHECKBOX_1_TITLE" />}
+                    icon={item.icon}
+                    isChecked={isChecked(item.key)}
+                />
+            ))}
         </Wrapper>
     );
 };

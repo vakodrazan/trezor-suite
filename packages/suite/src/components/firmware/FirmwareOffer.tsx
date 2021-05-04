@@ -160,5 +160,4 @@ const FirmwareOffer = ({ currentVersion, newVersion, releaseChangelog }: Props) 
     );
 };
 
-export default FirmwareOffer;
 export { FirmwareOffer };

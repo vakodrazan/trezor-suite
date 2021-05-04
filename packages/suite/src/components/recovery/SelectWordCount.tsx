@@ -15,9 +15,6 @@ interface Props {
 
 const SelectWordCount = ({ onSelect }: Props) => (
     <OptionsWrapper>
-        {/* <P size="small">
-            <Translation id="TR_RECOVER_SUBHEADING" />
-        </P> */}
         <StyledOption
             onClick={() => {
                 onSelect(12);

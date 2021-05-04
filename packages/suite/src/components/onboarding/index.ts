@@ -3,7 +3,6 @@ import NeueOption, { OptionsWrapper, OptionWrapper, OptionsDivider } from './Neu
 import Text from './Text';
 
 import ControlsWrapper from './Wrapper/ControlsWrapper';
-// import OptionsWrapper from './Wrapper/OptionsWrapper';
 import StepBodyWrapper from './Wrapper/StepBodyWrapper';
 import StepFooterWrapper from './Wrapper/StepFooterWrapper';
 import StepHeadingWrapper from './Wrapper/StepHeadingWrapper';
@@ -31,7 +30,6 @@ const Loaders = {
 };
 
 const Wrapper = {
-    // TODO: remove what we don't need anymore
     Controls: ControlsWrapper,
     Options: OptionsWrapper,
     StepBody: StepBodyWrapper,
@@ -40,7 +38,6 @@ const Wrapper = {
     Step: StepWrapper,
 };
 
-// TODO: remove what we don't need anymore
 export {
     OnboardingButtonAlt,
     OnboardingButtonCta,

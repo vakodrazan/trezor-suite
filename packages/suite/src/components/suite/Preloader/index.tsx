@@ -192,7 +192,6 @@ const Preloader = ({ children, hideModals = false }: Props) => {
 
     if (router.route?.app === 'onboarding') {
         // just let the onboarding view to render, no SuiteLayout involved
-        // return null;
         return <Onboarding />;
     }
 

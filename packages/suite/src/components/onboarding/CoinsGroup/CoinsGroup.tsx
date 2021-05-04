@@ -17,6 +17,7 @@ const Count = styled.div`
     align-self: flex-start;
     font-size: ${variables.FONT_SIZE.NORMAL};
     font-weight: ${variables.FONT_WEIGHT.DEMI_BOLD};
+    text-transform: lowercase;
 `;
 
 const Coins = styled.div`
@@ -75,9 +76,9 @@ const CoinsGroup = ({
             <Count>
                 {networks.length}{' '}
                 {testnet ? (
-                    <Translation id="TR_TESTNET_COINS_LOWERCASE" />
+                    <Translation id="TR_TESTNET_COINS" />
                 ) : (
-                    <Translation id="TR_ONBOARDING_STEP_COINS_LOWERCASE" />
+                    <Translation id="TR_ONBOARDING_STEP_COINS" />
                 )}
                 {' • '}
                 {enabledNetworks.length} <Translation id="TR_ACTIVE" />

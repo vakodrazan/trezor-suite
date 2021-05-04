@@ -2708,10 +2708,6 @@ const definedMessages = defineMessages({
         defaultMessage: 'Testnet coins',
         id: 'TR_TESTNET_COINS',
     },
-    TR_TESTNET_COINS_LOWERCASE: {
-        defaultMessage: 'testnet coins',
-        id: 'TR_TESTNET_COINS_LOWERCASE',
-    },
     TR_TESTNET_COINS_EXPLAINED: {
         defaultMessage:
             "Testnet coins don't have any value but you still may use them to learn and experiment.",
@@ -5861,10 +5857,6 @@ const definedMessages = defineMessages({
         id: 'TR_ONBOARDING_STEP_COINS',
         defaultMessage: 'Coins',
     },
-    TR_ONBOARDING_STEP_COINS_LOWERCASE: {
-        id: 'TR_ONBOARDING_STEP_COINS_LOWERCASE',
-        defaultMessage: 'coins',
-    },
     TR_ONBOARDING_CURRENT_VERSION: {
         id: 'TR_ONBOARDING_CURRENT_VERSION',
         defaultMessage: 'Current Version',
@@ -5893,7 +5885,7 @@ const definedMessages = defineMessages({
     },
     TR_ONBOARDING_DEVICE_CHECK_1: {
         id: 'TR_ONBOARDING_DEVICE_CHECK_1',
-        defaultMessage: 'My <strong>hologram</strong> looked prtty much incredible',
+        defaultMessage: 'My <strong>hologram</strong> was intact and untampered with.',
     },
     TR_ONBOARDING_DEVICE_CHECK_2: {
         id: 'TR_ONBOARDING_DEVICE_CHECK_2',

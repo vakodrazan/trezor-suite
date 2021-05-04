@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { OnboardingButtonCta, OnboardingButtonSkip } from '@onboarding-components';
+import { OnboardingButtonCta, OnboardingButtonSkip, OptionsWrapper } from '@onboarding-components';
 import { Translation, Image, TrezorLink } from '@suite-components';
 import { BackupSeedCards } from '@backup-components';
 import { canContinue } from '@backup-utils';
@@ -12,7 +12,6 @@ import * as onboardingActions from '@onboarding-actions/onboardingActions';
 import * as backupActions from '@backup-actions/backupActions';
 import * as routerActions from '@suite-actions/routerActions';
 import { OnboardingStepBox } from '@suite/components/firmware';
-import OptionsWrapper from '@suite/components/onboarding/Wrapper/OptionsWrapper';
 
 const StyledImage = styled(Image)`
     flex: 1;

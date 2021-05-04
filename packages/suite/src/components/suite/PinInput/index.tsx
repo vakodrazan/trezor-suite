@@ -13,7 +13,6 @@ const Wrapper = styled.div`
 `;
 
 const InputWrapper = styled.div`
-    /* margin-top: 12px; */
     margin-bottom: 12px;
     width: 100%;
 `;
