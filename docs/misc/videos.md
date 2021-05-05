@@ -1,6 +1,6 @@
 # Videos in Suite
 
-Videos in Suite can be encoded in `.mp4` container however we can also use HVEC/WebM formats which have benefits of smaller data footprint, better color accuracy and they also support **transparency**.
+Videos in Suite can be encoded in `.mp4` container however we can also use WebM format which have benefits of smaller data footprint, better color accuracy and they also support **transparency**.
 
 The designers should always provide `.mov` file with appropriate quality, pixel dimensions and a alpha channel (if e.g. transparent background is needed).
 
@@ -16,32 +16,10 @@ brew install ffmpeg
 
 ## Encode videos using command line (recommended)
 
-### Videos with transparency (video with alpha channel has to be provided)
-
-**HEVC for Safari**
+**WebM - currently supported by Chrome/Firefox**
 
 ```
-avconvert --preset PresetHEVC1920x1080WithAlpha --source video_with_transparency.mov --output encoded_file.mov
-```
-
-**WebM for Chrome/Firefox**
-
-```
-ffmpeg -i video_with_transparency.mov -pix_fmt yuva420p -an encoded_file.webm
-```
-
-### Videos with no transparency
-
-**HEVC for Safari**
-
-```
-avconvert --preset PresetHEVC1920x1080 --source video.mov --output encoded_file.mov
-```
-
-**WebM for Chrome/Firefox**
-
-```
-ffmpeg -i video.mov -pix_fmt yuva420p -an encoded_file.webm
+ffmpeg -i source.mov -pix_fmt yuva420p -an encoded_file.webm
 ```
 
 ## Encode videos using desktop application
@@ -54,12 +32,6 @@ Encoded video files can be then saved to `suite-data` and linked using `resolveS
 
 ```js
 <video loop autoPlay muted>
-    <source
-        src={resolveStaticPath(
-            `videos/onboarding/encoded_file.mov`,
-        )}
-        type="video/quicktime"
-    />
     <source
         src={resolveStaticPath(
             `videos/onboarding/encoded_file.webm`,

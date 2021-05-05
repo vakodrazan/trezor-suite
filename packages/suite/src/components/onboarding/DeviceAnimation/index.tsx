@@ -99,12 +99,6 @@ const DeviceAnimation = ({ size, type, version, loop = false, shape, ...props }:
                 >
                     <source
                         src={resolveStaticPath(
-                            `videos/onboarding/t${trezorVersion}_${animationType}.mov`,
-                        )}
-                        type="video/quicktime"
-                    />
-                    <source
-                        src={resolveStaticPath(
                             `videos/onboarding/t${trezorVersion}_${animationType}.webm`,
                         )}
                         type="video/webm"
@@ -113,12 +107,6 @@ const DeviceAnimation = ({ size, type, version, loop = false, shape, ...props }:
             )}
             {type === 'SUCCESS' && (
                 <StyledVideo loop={loop} autoPlay muted width={size} height={size}>
-                    <source
-                        src={resolveStaticPath(
-                            `videos/onboarding/t${trezorVersion}_${animationType}_${themeVariant}.mov`,
-                        )}
-                        type="video/quicktime"
-                    />
                     <source
                         src={resolveStaticPath(
                             `videos/onboarding/t${trezorVersion}_${animationType}_${themeVariant}.webm`,
