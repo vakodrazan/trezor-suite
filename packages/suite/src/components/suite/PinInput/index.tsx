@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
-import { Button, ButtonPin, variables } from '@trezor/components';
+import { Button, ButtonPin } from '@trezor/components';
 import InputPin from './components/InputPin';
 import { Translation } from '@suite-components';
 import { MAX_LENGTH } from '@suite-constants/inputs';
