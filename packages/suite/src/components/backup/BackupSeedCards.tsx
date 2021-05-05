@@ -61,7 +61,7 @@ const BackupSeedCards = () => {
                     // TODO: change data-test, checkbox keys to something more generic, independent of actual content
                     data-test={`@backup/check-item/${item.key}`}
                     onClick={() => toggleCheckboxByKey(item.key)}
-                    label={<Translation id="TR_BACKUP_CHECKBOX_1_TITLE" />}
+                    label={item.label}
                     icon={item.icon}
                     isChecked={isChecked(item.key)}
                 />
