@@ -62,10 +62,10 @@ const PinInput = (props: Props) => {
         [pin],
     );
 
-    const submit = () => {
+    const submit = useCallback(() => {
         onPinSubmit(pin);
         setPin('');
-    };
+    }, [onPinSubmit, setPin, pin]);
 
     useEffect(() => {
         const keyboardHandler = (event: KeyboardEvent) => {
@@ -127,7 +127,7 @@ const PinInput = (props: Props) => {
         return () => {
             window.removeEventListener('keydown', keyboardHandler, false);
         };
-    }, [pin, onPinSubmit, onPinAdd, onPinBackspace]);
+    }, [onPinAdd, onPinBackspace, submit]);
 
     return (
         <Wrapper data-test="@pin">
