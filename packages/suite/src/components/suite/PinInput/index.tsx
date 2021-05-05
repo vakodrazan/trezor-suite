@@ -73,7 +73,7 @@ const PinInput = (props: Props) => {
             switch (event.keyCode) {
                 case 13:
                     // enter,
-                    onPinSubmit(pin);
+                    submit();
                     break;
                 // backspace
                 case 8:
