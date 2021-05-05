@@ -514,27 +514,6 @@ const getDeviceInstances = [
     },
 ];
 
-// const parseFirmwareChangelog = [
-//     {
-//         changelog:
-//             '* Replacement transaction signing for replace-by-fee.\n* Support for Output Descriptors export.\n* Show Ypub/Zpub correctly for multisig GetAddress.\n* Show amounts in mBTC, uBTC and sat denominations.',
-//         result: {},
-//     },
-//     {
-//         changelog:
-//             '* Improves the Passphrase feature by showing the entered passphrase on the Trezor screen before opening the wallet.\n* Adds support for Verge (XVG).\n* Drops support for Metaverse (ETP), GINcoin (GIN), Pesetacoin (PTC), and Zel (ZEL).\n* Re-enables spending coins from Bitcoin paths (fixing some compatibility issues with Bitcoin Cash wallets).\n* Fixes smaller issues in the user interface.',
-
-//         result: {},
-//     },
-//     {
-//         changelog:
-//             '* Reintroduces the ability to spend pre-Overwinter (2018) funds on Zcash-like coins.\n* Adds support for multiple change outputs in outgoing transactions.\n* Adds a security check to prevent potential issues with paths used in altcoin transactions.',
-
-//         result: {},
-//     },
-//     { changelog: '* Refactor Bitcoin signing', result: {} },
-// ];
-
 const parseFirmwareChangelog = [
     {
         firmwareRelease: {

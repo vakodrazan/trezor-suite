@@ -21,5 +21,4 @@ const Fingerprint = ({ device }: { device: TrezorDevice }) => (
     </Wrapper>
 );
 
-export default Fingerprint;
 export { Fingerprint };

@@ -135,12 +135,7 @@ const DataAnalytics = () => {
                     <Switch
                         data-test="@analytics/toggle-switch"
                         checked={!!enabled}
-                        onChange={() => {
-                            if (enabled) {
-                                return dispose();
-                            }
-                            enable();
-                        }}
+                        onChange={() => (enabled ? dispose() : enable())}
                     />
                     <Label>
                         <Translation id="TR_ONBOARDING_ALLOW_ANALYTICS" />

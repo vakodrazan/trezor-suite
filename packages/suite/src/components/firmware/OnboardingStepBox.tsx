@@ -45,17 +45,17 @@ const OnboardingStepBox = ({
 }: Props) => (
     <>
         <Backdrop show={!!confirmOnDevice} animated zIndex={0} />
-        {!disableConfirmWrapper ? (
+        {!disableConfirmWrapper && (
             // todo: hey why is this file under /firmware path? :D
             <ConfirmWrapper data-test="@onboarding/confirm-on-device">
-                {typeof confirmOnDevice === 'number' ? (
+                {typeof confirmOnDevice === 'number' && (
                     <ConfirmOnDevice
                         title={<Translation id="TR_CONFIRM_ON_TREZOR" />}
                         trezorModel={confirmOnDevice === 1 ? 1 : 2}
                     />
-                ) : undefined}
+                )}
             </ConfirmWrapper>
-        ) : undefined}
+        )}
         <Box image={image} heading={heading} description={description} {...rest}>
             {(children || innerActions) && (
                 <>
@@ -68,6 +68,5 @@ const OnboardingStepBox = ({
     </>
 );
 
-export default OnboardingStepBox;
 export { OnboardingStepBox };
 export type { Props as OnboardingStepBoxProps };

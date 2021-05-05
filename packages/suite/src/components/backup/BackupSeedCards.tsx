@@ -28,6 +28,24 @@ const StyledBackupSeedCard = styled(BackupSeedCard)`
     }
 `;
 
+const items = [
+    {
+        key: 'wrote-seed-properly',
+        label: <Translation id="TR_BACKUP_CHECKBOX_1_TITLE" />,
+        icon: 'CALENDAR',
+    },
+    {
+        key: 'made-no-digital-copy',
+        label: <Translation id="TR_BACKUP_CHECKBOX_2_TITLE" />,
+        icon: 'CALENDAR',
+    },
+    {
+        key: 'will-hide-seed',
+        label: <Translation id="TR_BACKUP_CHECKBOX_3_TITLE" />,
+        icon: 'CALENDAR',
+    },
+] as const;
+
 const BackupSeedCards = () => {
     const backup = useSelector(s => s.backup);
     const { toggleCheckboxByKey } = useActions({
@@ -35,24 +53,6 @@ const BackupSeedCards = () => {
     });
 
     const isChecked = (key: backupActions.ConfirmKey) => backup.userConfirmed.includes(key);
-
-    const items = [
-        {
-            key: 'wrote-seed-properly',
-            label: <Translation id="TR_BACKUP_CHECKBOX_1_TITLE" />,
-            icon: 'CALENDAR',
-        },
-        {
-            key: 'made-no-digital-copy',
-            label: <Translation id="TR_BACKUP_CHECKBOX_2_TITLE" />,
-            icon: 'CALENDAR',
-        },
-        {
-            key: 'will-hide-seed',
-            label: <Translation id="TR_BACKUP_CHECKBOX_3_TITLE" />,
-            icon: 'CALENDAR',
-        },
-    ] as const;
 
     return (
         <Wrapper>

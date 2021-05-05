@@ -216,5 +216,4 @@ const ReconnectDevicePrompt = ({ deviceVersion, requestedMode }: Props) => {
     );
 };
 
-export default ReconnectDevicePrompt;
 export { ReconnectDevicePrompt };
