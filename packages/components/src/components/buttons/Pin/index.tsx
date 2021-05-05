@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Button = styled.button`
     max-width: 100px;
-    height: 100px;
+    height: 60px;
     transition: all 0.3s;
     position: relative;
     cursor: pointer;
