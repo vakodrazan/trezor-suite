@@ -10,6 +10,12 @@ const Wrapper = styled.div`
     align-items: center;
     width: 100%;
     cursor: pointer;
+    transition: all 0.3s;
+
+    :hover {
+        box-shadow: 0 6px 40px 0 ${props => props.theme.BOX_SHADOW_OPTION_CARD};
+        border: 1px solid transparent;
+    }
 `;
 
 const Content = styled.div`
