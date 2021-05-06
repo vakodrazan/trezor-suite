@@ -2,12 +2,26 @@ import React from 'react';
 import styled from 'styled-components';
 
 import * as backupActions from '@suite/actions/backup/backupActions';
-import { Translation } from '@suite-components';
+import { Translation } from '@suite-components/Translation';
 import { variables } from '@trezor/components';
 import { useActions, useSelector } from '@suite/hooks/suite';
 import BackupSeedCard from './BackupSeedCard';
 
 const Wrapper = styled.div`
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+`;
+
+const Instructions = styled.div`
+    text-align: center;
+    margin: 26px 0px;
+    color: ${props => props.theme.TYPE_LIGHT_GREY};
+    font-weight: ${variables.FONT_WEIGHT.MEDIUM};
+    font-size: ${variables.FONT_SIZE.TINY};
+`;
+
+const Items = styled.div`
     display: flex;
     width: 100%;
     justify-content: space-between;
@@ -56,16 +70,22 @@ const BackupSeedCards = () => {
 
     return (
         <Wrapper>
-            {items.map(item => (
-                <StyledBackupSeedCard
-                    // TODO: change data-test, checkbox keys to something more generic, independent of actual content
-                    data-test={`@backup/check-item/${item.key}`}
-                    onClick={() => toggleCheckboxByKey(item.key)}
-                    label={item.label}
-                    icon={item.icon}
-                    isChecked={isChecked(item.key)}
-                />
-            ))}
+            <Instructions>
+                <Translation id="TR_ONBOARDING_CLICK_TO_CONFIRM" />
+            </Instructions>
+            <Items>
+                {items.map(item => (
+                    <StyledBackupSeedCard
+                        // TODO: change data-test, checkbox keys to something more generic, independent of actual content
+                        data-test={`@backup/check-item/${item.key}`}
+                        key={item.key}
+                        onClick={() => toggleCheckboxByKey(item.key)}
+                        label={item.label}
+                        icon={item.icon}
+                        isChecked={isChecked(item.key)}
+                    />
+                ))}
+            </Items>
         </Wrapper>
     );
 };

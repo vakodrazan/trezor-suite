@@ -6032,6 +6032,10 @@ const definedMessages = defineMessages({
         id: 'TR_VERIFYING_PIN',
         defaultMessage: 'Verifying...',
     },
+    TR_ONBOARDING_CLICK_TO_CONFIRM: {
+        id: 'TR_ONBOARDING_CLICK_TO_CONFIRM',
+        defaultMessage: 'Click to confirm',
+    },
     TR_SEEDLESS_SETUP_IS_NOT_SUPPORTED_DESCRIPTION: {
         id: 'TR_SEEDLESS_SETUP_IS_NOT_SUPPORTED_DESCRIPTION',
         defaultMessage:
