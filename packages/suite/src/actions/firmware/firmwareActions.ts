@@ -96,8 +96,6 @@ export const firmwareUpdate = () => async (dispatch: Dispatch, getState: GetStat
 
     const updateResponse = await TrezorConnect.firmwareUpdate(payload);
 
-    console.warn('updateResponse', updateResponse);
-
     dispatch(
         analyticsActions.report({
             type: 'device-update-firmware',
