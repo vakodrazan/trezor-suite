@@ -4,16 +4,16 @@ import styled from 'styled-components';
 const Button = styled.button`
     max-width: 100px;
     height: 60px;
-    transition: all 0.3s;
+    transition: all 0.2s;
     position: relative;
     cursor: pointer;
     margin: 4px;
 
     width: 100%;
 
-    border-radius: 4px;
-    border: 1px solid ${props => props.theme.STROKE_GREY};
-    background: ${props => props.theme.BG_LIGHT_GREY};
+    border-radius: 5px;
+    border: 1px solid ${props => props.theme.BG_GREY};
+    background: ${props => props.theme.BG_GREY};
 
     &:first-child {
         margin-left: 0px;
@@ -23,7 +23,7 @@ const Button = styled.button`
     }
 
     &:hover {
-        background: ${props => props.theme.BG_GREY};
+        background: ${props => props.theme.BG_LIGHT_GREEN};
     }
 
     &:before {
@@ -35,6 +35,10 @@ const Button = styled.button`
         background: ${props => props.theme.TYPE_DARK_GREY};
         top: calc(50% - 3px);
         left: calc(50% - 3px);
+    }
+
+    &:hover:before {
+        background: ${props => props.theme.TYPE_GREEN};
     }
 `;
 

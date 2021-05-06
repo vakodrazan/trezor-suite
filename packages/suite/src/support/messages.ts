@@ -6028,6 +6028,10 @@ const definedMessages = defineMessages({
         id: 'TR_SEEDLESS_SETUP_IS_NOT_SUPPORTED_TITLE',
         defaultMessage: 'Seedless setup is not supported by Trezor Suite',
     },
+    TR_VERIFYING_PIN: {
+        id: 'TR_VERIFYING_PIN',
+        defaultMessage: 'Verifying...',
+    },
     TR_SEEDLESS_SETUP_IS_NOT_SUPPORTED_DESCRIPTION: {
         id: 'TR_SEEDLESS_SETUP_IS_NOT_SUPPORTED_DESCRIPTION',
         defaultMessage:

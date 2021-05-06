@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { DeviceImage, Icon, variables } from '@trezor/components';
 import { PinInput, Translation, TrezorLink } from '@suite-components';
 import { TrezorDevice } from '@suite-types';
@@ -20,20 +20,13 @@ const Wrapper = styled.div`
     }
 `;
 
-const Col = styled.div<{ blur?: boolean }>`
+const Col = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 5px;
     width: 100%;
     max-width: 340px;
-
-    ${props =>
-        props.blur &&
-        css`
-            filter: blur(5px);
-            pointer-events: none;
-        `}
 `;
 
 const GreyCol = styled(Col)`
@@ -161,8 +154,8 @@ const PinMatrix = ({ device, hideExplanation, invalid }: Props) => {
     return (
         <Wrapper>
             {!hideExplanation && <ExplanationCol invalid={invalid} />}
-            <Col blur={submitted}>
-                <PinInput onPinSubmit={submit} />
+            <Col>
+                <PinInput isSubmitting={submitted} onPinSubmit={submit} />
             </Col>
         </Wrapper>
     );
