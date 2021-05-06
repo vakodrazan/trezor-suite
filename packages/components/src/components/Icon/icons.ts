@@ -105,4 +105,7 @@ export const ICONS = {
     HOLOGRAM: require('../../images/icons/hologram.svg'),
     PACKAGE: require('../../images/icons/package.svg'),
     VERIFIED: require('../../images/icons/verified.svg'),
+    ANCHOR: require('../../images/icons/anchor.svg'),
+    PENCIL_LINE: require('../../images/icons/pencil-line.svg'),
+    KEY: require('../../images/icons/key.svg'),
 };

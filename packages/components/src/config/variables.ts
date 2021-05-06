@@ -159,4 +159,7 @@ export const ICONS: IconType[] = [
     'HOLOGRAM',
     'PACKAGE',
     'VERIFIED',
+    'ANCHOR',
+    'PENCIL_LINE',
+    'KEY',
 ];

@@ -10,6 +10,12 @@ const Card = styled.div<{ checked: boolean }>`
     border-radius: 10px;
     border: solid 1px ${props => (props.checked ? props.theme.TYPE_GREEN : props.theme.STROKE_GREY)};
     cursor: pointer;
+    transition: all 0.2s;
+
+    :hover {
+        box-shadow: 0 6px 40px 0 ${props => props.theme.BOX_SHADOW_OPTION_CARD};
+        border: 1px solid ${props => (props.checked ? props.theme.TYPE_GREEN : 'transparent')};
+    }
 
     @media only screen and (max-width: ${variables.SCREEN_SIZE.MD}) {
         flex-direction: row;
