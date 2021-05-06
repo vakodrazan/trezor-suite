@@ -48,6 +48,8 @@ should be bumped. Please follow simple semver versioning in format `<breaking-ch
 Breaking change should bump major version. Any other change bumps minor version.
 
 ## Changelog
+## 1.9
+- removed newDevice, usedDevice from initial-run-completed
 
 ### 1.8
 Added: 

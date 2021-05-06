@@ -34,8 +34,4 @@ export type AnyStepDisallowedState =
     | typeof STEP.DISALLOWED_DEVICE_IS_IN_RECOVERY_MODE
     | typeof STEP.DISALLOWED_IS_NOT_SAME_DEVICE;
 
-export type AnyPath =
-    | typeof STEP.PATH_CREATE
-    | typeof STEP.PATH_RECOVERY
-    | typeof STEP.PATH_NEW
-    | typeof STEP.PATH_USED;
+export type AnyPath = typeof STEP.PATH_CREATE | typeof STEP.PATH_RECOVERY;

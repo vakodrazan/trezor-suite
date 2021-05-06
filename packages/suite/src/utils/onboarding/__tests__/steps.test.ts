@@ -50,14 +50,8 @@ describe('steps', () => {
 
         it('should return true for full overlap', () => {
             const step = welcomeStep;
-            welcomeStep.path = ['create', 'new'];
-            expect(isStepInPath(step, ['create', 'new'])).toEqual(true);
-        });
-
-        it('should return false for partial overlap', () => {
-            const step = welcomeStep;
-            welcomeStep.path = ['create', 'new'];
-            expect(isStepInPath(step, ['recovery', 'new'])).toEqual(false);
+            welcomeStep.path = ['create'];
+            expect(isStepInPath(step, ['create'])).toEqual(true);
         });
     });
 });

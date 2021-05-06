@@ -36,10 +36,10 @@ export type AnalyticsAction =
 simple semver for data-analytics part.
 <breaking-change>.<analytics-extended>
 
-Don't forget to update docs with changelog!
+Don't forget to update docs with changelog! (docs/misc/analytics.md)
 */
 
-export const version = '1.8';
+const version = '1.9';
 
 export type AnalyticsEvent =
     | {
@@ -145,9 +145,6 @@ export type AnalyticsEvent =
               createSeed: boolean;
               /** how many users chose to do recovery */
               recoverSeed: boolean;
-              /**  how many users clicked that they have a new/used device */
-              newDevice: boolean;
-              usedDevice: boolean;
           };
       }
     | {

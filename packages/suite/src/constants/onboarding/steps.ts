@@ -18,5 +18,3 @@ export const DISALLOWED_DEVICE_IS_IN_RECOVERY_MODE = 'is-in-recovery-mode';
 
 export const PATH_RECOVERY = 'recovery';
 export const PATH_CREATE = 'create';
-export const PATH_NEW = 'new';
-export const PATH_USED = 'used';

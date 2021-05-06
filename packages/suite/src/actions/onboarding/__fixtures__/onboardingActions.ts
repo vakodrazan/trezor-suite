@@ -73,49 +73,49 @@ export default [
         description: 'addPath: should add duplicit entry',
         initialState: {
             onboarding: {
-                path: ['new'],
+                path: ['create'],
             },
             suite: {
                 device: getSuiteDevice(),
             },
         },
-        action: () => onboardingActions.addPath('new'),
+        action: () => onboardingActions.addPath('create'),
         expect: {
-            toMatchObject: { path: ['new'] },
+            toMatchObject: { path: ['create'] },
         },
     },
     {
         description: 'removePath: one element',
         initialState: {
             onboarding: {
-                path: ['create', 'new'],
+                path: ['create'],
             },
         },
         action: () => onboardingActions.removePath(['create']),
         expect: {
-            toMatchObject: { path: ['new'] },
+            toMatchObject: { path: [] },
         },
     },
     {
         description: 'removePath: multiple elements',
         initialState: {
             onboarding: {
-                path: ['create', 'new'],
+                path: ['create', 'recovery'],
             },
             suite: {
                 device: getSuiteDevice(),
             },
         },
-        action: () => onboardingActions.removePath(['create', 'new']),
+        action: () => onboardingActions.removePath(['recovery']),
         expect: {
-            toMatchObject: { path: [] },
+            toMatchObject: { path: ['create'] },
         },
     },
     {
         description: 'resetOnboarding: should set onboarding reducer to initial state',
         initialState: {
             onboarding: {
-                path: ['create', 'new', 'used'],
+                path: ['create'],
                 activeStepId: STEP.ID_RECOVERY_STEP,
             },
             suite: {
