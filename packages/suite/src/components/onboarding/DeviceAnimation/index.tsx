@@ -49,7 +49,12 @@ const StyledVideo = styled.video`
     height: 100%;
 `;
 
-type DeviceAnimationType = 'CONNECT' | 'BOOTLOADER' | 'SUCCESS' | 'HOLOGRAM';
+export type DeviceAnimationType =
+    | 'CONNECT'
+    | 'BOOTLOADER'
+    | 'BOOTLOADER_TWO_BUTTONS'
+    | 'SUCCESS'
+    | 'HOLOGRAM';
 
 type Shape = 'CIRCLE' | 'ROUNDED' | 'ROUNDED-SMALL';
 
@@ -80,6 +85,16 @@ const DeviceAnimation = ({ size, type, version, loop = false, shape, ...props }:
                     <source
                         src={resolveStaticPath(
                             `videos/onboarding/t${trezorVersion}_${animationType}_${themeVariant}.mp4`,
+                        )}
+                        type="video/mp4"
+                    />
+                </StyledVideo>
+            )}
+            {type === 'BOOTLOADER_TWO_BUTTONS' && (
+                <StyledVideo loop={loop} autoPlay muted width={size} height={size}>
+                    <source
+                        src={resolveStaticPath(
+                            `videos/onboarding/t1_${animationType}_${themeVariant}.mp4`,
                         )}
                         type="video/mp4"
                     />

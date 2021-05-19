@@ -22,7 +22,7 @@ import OnboardingLayout from './Layouts/OnboardingLayout';
 import WelcomeLayout from './Layouts/WelcomeLayout';
 import ProgressBar from './ProgressBar';
 import Hologram from './Hologram';
-import DeviceAnimation from './DeviceAnimation';
+import DeviceAnimation, { DeviceAnimationType } from './DeviceAnimation';
 import TroubleshootingTips from './TroubleshootingTips';
 import Dots from './Loaders/Dots';
 
@@ -64,4 +64,4 @@ export {
     Hologram,
     DeviceAnimation,
 };
-export type { BoxProps, CoinProps };
+export type { BoxProps, CoinProps, DeviceAnimationType };

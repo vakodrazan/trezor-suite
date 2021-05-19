@@ -1,8 +1,9 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import compareVersions from 'compare-versions';
 import { H1, Button, variables } from '@trezor/components';
 import { Translation, WebusbButton } from '@suite-components';
-import { DeviceAnimation } from '@onboarding-components';
+import { DeviceAnimation, DeviceAnimationType } from '@onboarding-components';
 import { useDevice, useFirmware } from '@suite-hooks';
 import { isDesktop, isMac } from '@suite-utils/env';
 import { DESKTOP_WRAPPER_BORDER_WIDTH } from '@suite-constants/layout';
@@ -169,14 +170,26 @@ const ReconnectDevicePrompt = ({ deviceVersion, requestedMode }: Props) => {
             </Button>
         ) : undefined;
 
+    // T1 bootloader before firmware version 1.8.0 can only be invoked by holding both buttons
+    const animationVersion = deviceVersion === 1 ? '1' : 'T';
+    const firmwareSemver = `${device?.features?.major_version}.${device?.features?.minor_version}.${device?.features?.patch_version}`;
+    let animationType: DeviceAnimationType = 'BOOTLOADER';
+    if (
+        animationVersion === '1' &&
+        compareVersions.validate(firmwareSemver) &&
+        compareVersions.compare(firmwareSemver, '1.8.0', '<')
+    ) {
+        animationType = 'BOOTLOADER_TWO_BUTTONS';
+    }
+
     return (
         <Overlay desktopBorder={isDesktop() && !isMac() ? DESKTOP_WRAPPER_BORDER_WIDTH : undefined}>
             <Wrapper data-test={`@firmware/reconnect-device/${requestedMode}`}>
                 <StyledDeviceAnimation
-                    type="BOOTLOADER"
+                    type={animationType}
                     size={200}
                     shape="ROUNDED"
-                    version={device?.features?.major_version === 1 ? '1' : 'T'}
+                    version={animationVersion}
                     loop
                 />
                 <Content>
