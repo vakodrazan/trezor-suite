@@ -65,13 +65,11 @@ const Content = styled.div`
     overflow-y: auto;
 
     /* @2x Images (Pixel Ratio of 1.25+) */
-    @media only screen and (min-device-pixel-ratio: 1.25),
-        only screen and (min-resolution: 1.25dppx) {
+    @media only screen and (min-resolution: 1.25dppx) {
         background-image: url(${resolveStaticPath('images/onboarding/OnboardingWelcomeBg@2x.png')});
     }
-    /* @3x Images (Pixel Ratio of 1.25+) */
-    @media only screen and (min-device-pixel-ratio: 2.25),
-        only screen and (min-resolution: 2.25dppx) {
+    /* @3x Images (Pixel Ratio of 2.25+) */
+    @media only screen and (min-resolution: 2.25dppx) {
         background-image: url(${resolveStaticPath('images/onboarding/OnboardingWelcomeBg@2x.png')});
     }
 `;
