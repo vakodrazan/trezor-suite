@@ -47,7 +47,6 @@ const CreateOrRecoverStep = () => {
                             goToNextStep();
                         }}
                         heading={<Translation id="TR_CREATE_WALLET" />}
-                        description={<Translation id="TR_IF_YOU_NEVER_HAD_WALLET" />}
                     />
                 </OptionWrapper>
                 <Divider />
@@ -60,7 +59,6 @@ const CreateOrRecoverStep = () => {
                             goToNextStep();
                         }}
                         heading={<Translation id="TR_RESTORE_EXISTING_WALLET" />}
-                        description={<Translation id="TR_USING_EITHER_YOUR_SINGLE_BACKUP" />}
                     />
                 </OptionWrapper>
             </OptionsWrapper>
