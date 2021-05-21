@@ -1,29 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Translation } from '@suite-components';
 import { useActions } from '@suite-hooks';
 import * as STEP from '@onboarding-constants/steps';
-import { NeueOption } from '@onboarding-components';
+import { NeueOption, OptionWrapper, OptionsWrapper, OptionsDivider } from '@onboarding-components';
 import * as onboardingActions from '@onboarding-actions/onboardingActions';
 import { OnboardingStepBox } from '@suite/components/firmware';
-import { variables } from '@trezor/components';
-
-const OptionsWrapper = styled.div`
-    display: flex;
-
-    @media all and (max-width: ${variables.SCREEN_SIZE.SM}) {
-        flex-direction: column;
-    }
-`;
-
-const OptionWrapper = styled.div`
-    display: flex;
-    width: 100%;
-`;
-
-const Divider = styled.div`
-    flex: 0 0 24px;
-`;
 
 const CreateOrRecoverStep = () => {
     const { goToNextStep, addPath } = useActions({
@@ -49,7 +30,7 @@ const CreateOrRecoverStep = () => {
                         heading={<Translation id="TR_CREATE_WALLET" />}
                     />
                 </OptionWrapper>
-                <Divider />
+                <OptionsDivider />
                 <OptionWrapper>
                     <NeueOption
                         icon="RECOVER"
