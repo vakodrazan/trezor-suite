@@ -5,6 +5,7 @@ import { Translation } from '@suite-components';
 import TrezorLink from '@suite-components/TrezorLink';
 import { isWeb } from '@suite-utils/env';
 import { TREZOR_URL, SUITE_URL } from '@suite-constants/urls';
+import { resolveStaticPath } from '@suite-utils/nextjs';
 
 const Wrapper = styled.div`
     display: flex;
@@ -48,14 +49,31 @@ const Bottom = styled.div`
 
 const Content = styled.div`
     display: flex;
+    position: relative;
     flex-direction: column;
     flex: 3;
     padding: 20px;
-    background: ${props => props.theme.BG_GREY};
+    background-color: ${props => props.theme.BG_GREY};
+    background-image: url(${resolveStaticPath('images/png/OnboardingWelcomeBg.png')});
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: local;
+    background-size: 570px 570px;
     color: ${props => props.theme.TYPE_DARK_GREY};
     /* justify-content: center; */
     align-items: center;
     overflow-y: auto;
+
+    /* @2x Images (Pixel Ratio of 1.25+) */
+    @media only screen and (min-device-pixel-ratio: 1.25),
+        only screen and (min-resolution: 1.25dppx) {
+        background-image: url(${resolveStaticPath('images/onboarding/OnboardingWelcomeBg@2x.png')});
+    }
+    /* @3x Images (Pixel Ratio of 1.25+) */
+    @media only screen and (min-device-pixel-ratio: 2.25),
+        only screen and (min-resolution: 2.25dppx) {
+        background-image: url(${resolveStaticPath('images/onboarding/OnboardingWelcomeBg@2x.png')});
+    }
 `;
 
 const StyledTrezorLink = styled(TrezorLink)`
