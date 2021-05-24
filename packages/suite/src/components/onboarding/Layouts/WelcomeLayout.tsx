@@ -54,7 +54,7 @@ const Content = styled.div`
     flex: 3;
     padding: 20px;
     background-color: ${props => props.theme.BG_GREY};
-    background-image: url(${resolveStaticPath('images/png/OnboardingWelcomeBg.png')});
+    background-image: url(${resolveStaticPath('images/svg/onboarding-welcome-bg.svg')});
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: local;
@@ -63,15 +63,6 @@ const Content = styled.div`
     /* justify-content: center; */
     align-items: center;
     overflow-y: auto;
-
-    /* @2x Images (Pixel Ratio of 1.25+) */
-    @media only screen and (min-resolution: 1.25dppx) {
-        background-image: url(${resolveStaticPath('images/onboarding/OnboardingWelcomeBg@2x.png')});
-    }
-    /* @3x Images (Pixel Ratio of 2.25+) */
-    @media only screen and (min-resolution: 2.25dppx) {
-        background-image: url(${resolveStaticPath('images/onboarding/OnboardingWelcomeBg@2x.png')});
-    }
 `;
 
 const StyledTrezorLink = styled(TrezorLink)`
