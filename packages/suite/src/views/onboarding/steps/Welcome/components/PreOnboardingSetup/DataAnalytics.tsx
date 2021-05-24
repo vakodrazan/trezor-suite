@@ -122,8 +122,9 @@ const DataAnalytics = () => {
                             <React.Fragment key={i}>
                                 <CategoryName>{category.name}</CategoryName>
                                 <CategoryItems>
-                                    {category.items.map(item => (
-                                        <CategoryItem>{item}</CategoryItem>
+                                    {category.items.map((item, j) => (
+                                        // eslint-disable-next-line react/no-array-index-key
+                                        <CategoryItem key={j}>{item}</CategoryItem>
                                     ))}
                                 </CategoryItems>
                             </React.Fragment>
