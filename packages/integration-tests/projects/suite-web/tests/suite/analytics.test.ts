@@ -49,7 +49,7 @@ describe('Analytics', () => {
         cy.getTestElement('@suite/loading').should('not.exist');
 
         // go to settings
-        cy.wait(1000);
+        cy.wait(5000);
         cy.prefixedVisit('/');
         cy.task('startEmu', { wipe: false });
         cy.discoveryShouldFinish();

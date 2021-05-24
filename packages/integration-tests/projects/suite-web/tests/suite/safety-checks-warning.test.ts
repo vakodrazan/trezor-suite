@@ -27,8 +27,11 @@ describe('safety_checks Warning For PromptTemporarily', () => {
         cy.task('startBridge');
         cy.viewport(1024, 768).resetDb();
         // Start in the device settings to easily open safety_checks setting modal.
-        cy.prefixedVisit('/settings/device/');
+        cy.prefixedVisit('/');
         cy.passThroughInitialRun();
+        cy.getTestElement('@suite/menu/settings-index').click();
+        cy.getTestElement('@settings/menu/device').click();
+
         // Set safety_checks to `PromptTemporarily'.
         // TODO: do this via the `applySetting` task once https://github.com/trezor/trezor-user-env/issues/54
         // is resolved.
