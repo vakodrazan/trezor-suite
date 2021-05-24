@@ -39,7 +39,7 @@ simple semver for data-analytics part.
 Don't forget to update docs with changelog! (docs/misc/analytics.md)
 */
 
-const version = '1.9';
+export const version = '1.9';
 
 export type AnalyticsEvent =
     | {

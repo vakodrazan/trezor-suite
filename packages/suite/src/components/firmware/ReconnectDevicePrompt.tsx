@@ -5,7 +5,7 @@ import { H1, Button, variables } from '@trezor/components';
 import { Translation, WebusbButton } from '@suite-components';
 import { DeviceAnimation, DeviceAnimationType } from '@onboarding-components';
 import { useDevice, useFirmware } from '@suite-hooks';
-import { isDesktop, isMac } from '@suite-utils/env';
+import { isDesktop, isMacOs } from '@suite-utils/env';
 import { DESKTOP_WRAPPER_BORDER_WIDTH } from '@suite-constants/layout';
 
 const Wrapper = styled.div`
@@ -183,7 +183,9 @@ const ReconnectDevicePrompt = ({ deviceVersion, requestedMode }: Props) => {
     }
 
     return (
-        <Overlay desktopBorder={isDesktop() && !isMac() ? DESKTOP_WRAPPER_BORDER_WIDTH : undefined}>
+        <Overlay
+            desktopBorder={isDesktop() && !isMacOs() ? DESKTOP_WRAPPER_BORDER_WIDTH : undefined}
+        >
             <Wrapper data-test={`@firmware/reconnect-device/${requestedMode}`}>
                 <StyledDeviceAnimation
                     type={animationType}
@@ -211,13 +213,7 @@ const ReconnectDevicePrompt = ({ deviceVersion, requestedMode }: Props) => {
                                         {step.label}
                                     </BulletPointText>
                                 </BulletPointWrapper>
-                                {isStepActive(2) && showWebUSB && (
-                                    <WebusbButton ready>
-                                        <Button icon="PLUS" variant="primary">
-                                            <Translation id="TR_CHECK_FOR_DEVICES" />
-                                        </Button>
-                                    </WebusbButton>
-                                )}
+                                {isStepActive(2) && showWebUSB && <WebusbButton />}
                             </React.Fragment>
                         ))
                     ) : (

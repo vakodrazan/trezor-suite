@@ -83,11 +83,7 @@ interface Props {
 const TroubleshootingTips = ({ label, items, offerWebUsb }: Props) => (
     <WhiteCollapsibleBox
         variant="large"
-        heading={
-            offerWebUsb ? (
-                <WebusbButton icon="SEARCH" />
-            ) : undefined
-        }
+        heading={offerWebUsb ? <WebusbButton icon="SEARCH" /> : undefined}
         iconLabel={label}
         noContentPadding
         data-test="@onboarding/expand-troubleshooting-tips"

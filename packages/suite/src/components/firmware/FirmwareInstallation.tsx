@@ -62,11 +62,7 @@ const FirmwareInstallation = ({ cachedDevice }: Props) => {
                         // Once in bootloader mode and once in normal mode. Without 2nd pairing step would get stuck at waiting for
                         // a reboot in case of fresh device which is, from the start, in bootloader mode (thus first time paired as a bootloader device).
                         // Suite won't detect such a restarted device, which will be now in normal mode, till it is paired again.
-                        <WebusbButton ready>
-                            <Button icon="SEARCH" variant="primary">
-                                <Translation id="TR_CHECK_FOR_DEVICES" />
-                            </Button>
-                        </WebusbButton>
+                        <WebusbButton icon="SEARCH" />
                     ) : undefined
                 }
                 outerActions={
