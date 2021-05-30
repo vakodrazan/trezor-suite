@@ -69,7 +69,7 @@ const DeviceInvalidModeLayout = (props: Props) => {
     } = props;
 
     return (
-        <Modal size="small" heading={title} description={text} data-test={props['data-test']}>
+        <Modal size="small" heading={title} description={text} data-test={props['data-test']} guideOpen={true}>
             <Image image={image} />
             <Buttons>
                 {resolveButton && resolveButton}

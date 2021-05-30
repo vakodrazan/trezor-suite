@@ -8,6 +8,17 @@ export const SCREEN_SIZE = {
     XL: '1200px', // extra Large laptops/desktops
 } as const;
 
+export const LAYOUT_SIZE = {
+    GUIDE_PANEL_WIDTH: '350px',
+} as const;
+
+export const Z_INDEX = {
+    MODAL: 10000,
+    NAVIGATION_BAR: 30,
+    GUIDE_PANEL: 15,
+    GUIDE_BUTTON: 10,
+} as const;
+
 export const FONT_SIZE = {
     BIG: '18px',
     NORMAL: '16px',

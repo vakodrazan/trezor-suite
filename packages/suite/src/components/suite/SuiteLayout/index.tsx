@@ -4,13 +4,15 @@ import { connect } from 'react-redux';
 import { variables, scrollbarStyles } from '@trezor/components';
 import SuiteBanners from '@suite-components/Banners';
 import { AppState } from '@suite-types';
-import { BetaBadge, Metadata } from '@suite-components';
+import { Metadata } from '@suite-components';
+import { GuidePanel, GuideButton } from '@guide-components';
 import MenuSecondary from '@suite-components/MenuSecondary';
 import { MAX_WIDTH, DESKTOP_TITLEBAR_HEIGHT } from '@suite-constants/layout';
 import { DiscoveryProgress } from '@wallet-components';
 import NavigationBar from '../NavigationBar';
-import { useLayoutSize } from '@suite-hooks';
+import { useLayoutSize, useSelector, useActions } from '@suite-hooks';
 import { isDesktop } from '@suite-utils/env';
+import * as guideActions from '@suite-actions/guideActions';
 
 const PageWrapper = styled.div`
     display: flex;
@@ -73,6 +75,21 @@ const DefaultPaddings = styled.div`
     }
 `;
 
+const StyledGuideButton = styled(GuideButton)`
+    height: 100%;
+    bottom: 15px;
+    right: 15px;
+    z-index: ${variables.Z_INDEX.GUIDE_PANEL};
+`;
+
+const StyledGuidePanel = styled(GuidePanel)`
+    height: 100%;
+    width: ${variables.LAYOUT_SIZE.GUIDE_PANEL_WIDTH};
+    flex: 0 0 ${variables.LAYOUT_SIZE.GUIDE_PANEL_WIDTH};
+    z-index: 20;
+    // z-index: ${variables.Z_INDEX.GUIDE_PANEL};
+`;
+
 const mapStateToProps = (state: AppState) => ({
     router: state.router,
 });
@@ -85,6 +102,8 @@ interface BodyProps {
     url: string;
     menu?: React.ReactNode;
     appMenu?: React.ReactNode;
+    // eslint-disable-next-line react/no-unused-prop-types
+    guideOpen?: boolean;
     children?: React.ReactNode;
 }
 
@@ -114,7 +133,7 @@ const ScrollAppWrapper = ({ url, children }: ScrollAppWrapperProps) => {
     return <AppWrapper ref={ref}>{children}</AppWrapper>;
 };
 
-const BodyWide = ({ url, menu, appMenu, children }: BodyProps) => (
+const BodyWide = ({ url, menu, appMenu, children, guideOpen }: BodyProps) => (
     <Body>
         <Columns>
             {menu && <MenuSecondary>{menu}</MenuSecondary>}
@@ -124,6 +143,7 @@ const BodyWide = ({ url, menu, appMenu, children }: BodyProps) => (
                     <MaxWidthWrapper>{children}</MaxWidthWrapper>
                 </DefaultPaddings>
             </ScrollAppWrapper>
+            {guideOpen && <StyledGuidePanel />}
         </Columns>
     </Body>
 );
@@ -144,6 +164,12 @@ type SuiteLayoutProps = Omit<Props, 'menu' | 'appMenu'>;
 const SuiteLayout = (props: SuiteLayoutProps) => {
     // TODO: if (props.layoutSize === 'UNAVAILABLE') return <SmallLayout />;
     const { isMobileLayout } = useLayoutSize();
+    const { guideOpen } = useSelector(state => ({
+        guideOpen: state.guide.open,
+    }));
+    const { openGuide } = useActions({
+        openGuide: guideActions.open,
+    });
     const [title, setTitle] = useState<string | undefined>(undefined);
     const [menu, setMenu] = useState<any>(undefined);
     const [appMenu, setAppMenu] = useState<any>(undefined);
@@ -164,7 +190,12 @@ const SuiteLayout = (props: SuiteLayoutProps) => {
             <NavigationBar />
             <LayoutContext.Provider value={{ title, menu, setLayout }}>
                 {!isMobileLayout && (
-                    <BodyWide menu={menu} appMenu={appMenu} url={props.router.url}>
+                    <BodyWide
+                        menu={menu}
+                        appMenu={appMenu}
+                        url={props.router.url}
+                        guideOpen={guideOpen}
+                    >
                         {props.children}
                     </BodyWide>
                 )}
@@ -174,7 +205,7 @@ const SuiteLayout = (props: SuiteLayoutProps) => {
                     </BodyNarrow>
                 )}
             </LayoutContext.Provider>
-            <BetaBadge />
+            {!isMobileLayout && <GuideButton onClick={openGuide} />}
         </PageWrapper>
     );
 };
