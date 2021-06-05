@@ -4,6 +4,7 @@
 # broken when combined with Yarn workspaces. See https://github.com/yarnpkg/yarn/issues/6291
 set -euxo pipefail
 
+ls .yarn
 rm -rf .yarn
 
 CKSUM_BEFORE=$(cksum yarn.lock)
