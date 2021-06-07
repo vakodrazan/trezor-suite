@@ -15,7 +15,7 @@ typescript:
 unit tests:
   stage: validation
   script:
-    - yarn install --frozen-lockfile --cache-folder .yarn --prefer-offline
+    - yarn install --frozen-lockfile
     - yarn build:libs
     - lerna run --stream test:unit -- --passWithNoTests
 
