@@ -3,10 +3,20 @@
 
 describe('Onboarding - create wallet', () => {
     beforeEach(() => {
-        cy.task('startEmu', { version: '1.9.0' });
-        cy.task('wipeEmu');
-        cy.task('stopEmu');
+        // ok lets try to make setup over bridge
         cy.task('startBridge');
+        cy.wait(1000);
+        cy.task('startEmu', { version: '1.9.0' });
+        cy.wait(1000);
+        cy.task('wipeEmu');
+        cy.wait(1000);
+        cy.task('stopEmu');
+
+        // reload bridge
+        cy.wait(1000);
+        cy.task('startBridge');
+        cy.wait(1000);
+        cy.task('stopBridge');
         cy.viewport(1024, 768).resetDb();
         cy.prefixedVisit('/');
     });

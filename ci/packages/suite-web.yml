@@ -1,115 +1,115 @@
-.config_sign_stable: &config_sign_stable
-  needs:
-    - msg-system config sign stable
+# .config_sign_stable: &config_sign_stable
+#   needs:
+#     - msg-system config sign stable
 
-.config_sign_dev: &config_sign_dev
-  needs:
-    - msg-system config sign dev
+# .config_sign_dev: &config_sign_dev
+#   needs:
+#     - msg-system config sign dev
 
-.run_everything_rules: &run_everything_rules
-  refs:
-    - develop
-    - releases
-    - schedules
-    - /^release\//
+# .run_everything_rules: &run_everything_rules
+#   refs:
+#     - develop
+#     - releases
+#     - schedules
+#     - /^release\//
 
-# build
+# # build
 
-suite-web build dev:
-  stage: build
-  <<: *config_sign_dev
-  script:
-    - yarn install --frozen-lockfile --cache-folder .yarn --prefer-offline
-    - yarn build:libs
-    - assetPrefix=/suite-web/${CI_BUILD_REF_NAME}/web yarn workspace @trezor/suite-web build
-  artifacts:
-    expire_in: 7 days
-    paths:
-      - packages/suite-web/build
+# suite-web build dev:
+#   stage: build
+#   <<: *config_sign_dev
+#   script:
+#     - yarn install --frozen-lockfile --cache-folder .yarn --prefer-offline
+#     - yarn build:libs
+#     - assetPrefix=/suite-web/${CI_BUILD_REF_NAME}/web yarn workspace @trezor/suite-web build
+#   artifacts:
+#     expire_in: 7 days
+#     paths:
+#       - packages/suite-web/build
 
-# to be removed after beta-wallet is officially killed
+# # to be removed after beta-wallet is officially killed
 
-suite-web build beta:
-  stage: build
-  <<: *config_sign_dev
-  only:
-    <<: *run_everything_rules
-  script:
-    - yarn install --frozen-lockfile --cache-folder .yarn --prefer-offline
-    - yarn build:libs
-    - assetPrefix=/wallet/web yarn workspace @trezor/suite-web build
-  artifacts:
-    expire_in: 7 days
-    paths:
-      - packages/suite-web/scripts/s3sync.sh
-      - packages/suite-web/build
+# suite-web build beta:
+#   stage: build
+#   <<: *config_sign_dev
+#   only:
+#     <<: *run_everything_rules
+#   script:
+#     - yarn install --frozen-lockfile --cache-folder .yarn --prefer-offline
+#     - yarn build:libs
+#     - assetPrefix=/wallet/web yarn workspace @trezor/suite-web build
+#   artifacts:
+#     expire_in: 7 days
+#     paths:
+#       - packages/suite-web/scripts/s3sync.sh
+#       - packages/suite-web/build
 
-suite-web build stable:
-  stage: build
-  <<: *config_sign_dev
-  only:
-    refs:
-      - develop
-      - releases
-      - schedules
-      - /^release\//
-  script:
-    - yarn install --frozen-lockfile --cache-folder .yarn --prefer-offline
-    - yarn build:libs
-    - assetPrefix=/web yarn workspace @trezor/suite-web build
-  artifacts:
-    expire_in: 7 days
-    paths:
-      - packages/suite-web/scripts/s3sync.sh
-      - packages/suite-web/build
+# suite-web build stable:
+#   stage: build
+#   <<: *config_sign_dev
+#   only:
+#     refs:
+#       - develop
+#       - releases
+#       - schedules
+#       - /^release\//
+#   script:
+#     - yarn install --frozen-lockfile --cache-folder .yarn --prefer-offline
+#     - yarn build:libs
+#     - assetPrefix=/web yarn workspace @trezor/suite-web build
+#   artifacts:
+#     expire_in: 7 days
+#     paths:
+#       - packages/suite-web/scripts/s3sync.sh
+#       - packages/suite-web/build
 
-suite-web build stable codesign:
-  stage: build
-  <<: *config_sign_stable
-  only:
-    refs:
-      - codesign
-  tags:
-    - darwin
-  variables:
-    IS_CODESIGN_BUILD: "true"
-  script:
-    - nix-shell --run "git lfs pull"
-    - nix-shell --run "yarn install --frozen-lockfile --cache-folder .yarn --prefer-offline"
-    - nix-shell --run "yarn build:libs"
-    - nix-shell --run "assetPrefix=/web yarn workspace @trezor/suite-web build"
-  artifacts:
-    expire_in: 7 days
-    paths:
-      - packages/suite-web/scripts/s3sync.sh
-      - packages/suite-web/build
+# suite-web build stable codesign:
+#   stage: build
+#   <<: *config_sign_stable
+#   only:
+#     refs:
+#       - codesign
+#   tags:
+#     - darwin
+#   variables:
+#     IS_CODESIGN_BUILD: "true"
+#   script:
+#     - nix-shell --run "git lfs pull"
+#     - nix-shell --run "yarn install --frozen-lockfile --cache-folder .yarn --prefer-offline"
+#     - nix-shell --run "yarn build:libs"
+#     - nix-shell --run "assetPrefix=/web yarn workspace @trezor/suite-web build"
+#   artifacts:
+#     expire_in: 7 days
+#     paths:
+#       - packages/suite-web/scripts/s3sync.sh
+#       - packages/suite-web/build
 
-# deploy
+# # deploy
 
-suite-web deploy dev:
-  stage: deploy to dev
-  variables:
-    DEPLOY_DIRECTORY: ${DEPLOY_BASE_DIR}/suite-web/${CI_BUILD_REF_NAME}
-  needs:
-    - suite-web-landing build dev
-    - suite-web build dev
-  environment:
-    name: ${CI_BUILD_REF_NAME}
-    url: $BASE_REVIEW_URL/${CI_BUILD_REF_NAME}
-  before_script: []
-  script:
-    - mkdir -p ${DEPLOY_DIRECTORY}/web
-    - rsync --delete -va packages/suite-web-landing/build/ "${DEPLOY_DIRECTORY}/"
-    - rsync --delete -va packages/suite-web/build/ "${DEPLOY_DIRECTORY}/web/"
-  tags:
-    - deploy
+# suite-web deploy dev:
+#   stage: deploy to dev
+#   variables:
+#     DEPLOY_DIRECTORY: ${DEPLOY_BASE_DIR}/suite-web/${CI_BUILD_REF_NAME}
+#   needs:
+#     - suite-web-landing build dev
+#     - suite-web build dev
+#   environment:
+#     name: ${CI_BUILD_REF_NAME}
+#     url: $BASE_REVIEW_URL/${CI_BUILD_REF_NAME}
+#   before_script: []
+#   script:
+#     - mkdir -p ${DEPLOY_DIRECTORY}/web
+#     - rsync --delete -va packages/suite-web-landing/build/ "${DEPLOY_DIRECTORY}/"
+#     - rsync --delete -va packages/suite-web/build/ "${DEPLOY_DIRECTORY}/web/"
+#   tags:
+#     - deploy
 
 # e2e
 
 .e2e web:
   stage: integration testing
-  needs:
-    - suite-web deploy dev
+  # needs:
+  #   - suite-web deploy dev
   variables:
     COMPOSE_PROJECT_NAME: $CI_JOB_ID
     COMPOSE_FILE: ./docker/docker-compose.suite-ci.yml
