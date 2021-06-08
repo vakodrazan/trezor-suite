@@ -143,30 +143,30 @@
       - ./packages/integration-tests/projects/suite-web/videos
       - download-snapshots.sh
 
-e2e web suite:
-  extends: .e2e web
-  variables:
-    TEST_GROUP: '@group:suite'
+# e2e web suite:
+#   extends: .e2e web
+#   variables:
+#     TEST_GROUP: '@group:suite'
 
 e2e web onboarding:
   extends: .e2e web
   variables:
     TEST_GROUP: '@group:onboarding'
 
-e2e web device-management:
-  extends: .e2e web
-  variables:
-    TEST_GROUP: '@group:device-management'
+# e2e web device-management:
+#   extends: .e2e web
+#   variables:
+#     TEST_GROUP: '@group:device-management'
 
-e2e web settings:
-  extends: .e2e web
-  variables:
-    TEST_GROUP: '@group:settings'
+# e2e web settings:
+#   extends: .e2e web
+#   variables:
+#     TEST_GROUP: '@group:settings'
 
-e2e web metadata:
-  extends: .e2e web
-  variables:
-    TEST_GROUP: '@group:metadata'
+# e2e web metadata:
+#   extends: .e2e web
+#   variables:
+#     TEST_GROUP: '@group:metadata'
 
 # Update snapshots
 # You may update snapshots either locally (see readme https://docs.trezor.io/trezor-suite/tests/e2e-web.html)
