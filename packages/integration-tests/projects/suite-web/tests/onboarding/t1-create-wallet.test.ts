@@ -11,12 +11,12 @@ describe('Onboarding - create wallet', () => {
         cy.task('wipeEmu');
         cy.wait(1000);
         cy.task('stopEmu');
-
-        // reload bridge
-        cy.wait(1000);
-        cy.task('startBridge');
         cy.wait(1000);
         cy.task('stopBridge');
+        cy.wait(1000);
+
+        // reload bridge
+        cy.task('startBridge');
         cy.viewport(1024, 768).resetDb();
         cy.prefixedVisit('/');
     });
