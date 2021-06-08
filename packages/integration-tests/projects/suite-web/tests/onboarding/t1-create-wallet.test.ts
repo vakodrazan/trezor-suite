@@ -3,13 +3,16 @@
 
 describe('Onboarding - create wallet', () => {
     beforeEach(() => {
+        cy.task('startEmu', { version: '1.9.0' });
+        cy.task('wipeEmu');
+        cy.task('stopEmu');
         cy.task('startBridge');
         cy.viewport(1024, 768).resetDb();
         cy.prefixedVisit('/');
     });
 
     it('Success (basic)', () => {
-        cy.task('startEmu', { version: '1.9.0', wipe: true });
+        cy.task('startEmu', { version: '1.9.0' });
         cy.getTestElement('@onboarding/continue-button').click();
         cy.getTestElement('@onboarding/continue-button').click();
         cy.getTestElement('@firmware/skip-button').click();
