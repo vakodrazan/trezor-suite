@@ -36,7 +36,8 @@ describe('Onboarding - create wallet', () => {
 
         cy.task('pressYes');
 
-        cy.getTestElement('@onboarding/skip-backup');
+        // sometimes operations on emulator take really long..
+        cy.getTestElement('@onboarding/skip-backup', { timeout: 30000});
         cy.log('It is possible to leave onboarding now');
 
         cy.getTestElement('@onboarding/create-backup-button').click();
