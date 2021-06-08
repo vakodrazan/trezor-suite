@@ -49,8 +49,8 @@ describe('Onboarding - create wallet', () => {
         cy.getTestElement('@backup/start-button').click();
 
         for (let i = 0; i < 48; i++) {
-            cy.task('pressYes');
             cy.wait(400);
+            cy.task('pressYes');
         }
 
         cy.getTestElement('@backup/close-button').click();
