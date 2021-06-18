@@ -26,7 +26,7 @@ const Description = styled.div`
     color: ${props => props.theme.TYPE_LIGHT_GREY};
     margin-bottom: 12px;
     margin-top: 12px;
-    font-size: ${variables.FONT_SIZE.SMALL};
+    font-size: ${variables.FONT_SIZE.TINY};
     font-weight: ${variables.FONT_WEIGHT.MEDIUM};
 
     &:last-child {
