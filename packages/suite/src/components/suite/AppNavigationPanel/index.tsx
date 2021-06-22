@@ -13,6 +13,8 @@ const Wrapper = styled.div`
 
     padding: 24px 32px 0px 32px;
 
+    margin-bottom: 12px;
+
     @media screen and (max-width: ${variables.SCREEN_SIZE.LG}) {
         padding: 24px 16px 0px 16px;
     }
@@ -38,6 +40,7 @@ const Title = styled(H1)`
     color: ${props => props.theme.TYPE_DARK_GREY};
     white-space: nowrap;
     overflow: hidden;
+    padding-left: 3px;
 `;
 
 const Aside = styled.div`

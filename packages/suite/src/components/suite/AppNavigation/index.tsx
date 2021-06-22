@@ -75,7 +75,7 @@ const StyledNavLink = styled.div<{ active?: boolean }>`
         ${props => (props.active ? props => props.theme.TYPE_DARK_GREY : 'transparent')};
     margin-right: 40px;
     &:first-child {
-        padding-left: 0;
+        padding-left: 5px;
     }
     &:last-child {
         margin-right: ${SECONDARY_MENU_BUTTON_MARGIN};
