@@ -113,7 +113,7 @@ const CollapsibleBox = ({
                     />
                 </IconWrapper>
             </Header>
-            <animated.div style={{ ...slideInStyles, overflow: 'hidden' }}>
+            <animated.div style={{ ...slideInStyles, overflow: 'hidden' }} data-test="@collapsible-box/animated">
                 <animated.div ref={heightRef} style={{ overflow: 'hidden' }}>
                     <Content variant={variant} padding={(!!noContentPadding).toString()}>
                         {children}

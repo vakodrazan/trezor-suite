@@ -42,6 +42,8 @@ describe('prerequisites = test various types of devices connecting to the applic
         it(f.desc, () => {
             f.mockDevice();
             cy.getTestElement('@onboarding/expand-troubleshooting-tips').click();
+            // this ensures animation has finished
+            cy.getTestElement('@collapsible-box/animated').should('have.css', 'opacity', '1');
             cy.matchImageSnapshot(f.desc);
         })
     })
