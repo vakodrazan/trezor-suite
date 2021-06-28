@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { OnboardingLayout } from '@onboarding-components';
 import { WelcomeLayout } from '@suite-components';
 import WelcomeStep from '@onboarding-views/steps/Welcome';
@@ -19,56 +19,73 @@ import type { InjectedModalApplicationProps } from '@suite-types';
 const Onboarding = ({ prerequisite }: InjectedModalApplicationProps) => {
     const { activeStepId } = useOnboarding();
 
-    // todo: more fine grained prerequisites handling done in UnexpectedState components
-    // if (prerequisite) {
-    //     return (
-    //         <WelcomeLayout>
-    //             <PrerequisitesGuide prerequisite={prerequisite} />
-    //         </WelcomeLayout>
-    //     );
-    // }
-
-    const getStepComponent = () => {
+    const { StepComponent, LayoutComponent } = useMemo(() => {
         switch (activeStepId) {
             case STEP.ID_WELCOME_STEP:
                 // Welcome Layout with Connect device prompt and Analytics toggle
-                return WelcomeStep;
+                return {
+                    StepComponent: WelcomeStep,
+                    LayoutComponent: WelcomeLayout,
+                };
             case STEP.ID_FIRMWARE_STEP:
                 // Firmware installation
-                return FirmwareStep;
+                return {
+                    StepComponent: FirmwareStep,
+                    LayoutComponent: OnboardingLayout,
+                };
             case STEP.ID_CREATE_OR_RECOVER:
                 // Selection between a new seed or seed recovery
-                return CreateOrRecover;
+                return {
+                    StepComponent: CreateOrRecover,
+                    LayoutComponent: OnboardingLayout,
+                };
             case STEP.ID_RESET_DEVICE_STEP:
                 // a) Generating a new seed, selection between single seed or shamir seed (only TT supported)
-                return ResetDeviceStep;
+                return {
+                    StepComponent: ResetDeviceStep,
+                    LayoutComponent: OnboardingLayout,
+                };
             case STEP.ID_RECOVERY_STEP:
                 // b) Seed recovery
-                return RecoveryStep;
+                return {
+                    StepComponent: RecoveryStep,
+                    LayoutComponent: OnboardingLayout,
+                };
             case STEP.ID_SECURITY_STEP:
                 // Security intro (BACKUP, PIN), option to skip them
-                return SecurityStep;
+                return {
+                    StepComponent: SecurityStep,
+                    LayoutComponent: OnboardingLayout,
+                };
             case STEP.ID_BACKUP_STEP:
                 // Seed backup
-                return BackupStep;
+                return {
+                    StepComponent: BackupStep,
+                    LayoutComponent: OnboardingLayout,
+                };
             case STEP.ID_SET_PIN_STEP:
                 // Pin setup
-                return SetPinStep;
+                return {
+                    StepComponent: SetPinStep,
+                    LayoutComponent: OnboardingLayout,
+                };
             case STEP.ID_COINS_STEP:
                 // Suite settings
-                return BasicSettingsStep;
+                return {
+                    StepComponent: BasicSettingsStep,
+                    LayoutComponent: OnboardingLayout,
+                };
             case STEP.ID_FINAL_STEP:
-                return FinalStep;
+                return {
+                    StepComponent: FinalStep,
+                    LayoutComponent: OnboardingLayout,
+                };
             default:
                 console.error('no corresponding component found');
-                return () => null;
+                return { StepComponent: () => null, LayoutComponent: WelcomeStep };
         }
-    };
+    }, [activeStepId]);
 
-    const StepComponent = getStepComponent();
-    const LayoutComponent = activeStepId === 'welcome' ? WelcomeLayout : OnboardingLayout;
-
-    // TODO global unexpected states
     return (
         <LayoutComponent>
             onboarding

@@ -46,12 +46,11 @@ const getPrerequisiteName = ({ router, device, transport }: PrerequisitesInput) 
     if (device.firmware === 'required') return 'firmware-required';
 };
 
+// todo: maybe remove this. but let's see if other foreground apps will make any use of it first
 const getExcludedPrerequisites = (router: PrerequisitesInput['router']): PrerequisiteType[] => {
     if (router.app === 'onboarding') {
-        return [
-            // 'device-initialize',
-            // 'device-disconnected'
-        ];
+        // todo: no prerequisites are excluded. there is more detailed handling in specific steps in onboarding
+        return [];
     }
     return [];
 };
@@ -73,7 +72,7 @@ export const getPrerequisites = ({ router, device, transport }: PrerequisitesInp
     return prerequisite;
 };
 
-// distributive conditional types to the rescue!
+// distributive conditional types to the rescue! This way we can infer union literal type from ReturnType but exclude undefined
 type DefinedUnionMember<T> = T extends string ? T : never;
 
 export type PrerequisiteType = DefinedUnionMember<ReturnType<typeof getPrerequisiteName>>;
