@@ -18,6 +18,7 @@ const handleDeviceRedirect = async (dispatch: Dispatch, state: AppState, device?
         return;
     }
 
+    console.log('device', device);
     // device is not initialized, redirect to onboarding
     if (device.mode === 'initialize') {
         await dispatch(routerActions.goto('onboarding-index'));
@@ -62,6 +63,7 @@ const redirect = (api: MiddlewareAPI<Dispatch, AppState>) => (next: Dispatch) =>
     }
 
     switch (action.type) {
+        // todo: this will not get call after acquiring device!
         case SUITE.SELECT_DEVICE:
             await handleDeviceRedirect(api.dispatch, api.getState(), action.payload);
             break;

@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TroubleshootingTips } from '@onboarding-components';
-import { Translation } from '@suite-components';
+import { Translation } from '@suite-components/Translation';
+import { TroubleshootingTips } from '@suite-components';
 import {
     TROUBLESHOOTING_TIP_BRIDGE,
     TROUBLESHOOTING_TIP_RESTART_COMPUTER,
-} from '@onboarding-components/TroubleshootingTips/tips';
+} from '@suite-components/TroubleshootingTips/tips';
 
 const Wrapper = styled.div`
     display: flex;

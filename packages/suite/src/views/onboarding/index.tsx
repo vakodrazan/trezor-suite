@@ -1,5 +1,6 @@
 import React from 'react';
-import { WelcomeLayout, OnboardingLayout } from '@onboarding-components';
+import { OnboardingLayout } from '@onboarding-components';
+import { WelcomeLayout } from '@suite-components';
 import WelcomeStep from '@onboarding-views/steps/Welcome';
 import CreateOrRecover from '@onboarding-views/steps/CreateOrRecover';
 import FirmwareStep from '@onboarding-views/steps/Firmware';
@@ -13,9 +14,19 @@ import FinalStep from '@onboarding-views/steps/Final';
 import UnexpectedState from '@onboarding-views/unexpected-states';
 import { useOnboarding } from '@suite-hooks';
 import * as STEP from '@onboarding-constants/steps';
+import type { InjectedModalApplicationProps } from '@suite-types';
 
-const Onboarding = () => {
+const Onboarding = ({ prerequisite }: InjectedModalApplicationProps) => {
     const { activeStepId } = useOnboarding();
+
+    // todo: more fine grained prerequisites handling done in UnexpectedState components
+    // if (prerequisite) {
+    //     return (
+    //         <WelcomeLayout>
+    //             <PrerequisitesGuide prerequisite={prerequisite} />
+    //         </WelcomeLayout>
+    //     );
+    // }
 
     const getStepComponent = () => {
         switch (activeStepId) {
@@ -60,7 +71,8 @@ const Onboarding = () => {
     // TODO global unexpected states
     return (
         <LayoutComponent>
-            <UnexpectedState>
+            onboarding
+            <UnexpectedState prerequisite={prerequisite}>
                 <StepComponent />
             </UnexpectedState>
         </LayoutComponent>
