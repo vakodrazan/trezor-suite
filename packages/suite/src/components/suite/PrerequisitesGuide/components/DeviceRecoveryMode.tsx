@@ -70,9 +70,11 @@ const DeviceRecoveryMode = () => {
 
     const { isLocked } = useDevice();
 
-    // TODO
+    // recovery is already in progress as connection of device in recovery mode got detected
+    // by recoveryMiddleware and TrezorConnect.recoverDevice method was called in order
+    // to establish communication between host and device
     if (recovery.status === 'in-progress') {
-        return <>recovery mode</>;
+        return null;
     }
 
     return (
