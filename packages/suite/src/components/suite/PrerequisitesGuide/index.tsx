@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { variables } from '@trezor/components';
 import { ConnectDevicePrompt } from '@suite-components';
 import { isWebUSB } from '@suite-utils/transport';
 import { getStatus, deviceNeedsAttention } from '@suite-utils/device';
@@ -23,14 +22,6 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20vh;
-
-    @media all and (max-height: ${variables.SCREEN_SIZE.MD}) {
-        margin-top: 5vh;
-    }
-    @media all and (max-height: ${variables.SCREEN_SIZE.SM}) {
-        margin-top: 0vh;
-    }
 `;
 
 interface Props {

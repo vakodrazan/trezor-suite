@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import styled from 'styled-components';
+import { variables } from '@trezor/components';
 import { SUITE } from '@suite-actions/constants';
 import { SuiteLayout, WelcomeLayout } from '@suite-components';
 import InitialLoading from './components/InitialLoading';
@@ -17,6 +19,17 @@ import Onboarding from '@onboarding-views';
 import { getPrerequisites } from '@suite-utils/prerequisites';
 
 import { Bridge, Udev, SwitchDevice, Version } from '@suite-views';
+
+const PrerequisitesGuideWrapper = styled.div`
+    margin-top: 20vh;
+
+    @media all and (max-height: ${variables.SCREEN_SIZE.MD}) {
+        margin-top: 5vh;
+    }
+    @media all and (max-height: ${variables.SCREEN_SIZE.SM}) {
+        margin-top: 0vh;
+    }
+`;
 
 const getForegroundApplication = (route: AppState['router']['route']) => {
     if (!route) return;
@@ -128,7 +141,9 @@ const Preloader = ({ children, hideModals = false }: Props) => {
     if (prerequisite) {
         return (
             <WelcomeLayout>
-                <PrerequisitesGuide prerequisite={prerequisite} />
+                <PrerequisitesGuideWrapper>
+                    <PrerequisitesGuide prerequisite={prerequisite} />
+                </PrerequisitesGuideWrapper>
             </WelcomeLayout>
         );
     }
