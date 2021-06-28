@@ -3,6 +3,7 @@ import { useSpring, config, animated } from 'react-spring';
 import styled from 'styled-components';
 
 import { Translation, TroubleshootingTips, WebusbButton } from '@suite-components';
+import { isLinux } from '@suite-utils/env';
 
 import {
     TROUBLESHOOTING_TIP_BRIDGE,
@@ -28,23 +29,27 @@ const DeviceConnect = ({ offerWebUsb }: Props) => {
         to: { opacity: 1 },
     });
 
-    // todo: udev only on linux
     // todo: does bridge tip make sense if we know bridge is already running?
 
     const items = offerWebUsb
-        ? [
-              TROUBLESHOOTING_TIP_USB,
-              TROUBLESHOOTING_TIP_CABLE,
-              TROUBLESHOOTING_TIP_BRIDGE,
-              TROUBLESHOOTING_TIP_UDEV,
-          ]
+        ? [TROUBLESHOOTING_TIP_USB, TROUBLESHOOTING_TIP_CABLE, TROUBLESHOOTING_TIP_BRIDGE]
         : [
               TROUBLESHOOTING_TIP_BRIDGE,
               TROUBLESHOOTING_TIP_CABLE,
               TROUBLESHOOTING_TIP_USB,
               TROUBLESHOOTING_TIP_DIFFERENT_COMPUTER,
-              TROUBLESHOOTING_TIP_UDEV,
           ];
+
+    // additional udev rules for Linux
+    if (isLinux()) {
+        if (offerWebUsb) {
+            // add it at the end for WebUsb case
+            items.push(TROUBLESHOOTING_TIP_UDEV);
+        } else {
+            // add it at second position for Bridge case
+            items.splice(1, 0, TROUBLESHOOTING_TIP_UDEV);
+        }
+    }
 
     return (
         <Wrapper style={fadeStyles}>
