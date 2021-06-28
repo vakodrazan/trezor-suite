@@ -1,24 +1,54 @@
 import React from 'react';
-import { TrezorLink } from '@suite-components';
-import { Translation } from '@suite-components/Translation';
-import { SUITE_BRIDGE_URL } from '@suite-constants/urls';
+import { Translation, TrezorLink } from '@suite-components';
 import { isWeb } from '@suite-utils/env';
+import { useActions } from '@suite-hooks';
+import * as routerActions from '@suite-actions/routerActions';
 
-export const TROUBLESHOOTING_TIP_BRIDGE = {
-    key: 'bridge',
-    heading: <Translation id="TR_TROUBLESHOOTING_TIP_BRIDGE_TITLE" />,
-    description: (
+// TODO: move it to separated components?
+const UdevDescription = () => {
+    const { goto } = useActions({
+        goto: routerActions.goto,
+    });
+
+    return (
+        <>
+            Try installing{' '}
+            <TrezorLink
+                onClick={() => goto('suite-udev')}
+                variant="underline"
+                // todo:
+                data-test="@goto/udev"
+            >
+                Udev rules
+            </TrezorLink>{' '}
+            Make sure to first download them to desktop before opening.
+        </>
+    );
+};
+
+const BridgeDescription = () => {
+    const { goto } = useActions({
+        goto: routerActions.goto,
+    });
+
+    return (
         <Translation
             id="TR_TROUBLESHOOTING_TIP_BRIDGE_DESCRIPTION"
             values={{
                 a: chunks => (
-                    <TrezorLink variant="underline" href={SUITE_BRIDGE_URL}>
+                    <TrezorLink variant="underline" onClick={() => goto('suite-bridge')}>
                         {chunks}
                     </TrezorLink>
                 ),
             }}
         />
-    ),
+    );
+};
+
+export const TROUBLESHOOTING_TIP_BRIDGE = {
+    key: 'bridge',
+    heading: <Translation id="TR_TROUBLESHOOTING_TIP_BRIDGE_TITLE" />,
+    description: <BridgeDescription />,
     hide: !isWeb(),
 };
 
@@ -44,4 +74,10 @@ export const TROUBLESHOOTING_TIP_RESTART_COMPUTER = {
     key: 'restartComputer',
     heading: <Translation id="TR_TROUBLESHOOTING_TIP_RESTART_COMPUTER_TITLE" />,
     description: <Translation id="TR_TROUBLESHOOTING_TIP_RESTART_COMPUTER_DESCRIPTION" />,
+};
+
+export const TROUBLESHOOTING_TIP_UDEV = {
+    key: 'udev',
+    heading: <Translation id="TR_UDEV_DOWNLOAD_TITLE" />,
+    description: <UdevDescription />,
 };
