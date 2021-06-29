@@ -1,5 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { variables } from '@trezor/components';
 import { ConnectDevicePrompt } from '@suite-components';
 import { isWebUSB } from '@suite-utils/transport';
 import { getStatus, deviceNeedsAttention } from '@suite-utils/device';
@@ -18,24 +19,37 @@ import DeviceBootloader from './components/DeviceBootloader';
 import DeviceNoFirmware from './components/DeviceNoFirmware';
 import DeviceUpdateRequired from './components/DeviceUpdateRequired';
 
-const Wrapper = styled.div`
+const positioningStyles = css`
+    margin-top: 20vh;
+    @media all and (max-height: ${variables.SCREEN_SIZE.MD}) {
+        margin-top: 5vh;
+    }
+    @media all and (max-height: ${variables.SCREEN_SIZE.SM}) {
+        margin-top: 0vh;
+    }
+`;
+
+const Wrapper = styled.div<{ padded?: boolean }>`
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    ${props => (props.padded ? positioningStyles : '')}
 `;
 
 interface Props {
     prerequisite: PrerequisiteType;
+    padded?: boolean;
 }
 
 // PrerequisitesGuide is a shared component used in Preloader and Onboarding
-const PrerequisitesGuide = ({ prerequisite }: Props) => {
+const PrerequisitesGuide = ({ prerequisite, padded }: Props) => {
     const { device, transport } = useSelector(state => ({
         device: state.suite.device,
         transport: state.suite.transport,
     }));
     return (
-        <Wrapper>
+        <Wrapper padded={padded}>
             <ConnectDevicePrompt
                 connected={!!device}
                 showWarning={!!(device && deviceNeedsAttention(getStatus(device)))}

@@ -17,12 +17,13 @@ const Wrapper = styled.div`
 interface Props {
     children: JSX.Element;
     prerequisite?: PrerequisiteType;
+    prerequisitesGuidePadded?: boolean;
 }
 
 /**
  * This component handles unexpected device states across various steps in the onboarding.
  */
-const UnexpectedState = ({ children, prerequisite }: Props) => {
+const UnexpectedState = ({ children, prerequisite, prerequisitesGuidePadded }: Props) => {
     const { device } = useSelector(s => s.suite);
     const { prevDevice, activeStepId, showPinMatrix } = useOnboarding();
     const activeStep = steps.find(s => s.id === activeStepId);
@@ -52,9 +53,11 @@ const UnexpectedState = ({ children, prerequisite }: Props) => {
 
         // otherwise handle common prerequisite which are determined and passed as prop from Preloader component
         if (prerequisite && activeStep?.prerequisites?.includes(prerequisite)) {
-            return <PrerequisitesGuide prerequisite={prerequisite} />;
+            return (
+                <PrerequisitesGuide prerequisite={prerequisite} padded={prerequisitesGuidePadded} />
+            );
         }
-    }, [activeStep, prerequisite, isNotSameDevice]);
+    }, [activeStep, prerequisite, isNotSameDevice, prerequisitesGuidePadded]);
 
     const getPinComponent = () => {
         // After the PIN is set it may happen that it takes too long for an user to finish the onboarding process.

@@ -19,11 +19,11 @@ import type { InjectedModalApplicationProps } from '@suite-types';
 const Onboarding = ({ prerequisite }: InjectedModalApplicationProps) => {
     const { activeStepId } = useOnboarding();
 
-    const [StepComponent, LayoutComponent] = useMemo(() => {
+    const [StepComponent, LayoutComponent, prerequisitesGuidePadded] = useMemo(() => {
         switch (activeStepId) {
             case STEP.ID_WELCOME_STEP:
                 // Welcome Layout with Connect device prompt and Analytics toggle
-                return [WelcomeStep, WelcomeLayout];
+                return [WelcomeStep, WelcomeLayout, true];
             case STEP.ID_FIRMWARE_STEP:
                 // Firmware installation
                 return [FirmwareStep, OnboardingLayout];
@@ -58,7 +58,10 @@ const Onboarding = ({ prerequisite }: InjectedModalApplicationProps) => {
 
     return (
         <LayoutComponent>
-            <UnexpectedState prerequisite={prerequisite}>
+            <UnexpectedState
+                prerequisite={prerequisite}
+                prerequisitesGuidePadded={prerequisitesGuidePadded}
+            >
                 <StepComponent />
             </UnexpectedState>
         </LayoutComponent>

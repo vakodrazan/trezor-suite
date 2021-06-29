@@ -66,16 +66,6 @@ const Content = styled.div`
     overflow-y: auto;
 `;
 
-const ContentWrapper = styled.div`
-    margin-top: 20vh;
-    @media all and (max-height: ${variables.SCREEN_SIZE.MD}) {
-        margin-top: 5vh;
-    }
-    @media all and (max-height: ${variables.SCREEN_SIZE.SM}) {
-        margin-top: 0vh;
-    }
-`;
-
 const StyledTrezorLink = styled(TrezorLink)`
     margin-right: 14px;
 `;
@@ -124,9 +114,7 @@ const WelcomeLayout = ({ children }: Props) => {
                 </Bottom>
             </Welcome>
 
-            <Content>
-                <ContentWrapper>{children}</ContentWrapper>
-            </Content>
+            <Content>{children}</Content>
         </Wrapper>
     );
 };
