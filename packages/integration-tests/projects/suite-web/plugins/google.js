@@ -203,6 +203,5 @@ class GoogleMock {
     }
 }
 
-const googleMock = new GoogleMock();
 
-export default googleMock;
+export default GoogleMock;

@@ -8,10 +8,10 @@ const providers = [
         provider: 'google',
         file: 'f7acc942eeb83921892a95085e409b3e6b5325db6400ae5d8de523a305291dca.mtdt',
     },
-    {
-        provider: 'dropbox',
-        file: '/apps/trezor/f7acc942eeb83921892a95085e409b3e6b5325db6400ae5d8de523a305291dca.mtdt',
-    },
+    // {
+    //     provider: 'dropbox',
+    //     file: '/apps/trezor/f7acc942eeb83921892a95085e409b3e6b5325db6400ae5d8de523a305291dca.mtdt',
+    // },
 ] as const;
 
 describe(`Metadata - In settings, there is enable metadata switch. On enable, it initiates metadata right away (if device already has state).

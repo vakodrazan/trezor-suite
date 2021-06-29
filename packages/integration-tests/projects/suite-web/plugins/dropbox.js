@@ -198,6 +198,4 @@ class DropboxMock {
     }
 }
 
-const dropboxMock = new DropboxMock();
-
-export default dropboxMock;
+export default DropboxMock;

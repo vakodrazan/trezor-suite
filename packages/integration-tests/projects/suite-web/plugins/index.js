@@ -6,8 +6,8 @@
 
 import { addMatchImageSnapshotPlugin } from 'cypress-image-snapshot/plugin';
 import { Controller } from './websocket-client';
-import googleMock from './google';
-import dropboxMock from './dropbox';
+import GoogleMock from './google';
+import DropboxMock from './dropbox';
 import * as metadataUtils from '../../../../suite/src/utils/suite/metadata';
 
 const webpackPreprocessor = require('@cypress/webpack-preprocessor');
@@ -37,12 +37,17 @@ module.exports = on => {
         return launchOptions;
     });
 
+    let googleMock = null;
+    let dropboxMock = null;
+
     on('task', {
         metadataStartProvider: async provider => {
             switch (provider) {
                 case 'dropbox':
+                    dropboxMock = new DropboxMock();
                     await dropboxMock.start();
                 case 'google':
+                    googleMock = new GoogleMock();
                     await googleMock.start();
             }
             return null;
