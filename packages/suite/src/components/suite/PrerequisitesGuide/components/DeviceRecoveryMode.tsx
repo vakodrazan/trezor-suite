@@ -16,9 +16,8 @@ const DeviceRecoveryMode = () => {
 
     const { isLocked } = useDevice();
 
-    // TODO
     if (recovery.status === 'in-progress') {
-        return <>recovery mode</>;
+        return null;
     }
 
     return (
