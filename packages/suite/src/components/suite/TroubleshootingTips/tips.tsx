@@ -1,5 +1,6 @@
 import React from 'react';
-import { Translation, TrezorLink } from '@suite-components';
+import TrezorLink from '@suite-components/TrezorLink';
+import { Translation } from '@suite-components/Translation';
 import { isWeb } from '@suite-utils/env';
 import { useActions } from '@suite-hooks';
 import * as routerActions from '@suite-actions/routerActions';
