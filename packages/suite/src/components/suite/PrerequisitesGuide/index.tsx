@@ -24,18 +24,18 @@ const Wrapper = styled.div`
     align-items: center;
 `;
 
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
+interface Props {
     prerequisite: PrerequisiteType;
 }
 
 // PrerequisitesGuide is a shared component used in Preloader and Onboarding
-const PrerequisitesGuide = ({ prerequisite, ...rest }: Props) => {
+const PrerequisitesGuide = ({ prerequisite }: Props) => {
     const { device, transport } = useSelector(state => ({
         device: state.suite.device,
         transport: state.suite.transport,
     }));
     return (
-        <Wrapper {...rest}>
+        <Wrapper>
             <ConnectDevicePrompt
                 connected={!!device}
                 showWarning={!!(device && deviceNeedsAttention(getStatus(device)))}
