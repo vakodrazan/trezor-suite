@@ -79,8 +79,10 @@ const Preloader = ({ children, hideModals = false }: Props) => {
     if (error) {
         // trezor-connect initialization failed
         // throw error to <ErrorBoundary /> in _app.tsx
+        console.error('error from connect', error);
         throw new Error(error);
     } else if (dbError) {
+        console.error('error from database', dbError);
         return <DatabaseUpgradeModal variant={dbError} />;
     }
 
