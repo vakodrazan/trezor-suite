@@ -168,8 +168,6 @@ const rerun = () => async (dispatch: Dispatch, getState: GetState) => {
 
     if (!features.initialized) {
         if (router.app !== 'onboarding') {
-            // ??? not sure if here but probably yes. this is only for the case when device was connected
-            // as unacquired and redirection upon this event was not possible
             dispatch(routerActions.goto('onboarding-index'));
         }
         dispatch(onboardingActions.goToStep('recovery'));

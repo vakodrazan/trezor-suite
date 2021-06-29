@@ -1,7 +1,7 @@
 import { Step } from '@onboarding-types';
 import * as STEP from '@onboarding-constants/steps';
 
-const commonPrerequisites = [
+const commonPrerequisites: Step['prerequisites'] = [
     'transport-bridge',
     'device-bootloader',
     'device-seedless',
@@ -9,13 +9,13 @@ const commonPrerequisites = [
     'device-unknown',
     'device-unreadable',
     'device-disconnected',
-] as const;
+];
 
-const afterInitializePrerequisites = [
+const afterInitializePrerequisites: Step['prerequisites'] = [
     'device-initialize',
     'device-recovery-mode',
     'device-different',
-] as const;
+];
 
 const steps: Step[] = [
     {
