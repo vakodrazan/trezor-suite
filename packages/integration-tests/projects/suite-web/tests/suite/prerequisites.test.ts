@@ -20,23 +20,23 @@ describe('prerequisites = test various types of devices connecting to the applic
             desc: 'device-seedless',
             mockDevice: () => cy.connectDevice({ mode: 'seedless' }),
         },
-        //  {
-        //     desc: 'device-unacquired',
-        //     mockDevice: () => cy.connectDevice({ type: 'unacquired' }),
-        // }, {
-        //     desc: 'device-unreadable',
-        //     mockDevice: () => cy.connectDevice({ type: 'unreadable' }),
-        // }, {
-        //     desc: 'device-unknown',
-        //     mockDevice: () => cy.connectDevice({ features: undefined })
-        // }, {
-        //     desc: 'device-disconnected',
-        //     mockDevice: () => { },
-        // },
-        // {
-        //     desc: 'device-bootloader',
-        //     mockDevice: () => cy.connectBootloaderDevice('1'),
-        // }
+         {
+            desc: 'device-unacquired',
+            mockDevice: () => cy.connectDevice({ type: 'unacquired' }),
+        }, {
+            desc: 'device-unreadable',
+            mockDevice: () => cy.connectDevice({ type: 'unreadable' }),
+        }, {
+            desc: 'device-unknown',
+            mockDevice: () => cy.connectDevice({ features: undefined })
+        }, {
+            desc: 'device-disconnected',
+            mockDevice: () => { },
+        },
+        {
+            desc: 'device-bootloader',
+            mockDevice: () => cy.connectBootloaderDevice('1'),
+        }
     ];
 
     fixtures.forEach(f => {
