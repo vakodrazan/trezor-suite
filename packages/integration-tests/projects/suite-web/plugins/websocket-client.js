@@ -5,8 +5,8 @@ const { EventEmitter } = require('events');
 const NOT_INITIALIZED = new Error('websocket_not_initialized');
 
 const createDeferred = id => {
-    let localResolve = t => () => {};
-    let localReject = e => () => {};
+    let localResolve = t => () => { };
+    let localReject = e => () => { };
 
     const promise = new Promise((resolve, reject) => {
         localResolve = resolve;
@@ -60,6 +60,7 @@ class Controller extends EventEmitter {
     }
 
     onTimeout() {
+        console.log('[ws]: onTimeout')
         const { ws } = this;
         if (!ws) return;
         if (ws.listenerCount('open') > 0) {
@@ -67,6 +68,7 @@ class Controller extends EventEmitter {
             try {
                 ws.close();
             } catch (error) {
+                console.log('[ws]: onTimeout close err', err.message);
                 // empty
             }
         } else {
@@ -76,14 +78,18 @@ class Controller extends EventEmitter {
     }
 
     async onPing() {
+        console.log('[ws]: onPing')
+
         // make sure that connection is alive if there are subscriptions
         if (this.ws && this.isConnected()) {
             if (this.subscriptions.length > 0 || this.options.keepAlive) {
+                console.log('[ws]: getBlockHash. This cant work!')
                 await this.getBlockHash(0);
             } else {
                 try {
                     this.ws.close();
                 } catch (error) {
+                    console.log('[ws]: onPing close error', err.message)
                     // empty
                 }
             }
@@ -112,8 +118,7 @@ class Controller extends EventEmitter {
         this.setPingTimeout();
         console.log('[ws]: sending', req);
         ws.send(JSON.stringify(req));
-        console.log('[ws]: sent');
-        
+
         return dfd.promise;
     }
 
@@ -169,11 +174,12 @@ class Controller extends EventEmitter {
         const ws = new WebSocket(url);
 
         ws.once('error', error => {
+            console.log('[ws]: ws once error', error.message);
+
             this.dispose();
-            console.log(error);
             dfd.reject(new Error('websocket_runtime_error: ', error.message));
         });
-        
+
         ws.on('open', () => {
             this.init();
             dfd.resolve();
