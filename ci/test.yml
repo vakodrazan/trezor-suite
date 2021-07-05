@@ -1,8 +1,8 @@
 # e2e tests
 .e2e web:
   stage: integration testing
-  needs:
-    - suite-web deploy dev
+  # needs:
+  #   - suite-web deploy dev
   variables:
     COMPOSE_PROJECT_NAME: $CI_JOB_ID
     COMPOSE_FILE: ./docker/docker-compose.suite-ci.yml
