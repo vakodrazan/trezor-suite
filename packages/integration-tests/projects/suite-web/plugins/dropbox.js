@@ -174,12 +174,18 @@ class DropboxMock {
         console.log('[mockDropbox]: start');
 
         return new Promise(resolve => {
-            this.app.listen(port, server => {
+            this.server = this.app.listen(port, (err) => {
+                if (err) return;
                 console.log(`[mockDropbox] listening at http://localhost:${port}`);
                 this.running = true;
-                this.server = server;
-                resolve();
             });
+
+            this.server.on('error', (e) => {
+                this.running = false;
+                console.log('[mockDropbox]: start error', e.message)
+            });
+
+            resolve();
         });
     }
 
