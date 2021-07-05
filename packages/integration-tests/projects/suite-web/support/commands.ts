@@ -33,11 +33,15 @@ beforeEach(() => {
     cy.intercept('POST', 'http://127.0.0.1:21325/', req => {
         req.url = req.url.replace('21325', '21326');
     });
+    cy.task('trezorUserEnvConnect');
     cy.log('stop and start bridge before every test to make sure that there is no pending session');
     cy.task('stopBridge');
     cy.task('stopEmu');
 });
 
+afterEach(() => {
+    cy.task('trezorUserEnvDisconnect');
+})
 declare global {
     namespace Cypress {
         interface Chainable<Subject> {

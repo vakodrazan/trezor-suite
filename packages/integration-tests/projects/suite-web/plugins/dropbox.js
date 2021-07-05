@@ -38,9 +38,10 @@ class DropboxMock {
 
         // https://api.dropboxapi.com/oauth2/token
         app.post('/oauth2/token', (req, res) => {
-            console.log('[dropbox]: token');
-
             const { grant_type } = req.query;
+
+            console.log('[dropbox]: token ', grant_type);
+
             if (grant_type === 'authorization_code') {
                 return res.send({
                     uid: '123',
@@ -59,6 +60,7 @@ class DropboxMock {
                     expires_in: 14400,
                 });
             }
+
             return res.send('foo bar');
         });
 

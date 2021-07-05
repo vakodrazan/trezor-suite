@@ -30,7 +30,7 @@ class Controller extends EventEmitter {
         this.messageID = 0;
         this.messages = [];
         this.subscriptions = [];
-        this.setMaxListeners(Infinity);
+        // this.setMaxListeners(Infinity);
         this.options = options;
     }
 
@@ -139,7 +139,8 @@ class Controller extends EventEmitter {
                 this.messages.splice(this.messages.indexOf(dfd), 1);
             }
         } catch (error) {
-            conole.log('[ws]: error', error.message)
+            // this can indeed happen
+            console.log('[ws]: error', error.message)
             // empty
         }
 
@@ -213,7 +214,7 @@ class Controller extends EventEmitter {
         if (this.ws) {
             this.ws.close();
         }
-        // this.dispose();
+        this.dispose();
     }
 
     isConnected() {

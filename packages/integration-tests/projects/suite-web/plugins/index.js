@@ -38,6 +38,7 @@ module.exports = on => {
     });
 
     on('task', {
+        
         metadataStartProvider: async provider => {
             console.log('node: metadataStartProvider');
             switch (provider) {
@@ -91,18 +92,26 @@ module.exports = on => {
                     return googleMock.requests;
             }
         },
+        trezorUserEnvConnect: async () => {
+            console.log('node: trezorUserEnvConnect')
+            await controller.connect();
+            console.log('node: trezorUserEnvConnect connected')
+            return null;
+        },
+        trezorUserEnvDisconnect: async () => {
+            console.log('node: trezorUserEnvDisconnect')
+            await controller.disconnect();
+            console.log('node: trezorUserEnvDisconnect disconnected')
+            return null;
+        },
         startBridge: async version => {
             console.log('node: startBridge')
-            await controller.connect();
             await controller.send({ type: 'bridge-start', version });
-            controller.disconnect();
             return null;
         },
         stopBridge: async () => {
             console.log('node: stopBridge');
-            await controller.connect();
-            const response = await controller.send({ type: 'bridge-stop' });
-            controller.disconnect();
+            await controller.send({ type: 'bridge-stop' });
             return null;
         },
         setupEmu: async options => {
@@ -116,7 +125,6 @@ module.exports = on => {
                 needs_backup: false,
             };
             
-            await controller.connect();
             // before setup, stop bridge and start it again after it. it has no performance hit
             // and avoids 'wrong previous session' errors from bridge. actual setup is done
             // through udp transport if bridge transport is not available
@@ -127,7 +135,6 @@ module.exports = on => {
                 ...options,
             });
             await controller.send({ type: 'bridge-start' });
-            controller.disconnect();
             return null;
         },
         /**
@@ -138,68 +145,50 @@ module.exports = on => {
          */
         startEmu: async arg => {
             console.log('node: startEmu');
-            await controller.connect();
             await controller.send({
                 type: 'emulator-start',
                 ...arg,
             });
-            controller.disconnect();
             return null;
         },
         stopEmu: async () => {
             console.log('node: stopEmu')
-            await controller.connect();
             await controller.send({ type: 'emulator-stop' });
-            controller.disconnect();
             return null;
         },
         wipeEmu: async () => {
             console.log('node: wipeEmu')
-            await controller.connect();
             await controller.send({ type: 'emulator-wipe' });
-            controller.disconnect();
             return null;
         },
         pressYes: async () => {
             console.log('node: pressYes')
-            await controller.connect();
             await controller.send({ type: 'emulator-press-yes' });
-            controller.disconnect();
             return null;
         },
         pressNo: async () => {
             console.log('node: pressNo')
-            await controller.connect();
             await controller.send({ type: 'emulator-press-no' });
-            controller.disconnect();
             return null;
         },
         swipeEmu: async direction => {
             console.log('node: swipeEmu')
-            await controller.connect();
             await controller.send({ type: 'emulator-swipe', direction });
-            controller.disconnect();
             return null;
         },
         inputEmu: async value => {
             console.log('node: inputEmu')
-            await controller.connect();
             await controller.send({ type: 'emulator-input', value });
-            controller.disconnect();
             return null;
         },
         resetDevice: async options => {
             console.log('node: resetDevice')
-            await controller.connect();
             await controller.send({ type: 'emulator-reset-device', ...options });
-            controller.disconnect();
             return null;
         },
         readAndConfirmMnemonicEmu: async () => {
             console.log('node: readAndConfirmMnemonicEmu')
-            await controller.connect();
             await controller.send({ type: 'emulator-read-and-confirm-mnemonic' });
-            controller.disconnect();
             return null;
         },
         applySettings: async options => {
@@ -207,20 +196,16 @@ module.exports = on => {
             const defaults = {
                 passphrase_always_on_device: false,
             };
-            await controller.connect();
             await controller.send({
                 type: 'emulator-apply-settings',
                 ...defaults,
                 ...options,
             });
-            controller.disconnect();
             return null;
         },
         selectNumOfWordsEmu: async num => {
             console.log('node: selectNumOfWordsEmu')
-            await controller.connect();
             await controller.send({ type: 'select-num-of-words', num });
-            controller.disconnect();
             return null;
         },
     });
