@@ -110,12 +110,15 @@ class Controller extends EventEmitter {
 
         this.setConnectionTimeout();
         this.setPingTimeout();
-
+        console.log('[ws]: sending', req);
         ws.send(JSON.stringify(req));
+        console.log('[ws]: sent');
+        
         return dfd.promise;
     }
 
     onmessage(message) {
+        console.log('[ws]: onmessage', message);
         try {
             const resp = JSON.parse(message);
             const { id, success } = resp;
@@ -131,6 +134,7 @@ class Controller extends EventEmitter {
                 this.messages.splice(this.messages.indexOf(dfd), 1);
             }
         } catch (error) {
+            conole.log('[ws]: error', error.message)
             // empty
         }
 
@@ -163,11 +167,13 @@ class Controller extends EventEmitter {
 
         // initialize connection
         const ws = new WebSocket(url);
+
         ws.once('error', error => {
             this.dispose();
             console.log(error);
             dfd.reject(new Error('websocket_runtime_error: ', error.message));
         });
+        
         ws.on('open', () => {
             this.init();
             dfd.resolve();
