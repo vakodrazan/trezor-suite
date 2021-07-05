@@ -135,7 +135,7 @@ async function runTests() {
                 // eslint-disable-next-line no-await-in-loop
                 const runResult = await cypress.run({
                     browser: BROWSER,
-                    // headless,
+                    // headless: true,
                     headed: true,
                     spec,
                     config,
@@ -179,7 +179,7 @@ async function runTests() {
                 // log either success or retried (success after retry)
                 log.records[testFileName] = testRunNumber === 1 ? 'success' : 'retried';
                 console.log(
-                    `[run_tests.js] test ${testFileName} finished as successful after ${allowedRuns} run(s)`,
+                    `[run_tests.js] test ${testFileName} finished as successful after ${testRunNumber} run(s) (of ${allowedRuns})`,
                 );
                 break;
             } catch (err) {
