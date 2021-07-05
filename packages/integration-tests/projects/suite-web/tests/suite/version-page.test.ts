@@ -9,8 +9,17 @@ describe('There is a hidden route (not accessible in UI)', () => {
     it('/version', () => {
         cy.prefixedVisit('/version');
         cy.get('html').should('contain', 'version');
-        cy.getTestElement('@version').matchImageSnapshot({
-            blackout: ['[data-test="@version/commit-hash-link"]'],
-        });
+        cy.getTestElement('@version/commit-hash-link').then(($a) => {
+            $a.text('some-commit-hash');
+
+            cy.getTestElement('@version/heading').then(($h) => {
+                $h.text('21.01.1')
+            })
+
+            cy.get('html').should('contain', 'some-commit-hash');
+
+            cy.getTestElement('@version').matchImageSnapshot();
+        })
+
     });
 });

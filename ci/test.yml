@@ -67,7 +67,7 @@ e2e web metadata:
 
 # TODO: should there be one job updating all? not sure
 e2e web suite snapshots:
-  when: manual
+  # when: manual
   extends: .e2e web
   variables:
     CYPRESS_SNAPSHOT: 1
