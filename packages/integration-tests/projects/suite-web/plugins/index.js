@@ -13,6 +13,7 @@ import * as metadataUtils from '../../../../suite/src/utils/suite/metadata';
 const webpackPreprocessor = require('@cypress/webpack-preprocessor');
 
 const controller = new Controller({ url: 'ws://localhost:9001/' });
+
 module.exports = on => {
     // make ts possible start
     const options = {

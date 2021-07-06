@@ -31,14 +31,18 @@ class Controller extends EventEmitter {
         this.messages = [];
         this.subscriptions = [];
         // this.setMaxListeners(Infinity);
-        this.options = options;
+        this.options = {
+            pingTimeout: DEFAULT_PING_TIMEOUT,
+            timeout: DEFAULT_TIMEOUT,
+            ...options
+        };
     }
 
     setConnectionTimeout() {
         this.clearConnectionTimeout();
         this.connectionTimeout = setTimeout(
             this.onTimeout.bind(this),
-            this.options.timeout || DEFAULT_TIMEOUT,
+            this.options.timeout,
         );
     }
 
@@ -55,7 +59,7 @@ class Controller extends EventEmitter {
         }
         this.pingTimeout = setTimeout(
             this.onPing.bind(this),
-            this.options.pingTimeout || DEFAULT_PING_TIMEOUT,
+            this.options.pingTimeout,
         );
     }
 
@@ -205,9 +209,22 @@ class Controller extends EventEmitter {
         ws.on('error', this.onError.bind(this));
         ws.on('message', this.onmessage.bind(this));
         ws.on('close', () => {
+            console.log('[ws]: close');
             this.emit('disconnected');
             this.dispose();
         });
+        ws.on('ping', () => {
+            console.log('[ws]: ping');
+        })
+        ws.on('pong', () => {
+            console.log('[ws]: pong');
+        })
+        ws.on('unexpected-response', () => {
+            console.log('[ws]: unexpected-response');
+        })
+        ws.on('upgrade', () => {
+            console.log('[ws]: upgrade');
+        })
     }
 
     disconnect() {

@@ -7,7 +7,6 @@ const cypress = require('cypress');
 const shell = require('shelljs');
 const { argv } = require('yargs');
 const fetch = require('node-fetch');
-const path = require('path');
 const fs = require('fs');
 
 const TEST_DIR = './packages/integration-tests/projects/suite-web';
@@ -59,7 +58,6 @@ async function runTests() {
         CI_JOB_ID,
         CI_COMMIT_MESSAGE,
         CI_COMMIT_SHA,
-        // CI_RUNNER_ID,
         CI_RUNNER_DESCRIPTION,
         CYPRESS_updateSnapshots,
     } = process.env;
