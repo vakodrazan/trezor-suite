@@ -128,13 +128,13 @@ module.exports = on => {
             // before setup, stop bridge and start it again after it. it has no performance hit
             // and avoids 'wrong previous session' errors from bridge. actual setup is done
             // through udp transport if bridge transport is not available
-            await controller.send({ type: 'bridge-stop' });
+            // await controller.send({ type: 'bridge-stop' });
             await controller.send({
                 type: 'emulator-setup',
                 ...defaults,
                 ...options,
             });
-            await controller.send({ type: 'bridge-start' });
+            // await controller.send({ type: 'bridge-start' });
             return null;
         },
         /**

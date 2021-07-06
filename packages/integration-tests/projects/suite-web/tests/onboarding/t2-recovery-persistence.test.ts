@@ -123,7 +123,7 @@ describe('Onboarding - T2 in recovery mode', () => {
         }
         cy.wait(1000);
         cy.task('pressYes');
-        cy.getTestElement('@onboarding/recovery/continue-button').click();
+        cy.getTestElement('@onboarding/recovery/continue-button', { timeout: 30000 }).click();
         cy.getTestElement('@onboarding/skip-button').click();
     });
 });

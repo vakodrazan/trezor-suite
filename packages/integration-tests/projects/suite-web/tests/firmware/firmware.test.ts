@@ -4,13 +4,14 @@
 describe('Firmware', () => {
     beforeEach(() => {
         cy.viewport(1024, 768).resetDb();
+        cy.task('startBridge');
     });
 
     ['1.9.4', '2.3.0'].forEach(fw => {
         it(`Firmware ${fw} outdated notification banner should open firmware update modal`, () => {
             cy.task('startEmu', { wipe: true, version: fw });
             cy.task('setupEmu');
-            cy.task('startBridge');
+            // cy.task('startBridge');
             cy.prefixedVisit('/');
             cy.passThroughInitialRun();
             cy.matchImageSnapshot('outdated notification banner');
@@ -42,7 +43,7 @@ describe('Firmware', () => {
         it(`For latest firmware ${fw}, update button in device settings should display "Up to date" but still be clickable`, () => {
             cy.task('startEmu', { wipe: true, version: fw });
             cy.task('setupEmu');
-            cy.task('startBridge');
+            // cy.task('startBridge');
             cy.prefixedVisit('/');
             cy.passThroughInitialRun();
             cy.getTestElement('@suite/menu/settings').click();
