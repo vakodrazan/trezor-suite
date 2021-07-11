@@ -146,6 +146,7 @@
         "afterSign": "scripts/notarize.js"
     },
     "dependencies": {
+        "@ledgerhq/electron-updater": "^4.2.2",
         "chalk": "^4.1.0",
         "electron-is-dev": "^1.2.0",
         "electron-localshortcut": "^3.2.1",

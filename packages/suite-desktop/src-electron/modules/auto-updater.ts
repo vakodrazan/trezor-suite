@@ -9,7 +9,8 @@ import {
     CancellationToken,
     UpdateInfo,
     UpdateDownloadedEvent,
-} from 'electron-updater';
+    // @ts-ignore
+} from '@ledgerhq/electron-updater';
 import isDev from 'electron-is-dev';
 
 import { b2t } from '@desktop-electron/libs/utils';
