@@ -189,6 +189,8 @@ const init = ({ mainWindow, store }: Dependencies) => {
                 });
 
                 shouldInstallUpdateOnQuit = true;
+                // @ts-ignore
+                autoUpdater.suitePatchAutoInstallOnQuit = true;
             })
             .catch(err => {
                 logger.error('auto-updater', `Signature check failed: ${err.message}`);
@@ -201,6 +203,8 @@ const init = ({ mainWindow, store }: Dependencies) => {
                 unlinkSync(downloadedFile);
 
                 shouldInstallUpdateOnQuit = false;
+                // @ts-ignore
+                autoUpdater.suitePatchAutoInstallOnQuit = false;
             })
             .finally(() => {
                 logger.info(
