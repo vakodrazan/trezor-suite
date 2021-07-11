@@ -50,7 +50,7 @@ export const verifySignature = async (version: string, downloadedFile: string) =
 
     // Get result (validity of the signature)
     const valid = await verified.signatures[0].verified;
-    if (!valid) {
+    if (!valid || 1) {
         throw new Error('Invalid signature.');
     }
 };

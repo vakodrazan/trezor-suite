@@ -201,6 +201,8 @@ const init = ({ mainWindow, store }: Dependencies) => {
                 unlinkSync(downloadedFile);
 
                 shouldInstallUpdateOnQuit = false;
+                // @ts-ignore
+                autoUpdater.suitePatchAutoInstallOnQuit = false;
             })
             .finally(() => {
                 logger.info(
