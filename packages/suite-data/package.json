@@ -16,7 +16,8 @@
         "msg-system-types": "ts-node ./src/message-system/scripts/generate-types.ts",
         "msg-system-validate-config": "ts-node ./src/message-system/scripts/validate-config.ts",
         "msg-system-sign-config": "ts-node ./src/message-system/scripts/sign-config.ts",
-        "guide-pull-content": "ts-node ./src/guide/index.ts"
+        "guide-pull-content": "ts-node ./src/guide/index.ts",
+        "ttm:backport-en": "yarn ts-node -O '{\"module\": \"commonjs\"}' ./scripts/backport-en.ts"
     },
     "dependencies": {
         "ua-parser-js": "^0.7.24"
