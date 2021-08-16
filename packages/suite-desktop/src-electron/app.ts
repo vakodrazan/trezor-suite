@@ -37,14 +37,12 @@ global.resourcesPath = isDev
     ? path.join(__dirname, '..', 'build', 'static')
     : process.resourcesPath;
 
-logger.info('main', 'Application starting');
-
 const init = async () => {
     buildInfo();
     await computerInfo();
 
     const winBounds = store.getWinBounds();
-    logger.debug('init', `Create Browswer Window (${winBounds.width}x${winBounds.height})`);
+    logger.debug('init', `Create Browser Window (${winBounds.width}x${winBounds.height})`);
 
     mainWindow = new BrowserWindow({
         title: APP_NAME,
