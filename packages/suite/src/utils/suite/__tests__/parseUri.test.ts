@@ -1,4 +1,4 @@
-import { parseUri } from '@suite-utils/parseUri';
+import { parseUri, getProtocolInfo } from '@suite-utils/parseUri';
 
 describe('parseUri', () => {
     describe('parsedUri', () => {
@@ -64,3 +64,23 @@ describe('parseUri', () => {
             });
         });
     });
+
+    describe('getProtocolInfo', () => {
+        it('should work with bitcoin URI', () => {
+            const protocolInfo = getProtocolInfo(
+                'bitcoin:3QmuBaZrJNCxc5Xs7aGzZUK8RirUT8jRKf?amount=0.1',
+            );
+            expect(protocolInfo).toEqual({
+                scheme: 'bitcoin',
+                amount: 0.1,
+                address: '3QmuBaZrJNCxc5Xs7aGzZUK8RirUT8jRKf',
+            });
+        });
+
+        it('should throw an error with non-existing scheme', () => {
+            expect(() =>
+                getProtocolInfo('litecoin:3QmuBaZrJNCxc5Xs7aGzZUK8RirUT8jRKf?amount=0.1'),
+            ).toThrow(`Unsupported 'litecoin' protocol handler or its params '{"amount":"0.1"}'!`);
+        });
+    });
+});
