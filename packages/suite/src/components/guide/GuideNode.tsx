@@ -51,9 +51,10 @@ const CategoryButtonNode = styled(NodeButton)`
 
 type GuideNodeProps = {
     node: Node;
+    className?: string;
 };
 
-const GuideNode = ({ node }: GuideNodeProps) => {
+const GuideNode = ({ node, className }: GuideNodeProps) => {
     const theme = useTheme();
     const analytics = useAnalytics();
 
@@ -80,7 +81,7 @@ const GuideNode = ({ node }: GuideNodeProps) => {
 
     if (node.type === 'page') {
         return (
-            <PageNodeButton onClick={() => navigateToNode(node)}>
+            <PageNodeButton onClick={() => navigateToNode(node)} className={className}>
                 <PageNodeButtonIcon icon="ARTICLE" size={20} color={theme.TYPE_LIGHT_GREY} />
                 {label}
             </PageNodeButton>
@@ -89,7 +90,9 @@ const GuideNode = ({ node }: GuideNodeProps) => {
 
     if (node.type === 'category') {
         return (
-            <CategoryButtonNode onClick={() => navigateToNode(node)}>{label}</CategoryButtonNode>
+            <CategoryButtonNode onClick={() => navigateToNode(node)} className={className}>
+                {label}
+            </CategoryButtonNode>
         );
     }
 

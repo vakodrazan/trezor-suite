@@ -6,7 +6,7 @@ import { Translation } from '@suite-components';
 import * as guideActions from '@suite-actions/guideActions';
 import { useActions, useAnalytics, useSelector } from '@suite-hooks';
 import { Icon, variables, useTheme } from '@trezor/components';
-import { Header, Content, ViewWrapper, GuideCategories } from '@guide-components';
+import { Header, Content, ViewWrapper, GuideCategories, GuideSearch } from '@guide-components';
 
 const FeedbackLinkWrapper = styled.div`
     border-top: 1px solid ${props => props.theme.STROKE_GREY};
@@ -66,6 +66,7 @@ const GuideDefault = (props: any) => {
                     node={indexNode}
                     label={<Translation id="TR_GUIDE_CATEGORIES" />}
                 />
+                <GuideSearch pageRoot={indexNode} />
             </Content>
             <FeedbackLinkWrapper
                 onClick={() => {
