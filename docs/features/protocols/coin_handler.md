@@ -4,18 +4,17 @@ Trezor Suite, both on web and desktop, can handle opening of coin URLs in `coin:
 ## Behavior
 
 ### Behavior on web
-When opening Suite on web, it will prompt the user to associate the opening of `bitcoin:` URLs with Suite. By accepting, all `bitcoin:` URLs in the browser will open Suite. 
+When opening Suite on web, in Firefox it will prompt the user to associate the opening of `bitcoin:` URLs with Suite. On Chrome, you have to click on small icon in address bar and allow `bitcoin:` URLs. By accepting, all `bitcoin:` URLs in the browser will open Suite. 
 
+![Chrome Prompt](./chrome-protocol-prompt.png)
 ![Firefox Prompt](./firefox-protocol-prompt.png)
 
 ### Behavior on desktop
-By installing the desktop application, the `bitcoin:` protocol handler will be automatically registered in the system. The user will have the choice to use Suite Desktop to open `bitcoin:` URLs once or always (as default option).
+By installing the desktop application, the `bitcoin:` protocol handler will be automatically registered in the system. In Firefox, the user will have the choice to use Suite Desktop to open `bitcoin:` URLs or browser if the protocol handler is also registered there. In Chrome, if the desktop application protocol handler is registered but web is not, Chrome will offer the desktop app. If both desktop and web app is registered, Chrome will open the web app without asking.
 
-### System behavior (macOS)
+### More apps with same handler (macOS)
 
-1. If the `bitcoin:` handler is registered only by a desktop app. Firefox and Chrome show dialogue if a user wants to open this link using the app.
-2. If user has more apps with same handler installed, the behavior is not defined. However, it looks like that the last installed application is started.
-3. If the same handler is registered by a desktop app and a web app. Firefox shows dialogue where a user can choose what he wants to open. Chrome opens the web app without asking.
+If user has more desktop apps with same handler installed, the behavior is not defined. However, it looks like that the last installed application is launched.
 
 ## Structure
 The implementation adheres to the [BIP29](https://github.com/bitcoin/bips/blob/master/bip-0021.mediawiki) specification (with the exception of the `label` and `message` parameters).
@@ -50,4 +49,4 @@ Navigate to `about:preferences#general` and scroll to `Applications`. Find handl
 
 ### Desktop app - macOS
 
-In terminal `open -a Xcode ~/Library/Preferences/com.apple.LaunchServices/com.apple.launchservices.secure.plist` and delete `bitcoin` handler.
+Delete desktop app and use terminal `open -a Xcode ~/Library/Preferences/com.apple.LaunchServices/com.apple.launchservices.secure.plist`. Find and delete `bitcoin` handler. If it still wants to open a desktop app. Find all occurrences of `Trezor Suite.app` and delete them, even the `.dmg` files in `suite-desktop/build-electron`.
