@@ -40,7 +40,15 @@ const init = ({ mainWindow }: Dependencies) => {
 
     // Protocol handler for macOS
     app.on('open-url', (event, url) => {
+        logger.info('custom-protocols', `Handle open protocol url ${url}`);
         event.preventDefault();
+
+        if (mainWindow.isMinimized()) {
+            mainWindow.restore();
+        } else {
+            mainWindow.focus();
+        }
+
         sendProtocolInfo(url);
     });
 };
