@@ -47,9 +47,9 @@ describe('Protocol actions', () => {
 
         expect(store.getActions().length).toBe(2);
         expect(store.getActions()[0].type).toBe(protocolConstants.FILL_SEND_FORM);
-        expect(store.getActions()[0].shouldFillSendForm).toBe(true);
+        expect(store.getActions()[0].payload).toBe(true);
         expect(store.getActions()[1].type).toBe(protocolConstants.FILL_SEND_FORM);
-        expect(store.getActions()[1].shouldFillSendForm).toBe(false);
+        expect(store.getActions()[1].payload).toBe(false);
     });
 
     it('saves coin protocol', async () => {
@@ -65,9 +65,9 @@ describe('Protocol actions', () => {
 
         expect(store.getActions().length).toBe(1);
         expect(store.getActions()[0].type).toBe(protocolConstants.SAVE_COIN_PROTOCOL);
-        expect(store.getActions()[0].scheme).toBe(PROTOCOL_SCHEME.BITCOIN);
-        expect(store.getActions()[0].address).toBe('12345abcde');
-        expect(store.getActions()[0].amount).toBe(1.02);
+        expect(store.getActions()[0].payload.scheme).toBe(PROTOCOL_SCHEME.BITCOIN);
+        expect(store.getActions()[0].payload.address).toBe('12345abcde');
+        expect(store.getActions()[0].payload.amount).toBe(1.02);
     });
 
     it('resets protocol state', async () => {

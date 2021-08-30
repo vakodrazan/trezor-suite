@@ -19,12 +19,12 @@ const protocolReducer = (state: State = initialState, action: Action): State =>
     produce(state, draft => {
         switch (action.type) {
             case PROTOCOL.FILL_SEND_FORM:
-                draft.sendForm.shouldFillSendForm = action.shouldFillSendForm;
+                draft.sendForm.shouldFillSendForm = action.payload;
                 break;
             case PROTOCOL.SAVE_COIN_PROTOCOL:
-                draft.sendForm.address = action.address;
-                draft.sendForm.amount = action.amount;
-                draft.sendForm.scheme = action.scheme;
+                draft.sendForm.address = action.payload.address;
+                draft.sendForm.amount = action.payload.amount;
+                draft.sendForm.scheme = action.payload.scheme;
                 draft.sendForm.shouldFillSendForm = false;
                 break;
             case PROTOCOL.RESET:
