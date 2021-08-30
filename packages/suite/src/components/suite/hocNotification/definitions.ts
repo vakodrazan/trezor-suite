@@ -8,11 +8,11 @@ export interface ViewProps {
     icon?: IconProps['icon'] | JSX.Element;
     message: ExtendedMessageDescriptor | ExtendedMessageDescriptor['id'];
     action?: {
-        onClick: () => any;
+        onClick: () => void;
         label: ExtendedMessageDescriptor['id'];
         position?: 'bottom' | 'right';
         variant?: ButtonProps['variant'];
     };
     cancelable?: boolean;
-    onCancel?: () => any;
+    onCancel?: () => void;
 }
